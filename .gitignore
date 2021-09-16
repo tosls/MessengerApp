@@ -1,0 +1,14 @@
+
+### Swift ###
+# Xcode
+
+# User settings
+xcuserdata/
+
+# Untracked files:
+*.xcscmblueprint
+*.xccheckout
+
+#Untracked directories:
+build/
+DerivedData/
