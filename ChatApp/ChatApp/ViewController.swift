@@ -9,48 +9,48 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let logStatus = false
+    private let showLogStatus = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        printFuncName(logStatus)
+        printFuncName(showLogStatus)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
-        printFuncName(logStatus)
+        printFuncName(showLogStatus)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         
-        printFuncName(logStatus)
+        printFuncName(showLogStatus)
     }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        printFuncName(logStatus)
+        printFuncName(showLogStatus)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        printFuncName(logStatus)
+        printFuncName(showLogStatus)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(false)
         
-        printFuncName(logStatus)
+        printFuncName(showLogStatus)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(false)
         
-        printFuncName(logStatus)
+        printFuncName(showLogStatus)
     }
     
     private func printFuncName(_ logStatus: Bool, funcName: String = #function) {
