@@ -13,6 +13,7 @@
 		191F772426F3BC7800A30032 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191F772226F3BC7800A30032 /* Main.storyboard */; };
 		191F772626F3BC7A00A30032 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191F772526F3BC7A00A30032 /* Assets.xcassets */; };
 		191F772926F3BC7A00A30032 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */; };
+		1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		191F772526F3BC7A00A30032 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		191F772826F3BC7A00A30032 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191F772A26F3BC7A00A30032 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +58,13 @@
 		191F771B26F3BC7800A30032 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */,
+				191F772026F3BC7800A30032 /* ViewController.swift */,
 				191F771C26F3BC7800A30032 /* AppDelegate.swift */,
 				191F771E26F3BC7800A30032 /* SceneDelegate.swift */,
-				191F772026F3BC7800A30032 /* ViewController.swift */,
 				191F772226F3BC7800A30032 /* Main.storyboard */,
-				191F772526F3BC7A00A30032 /* Assets.xcassets */,
 				191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */,
+				191F772526F3BC7A00A30032 /* Assets.xcassets */,
 				191F772A26F3BC7A00A30032 /* Info.plist */,
 			);
 			path = ChatApp;
@@ -139,6 +142,7 @@
 			files = (
 				191F772126F3BC7800A30032 /* ViewController.swift in Sources */,
 				191F771D26F3BC7800A30032 /* AppDelegate.swift in Sources */,
+				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,
 				191F771F26F3BC7800A30032 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
