@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    
+    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var userInfoLabel: UILabel!
@@ -17,7 +19,17 @@ class ProfileViewController: UIViewController {
     private var userName = UserProfile().userName
     private var userInfo = UserProfile().userInfo
     private var userInitials = UserProfile().userInitials
-       
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+//        printButtonFrame() - печать Frame не возможна т.к.view еще не создана и его еще не существует
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,7 +39,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         printButtonFrame()
-        //Frame отличается...
+        //Значение Frame здесь отличаются от значения во viewDidLoad, так как размеры view становятся окончательно актульны только сейчас, при вызове viewDidAppear, когда выводятся на экран. До этого они не находтся в системе отображений
     }
     
     @IBAction func editProfileButtonTapped(_ sender: UIButton) {

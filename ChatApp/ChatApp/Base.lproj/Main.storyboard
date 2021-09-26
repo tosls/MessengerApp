@@ -25,9 +25,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyf-Fo-Kj8">
-                                <rect key="frame" x="123" y="324.5" width="74" height="30"/>
+                                <rect key="frame" x="117" y="324.5" width="86" height="30"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="userProfile"/>
+                                <state key="normal" title="Show Profile"/>
                                 <connections>
                                     <segue destination="tqN-bp-SzF" kind="presentation" id="Qj2-QL-xsK"/>
                                 </connections>
@@ -130,7 +130,6 @@
         <!--Navigation Controller-->
         <scene sceneID="ZUa-se-gJO">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dHr-CF-T7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tqN-bp-SzF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="KzG-Zi-QL0">
@@ -142,6 +141,7 @@
                         <segue destination="vtQ-IR-tYA" kind="relationship" relationship="rootViewController" id="KDd-8S-5C0"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dHr-CF-T7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1138.125" y="81.338028169014081"/>
         </scene>
