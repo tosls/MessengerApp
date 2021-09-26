@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let showLog = true
+    private let showLog = false
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,11 +24,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyf-Fo-Kj8">
-                                <rect key="frame" x="118" y="122" width="67" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyf-Fo-Kj8">
+                                <rect key="frame" x="123" y="324.5" width="74" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="userProfile"/>
                                 <connections>
                                     <segue destination="tqN-bp-SzF" kind="presentation" id="Qj2-QL-xsK"/>
                                 </connections>
@@ -37,6 +37,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="J1f-Bd-hdX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3hX-nm-GIJ"/>
+                            <constraint firstItem="gyf-Fo-Kj8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5JP-fN-OCQ"/>
+                            <constraint firstItem="gyf-Fo-Kj8" firstAttribute="top" secondItem="J1f-Bd-hdX" secondAttribute="bottom" constant="30" id="PLx-xn-sK3"/>
                             <constraint firstItem="J1f-Bd-hdX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="n1V-LH-auW"/>
                         </constraints>
                     </view>
@@ -58,10 +60,12 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="IFo-i4-vlf"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Save">
-                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="19"/>
-                                </buttonConfiguration>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="vtQ-IR-tYA" eventType="touchUpInside" id="Jx1-cF-0SD"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gFR-id-JVj">
                                 <rect key="frame" x="40" y="110" width="240" height="240"/>
@@ -76,22 +80,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0F-fy-I3O">
+                                <rect key="frame" x="226" y="316" width="54" height="34"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Edit">
+                                    <color key="titleColor" name="AccentColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="editProfileButtonTapped:" destination="vtQ-IR-tYA" eventType="touchUpInside" id="xIZ-iX-FzH"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile info" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPN-SY-WGk">
                                 <rect key="frame" x="40" y="443" width="240" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0F-fy-I3O">
-                                <rect key="frame" x="226" y="316" width="54" height="34"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Edit">
-                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="editProfileButtonTapped:" destination="vtQ-IR-tYA" eventType="touchUpInside" id="xIZ-iX-FzH"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CmQ-RR-Nag"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -111,14 +115,12 @@
                             <constraint firstItem="g5C-3H-cnf" firstAttribute="leading" secondItem="CmQ-RR-Nag" secondAttribute="leading" constant="50" id="zrv-WN-B6k"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My Profile" id="Cnd-tR-vNy">
-                        <barButtonItem key="rightBarButtonItem" title="Close" style="plain" id="MAT-4o-r7n"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="My Profile" id="Cnd-tR-vNy"/>
                     <connections>
                         <outlet property="profileImageView" destination="gFR-id-JVj" id="UWe-6W-v6m"/>
-                        <outlet property="profileInfoLabel" destination="wPN-SY-WGk" id="T4s-FW-SyT"/>
-                        <outlet property="profileNameLabel" destination="7sp-fb-mxT" id="GBA-y8-2qo"/>
                         <outlet property="saveButton" destination="g5C-3H-cnf" id="zRF-Tu-jch"/>
+                        <outlet property="userInfoLabel" destination="wPN-SY-WGk" id="T4s-FW-SyT"/>
+                        <outlet property="userNameLabel" destination="7sp-fb-mxT" id="GBA-y8-2qo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mzE-29-PYx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -145,6 +147,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
