@@ -26,7 +26,7 @@ class ProfileViewController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        printButtonFrame() - печать Frame не возможна т.к.view еще не создана и его еще не существует
+//        printButtonFrame() - печать Frame не возможна т.к.view еще не создана и его(frame) еще не существует
     }
     
     
@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController {
         
         setupView()
         printButtonFrame()
+        print(UIDevice.current.name)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,12 +49,17 @@ class ProfileViewController: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
     }
+    @IBAction func closeButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     
     private func printButtonFrame() {
         let buttonFrame = saveButton.frame
         print(buttonFrame)
     }
-
+    
+    
+    
     
     //MARK: Setuping a view
     
