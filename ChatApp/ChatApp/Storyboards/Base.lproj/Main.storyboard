@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vtQ-IR-tYA">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -10,63 +10,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HelloWorld" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1f-Bd-hdX">
-                                <rect key="frame" x="118.5" y="273.5" width="83" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyf-Fo-Kj8">
-                                <rect key="frame" x="93" y="324.5" width="134" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Show Profile"/>
-                                <connections>
-                                    <segue destination="vtQ-IR-tYA" kind="presentation" id="gu7-lz-Lga"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="J1f-Bd-hdX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3hX-nm-GIJ"/>
-                            <constraint firstItem="gyf-Fo-Kj8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5JP-fN-OCQ"/>
-                            <constraint firstItem="gyf-Fo-Kj8" firstAttribute="top" secondItem="J1f-Bd-hdX" secondAttribute="bottom" constant="30" id="PLx-xn-sK3"/>
-                            <constraint firstItem="J1f-Bd-hdX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="n1V-LH-auW"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="129" y="94"/>
-        </scene>
         <!--My Profile-->
         <scene sceneID="mLf-rW-af5">
             <objects>
                 <viewController id="vtQ-IR-tYA" customClass="ProfileViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="64L-Zy-p2m">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5C-3H-cnf">
-                                <rect key="frame" x="50" y="478" width="220" height="40"/>
+                                <rect key="frame" x="50" y="498" width="220" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="IFo-i4-vlf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Save"/>
-                                <connections>
-                                    <action selector="saveButtonTapped:" destination="vtQ-IR-tYA" eventType="touchUpInside" id="Jx1-cF-0SD"/>
-                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gFR-id-JVj">
                                 <rect key="frame" x="40" y="97" width="240" height="240"/>
@@ -92,27 +51,24 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile info" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPN-SY-WGk">
-                                <rect key="frame" x="40" y="430" width="240" height="19.5"/>
+                                <rect key="frame" x="40" y="418" width="240" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="f8r-Fe-uzi">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="f8r-Fe-uzi">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BN4-NG-oix">
-                                        <rect key="frame" x="16" y="29.5" width="149.5" height="31.5"/>
+                                        <rect key="frame" x="16" y="29.5" width="121.5" height="31.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aae-lo-Vb8">
-                                        <rect key="frame" x="265.5" y="30" width="38.5" height="30"/>
+                                        <rect key="frame" x="265" y="30" width="39" height="30"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Close"/>
-                                        <connections>
-                                            <action selector="closeButtonTapped:" destination="vtQ-IR-tYA" eventType="touchUpInside" id="W29-ea-139"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -127,7 +83,7 @@
                         <constraints>
                             <constraint firstItem="d0F-fy-I3O" firstAttribute="top" secondItem="gFR-id-JVj" secondAttribute="bottom" constant="-34" id="2ic-WI-OUf"/>
                             <constraint firstItem="gFR-id-JVj" firstAttribute="centerX" secondItem="64L-Zy-p2m" secondAttribute="centerX" id="7d1-wf-Caq"/>
-                            <constraint firstItem="wPN-SY-WGk" firstAttribute="top" secondItem="7sp-fb-mxT" secondAttribute="bottom" constant="32" id="RoO-FR-YAq"/>
+                            <constraint firstItem="wPN-SY-WGk" firstAttribute="top" secondItem="7sp-fb-mxT" secondAttribute="bottom" constant="20" id="RoO-FR-YAq"/>
                             <constraint firstItem="CmQ-RR-Nag" firstAttribute="trailing" secondItem="d0F-fy-I3O" secondAttribute="trailing" constant="40" id="cUM-fH-Ah2"/>
                             <constraint firstItem="CmQ-RR-Nag" firstAttribute="trailing" secondItem="g5C-3H-cnf" secondAttribute="trailing" constant="50" id="cXP-hf-vTI"/>
                             <constraint firstItem="CmQ-RR-Nag" firstAttribute="trailing" secondItem="f8r-Fe-uzi" secondAttribute="trailing" id="f1t-PJ-jzm"/>

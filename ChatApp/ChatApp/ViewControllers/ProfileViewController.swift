@@ -9,8 +9,6 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    
-    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var userInfoLabel: UILabel!
@@ -29,7 +27,6 @@ class ProfileViewController: UIViewController {
 //        printButtonFrame() - печать Frame не возможна т.к.view еще не создана и его(frame) еще не существует
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,18 +44,10 @@ class ProfileViewController: UIViewController {
         actionSheetController()
     }
     
-    @IBAction func saveButtonTapped(_ sender: UIButton) {
-    }
-    @IBAction func closeButtonTapped(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     private func printButtonFrame() {
         let buttonFrame = saveButton.frame
         print(buttonFrame)
     }
-    
-    
     
     
     //MARK: Setuping a view
@@ -69,19 +58,20 @@ class ProfileViewController: UIViewController {
         
         userInfoLabel.text = userInfo
         userInfoLabel.textAlignment = .center
+        userInfoLabel.textColor = .black
         userNameLabel.text = userName
+        userNameLabel.textColor = .black
         
         setupSaveButton()
         setupProfileImageView()
-        setupNavigationBar()
     }
     
-    private func setupNavigationBar() {
-        navigationItem.title = "My Profile"
-        navigationController?.navigationBar.backgroundColor = UIColor(red: 0.969,
-                                                                      green: 0.969,
-                                                                      blue: 0.969,
-                                                                      alpha: 1)
+    private func setupSaveButton() {
+        saveButton.backgroundColor = UIColor(red: 0.965,
+                                             green: 0.965,
+                                             blue: 0.965,
+                                             alpha: 1)
+        saveButton.layer.cornerRadius = 14
     }
     
     private func setupProfileImageView() {
@@ -97,21 +87,11 @@ class ProfileViewController: UIViewController {
         profileImageView.image = userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
     }
     
-    private func setupSaveButton() {
-        saveButton.backgroundColor = UIColor(red: 0.965,
-                                             green: 0.965,
-                                             blue: 0.965,
-                                             alpha: 1)
-        saveButton.layer.cornerRadius = 14
-    }
-    
     
     //MARK: Getting a profile picture
     
     
-    private func userInitialsToImage(_ text: String, _ height: CGFloat, _ width: CGFloat) -> UIImage? {
-        let imageViewHeight = height
-        let imageViewWidth = width
+    private func userInitialsToImage(_ text: String, _ imageViewHeight: CGFloat, _ imageViewWidth: CGFloat) -> UIImage? {
         
         UIGraphicsBeginImageContext(CGSize(width: imageViewWidth, height: imageViewHeight))
         
@@ -124,7 +104,7 @@ class ProfileViewController: UIViewController {
         
         let textSize = text.size(withAttributes: attributes as [NSAttributedString.Key : Any])
         
-        let rectangle = CGRect(x: imageViewHeight / 2 - textSize.width / 2,
+        let rectangle = CGRect(x: imageViewWidth / 2 - textSize.width / 2,
                                y: imageViewHeight / 2 - textSize.height / 2 ,
                                width: textSize.width,
                                height: textSize.height)
@@ -150,6 +130,10 @@ class ProfileViewController: UIViewController {
     }
 }
 
+
+    //MARK: Extension ImagePickerController
+
+
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -168,7 +152,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         dismiss(animated: true)
         
         guard profileImage != nil else {
-            print("not Image")
+            print("Not Image")
             return
         }
     }
