@@ -32,7 +32,6 @@ class ProfileViewController: UIViewController {
         
         setupView()
         printButtonFrame()
-        print(UIDevice.current.name)
     }
     
     override func viewDidAppear(_ animated: Bool) {
