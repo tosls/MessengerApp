@@ -14,6 +14,10 @@
 		191F772926F3BC7A00A30032 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */; };
 		1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */; };
 		1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02626FFABE800E4F6B9 /* UserProfile.swift */; };
+		19E978EF270863100077D249 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978EE270863100077D249 /* ConversationsListViewController.swift */; };
+		19E978F227086D540077D249 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978F027086D540077D249 /* ConversationTableViewCell.swift */; };
+		19E978F327086D540077D249 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19E978F127086D540077D249 /* ConversationTableViewCell.xib */; };
+		19E978F527088C8F0077D249 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978F427088C8F0077D249 /* ConversationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		191F772A26F3BC7A00A30032 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1994C02626FFABE800E4F6B9 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		19E978EE270863100077D249 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
+		19E978F027086D540077D249 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
+		19E978F127086D540077D249 /* ConversationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationTableViewCell.xib; sourceTree = "<group>"; };
+		19E978F427088C8F0077D249 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +89,9 @@
 			isa = PBXGroup;
 			children = (
 				1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */,
+				19E978F427088C8F0077D249 /* ConversationViewController.swift */,
+				19E978EE270863100077D249 /* ConversationsListViewController.swift */,
+				19E978F027086D540077D249 /* ConversationTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -88,6 +99,7 @@
 		19B334E62703160000315358 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				19E978F127086D540077D249 /* ConversationTableViewCell.xib */,
 				191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */,
 				191F772226F3BC7800A30032 /* Main.storyboard */,
 			);
@@ -151,6 +163,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19E978F327086D540077D249 /* ConversationTableViewCell.xib in Resources */,
 				191F772926F3BC7A00A30032 /* LaunchScreen.storyboard in Resources */,
 				191F772626F3BC7A00A30032 /* Assets.xcassets in Resources */,
 				191F772426F3BC7800A30032 /* Main.storyboard in Resources */,
@@ -164,7 +177,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19E978F527088C8F0077D249 /* ConversationViewController.swift in Sources */,
 				191F771D26F3BC7800A30032 /* AppDelegate.swift in Sources */,
+				19E978EF270863100077D249 /* ConversationsListViewController.swift in Sources */,
+				19E978F227086D540077D249 /* ConversationTableViewCell.swift in Sources */,
 				1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */,
 				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,
 				191F771F26F3BC7800A30032 /* SceneDelegate.swift in Sources */,

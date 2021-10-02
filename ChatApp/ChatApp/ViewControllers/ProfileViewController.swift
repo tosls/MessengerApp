@@ -31,11 +31,11 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        printButtonFrame()
+//        printButtonFrame()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        printButtonFrame()
+//        printButtonFrame()
         //Значение Frame здесь отличаются от значения во viewDidLoad, так как размеры view становятся окончательно актульны только сейчас, при вызове viewDidAppear, когда выводятся на экран. До этого они не находтся в системе отображений
     }
     
