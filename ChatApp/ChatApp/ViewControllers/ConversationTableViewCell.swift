@@ -9,27 +9,20 @@ import UIKit
 
 class ConversationTableViewCell: UITableViewCell {
    
-//    struct ConversationModel {
-//        var name: String?
-//        var message: String?
-//        var date: Date?
-//        var online: Bool
-////        var hasUnreadMessage: Bool
-//    }
-//    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var userImage: UIImageView!
 
 
     func configure(with model: ConversationModel) {
         nameLabel.text = model.name
         messageLabel.text = model.message ?? "No message yet"
-        let date = model.date ?? Date()
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "dd:MM"
+        messageLabel.font = model.hasUnreadMessage ? UIFont.systemFont(ofSize: 13, weight: .bold) : UIFont.systemFont(ofSize: 13, weight: .thin)
         
-        dateLabel.text = dateFormater.string(from: date)
+        let date = model.date ?? Date()
+        compareDate(date, _dateLabel: dateLabel)
+
         backgroundColor = model.online ? UIColor(red: 1.00,
                                                  green: 0.95,
                                                  blue: 0.74,
@@ -38,14 +31,22 @@ class ConversationTableViewCell: UITableViewCell {
                                                                      blue: 1.00,
                                                                      alpha: 1)
         
+        userImage.layer.cornerRadius = userImage.frame.size.height / 2
+        userImage.backgroundColor = .gray
+
     }
     
-    
-    func formateDate(_ date: Date) -> String {
+    private func compareDate(_ dialogDate: Date, _dateLabel: UILabel) {
         let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "dd/MM"
-        return dateFormater.string(from: date)
+        let comparison = Calendar.current.compare(dialogDate, to: Date(), toGranularity: .day)
+        switch comparison {
+        case .orderedAscending:
+            dateFormater.dateFormat = "dd.MM"
+            dateLabel.text = dateFormater.string(from: dialogDate)
+        default:
+            dateFormater.dateFormat = "HH:mm"
+            dateLabel.text = dateFormater.string(from: dialogDate)
+        }
     }
 }
-
 

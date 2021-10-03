@@ -27,9 +27,12 @@ class ConversationsListViewController: UIViewController {
         
         title = "Tinkoff Chat"
         view.addSubview(tableView)
-        print(Date())
     }
 }
+
+
+// MARK: extension UITableViewDataSource
+
 
 extension ConversationsListViewController: UITableViewDataSource {
     
@@ -58,18 +61,20 @@ extension ConversationsListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? ConversationTableViewCell else {
             return UITableViewCell() }
         
-        cell.configure(with: ConversationModel(name: dialog.userName, message: dialog.message, online: dialog.status, hasUnreadMessage: dialog.hasUnreadMessage))
-        
+        cell.configure(with: ConversationModel(name: dialog.userName, message: dialog.message, date: dialog.date, online: dialog.status, hasUnreadMessage: dialog.hasUnreadMessage))
+    
         return cell
     }
 }
+
+
+// MARK: extension UITableViewDelegate
+
 
 extension ConversationsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let conversationVC = ConversatioViewController()
-        let rowIndex = indexPath.row
-        let sectionIndex = indexPath.section
-        let title = conversations[sectionIndex].dialogs[rowIndex]
+        navigationController?.pushViewController(conversationVC, animated: true)
     }
 }
