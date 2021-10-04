@@ -21,6 +21,7 @@
 		19E978F72708CF430077D249 /* Conversations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978F62708CF430077D249 /* Conversations.swift */; };
 		19E978FA2708D4A30077D249 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978F92708D4A30077D249 /* ConversationModel.swift */; };
 		19E978FC2708E81E0077D249 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978FB2708E81E0077D249 /* MessageModel.swift */; };
+		19E97900270B0FD80077D249 /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978FF270B0FD80077D249 /* UserProfileModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		19E978F62708CF430077D249 /* Conversations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversations.swift; sourceTree = "<group>"; };
 		19E978F92708D4A30077D249 /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		19E978FB2708E81E0077D249 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		19E978FF270B0FD80077D249 /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				19E978F92708D4A30077D249 /* ConversationModel.swift */,
 				19E978FB2708E81E0077D249 /* MessageModel.swift */,
+				19E978FF270B0FD80077D249 /* UserProfileModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */,
 				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,
 				19E978FA2708D4A30077D249 /* ConversationModel.swift in Sources */,
+				19E97900270B0FD80077D249 /* UserProfileModel.swift in Sources */,
 				191F771F26F3BC7800A30032 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

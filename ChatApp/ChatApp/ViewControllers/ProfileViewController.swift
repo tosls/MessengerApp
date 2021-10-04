@@ -14,9 +14,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userInfoLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     
-    private var userName = UserProfile().userName
-    private var userInfo = UserProfile().userInfo
-    private var userInitials = UserProfile().userInitials
+    let user = userProfile
+//    private var userName = user.userName
+//    private var userInfo = user.userInfo
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -42,6 +42,9 @@ class ProfileViewController: UIViewController {
     @IBAction func editProfileButtonTapped(_ sender: UIButton) {
         actionSheetController()
     }
+    @IBAction func closeButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     
     private func printButtonFrame() {
         let buttonFrame = saveButton.frame
@@ -55,10 +58,10 @@ class ProfileViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         
-        userInfoLabel.text = userInfo
+        userInfoLabel.text = user.userInfo
         userInfoLabel.textAlignment = .center
         userInfoLabel.textColor = .black
-        userNameLabel.text = userName
+        userNameLabel.text = user.userName
         userNameLabel.textColor = .black
         
         setupSaveButton()
@@ -82,7 +85,7 @@ class ProfileViewController: UIViewController {
         
         let imageViewHeight = profileImageView.bounds.height
         let imageViewWidth = profileImageView.bounds.width
-        
+        let userInitials = UserProfileModel.userNameToInitials(name: user.userName ?? "User Profile")
         profileImageView.image = userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
     }
     

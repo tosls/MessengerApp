@@ -21,12 +21,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="qH7-Ed-vxg">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="camera" id="sLI-2m-Exq">
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="sLI-2m-Exq">
+                            <color key="tintColor" name="AccentColor"/>
                             <connections>
                                 <segue destination="vtQ-IR-tYA" kind="presentation" id="hVT-Z6-BnP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="vtQ-IR-tYA" kind="presentation" identifier="profileVC" id="Tez-A3-TvI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hsz-CF-Y5C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -91,6 +95,9 @@
                                         <rect key="frame" x="265" y="30" width="39" height="30"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Close"/>
+                                        <connections>
+                                            <action selector="closeButtonTapped:" destination="vtQ-IR-tYA" eventType="touchUpInside" id="BEE-bA-UAK"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -152,6 +159,9 @@
             <point key="canvasLocation" x="-438.75" y="138.38028169014083"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Tez-A3-TvI"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

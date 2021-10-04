@@ -10,7 +10,6 @@ import UIKit
 struct MessageModel: MessageCellConfiguration {
     var text: String?
     
-    
 }
 protocol MessageCellConfiguration {
     var text: String? {get set}

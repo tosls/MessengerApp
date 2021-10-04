@@ -31,8 +31,14 @@ class ConversationTableViewCell: UITableViewCell {
                                                                      blue: 1.00,
                                                                      alpha: 1)
         
+        let userInitials = UserProfileModel.userNameToInitials(name: model.name ?? "UP")
+        
         userImage.layer.cornerRadius = userImage.frame.size.height / 2
-        userImage.backgroundColor = .gray
+        userImage.backgroundColor = .orange
+        let imageViewHeight = userImage.bounds.height
+        let imageViewWidth = userImage.bounds.width
+        
+        userImage.image = UserProfileModel.userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
 
     }
     

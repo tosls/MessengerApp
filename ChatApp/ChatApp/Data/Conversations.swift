@@ -18,7 +18,6 @@ struct Dialogs {
     var date: Date?
     let status: Bool
     let hasUnreadMessage: Bool
-
 }
 
 enum Status: String {
