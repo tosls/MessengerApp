@@ -14,7 +14,6 @@ class ConversationTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
 
-
     func configure(with model: ConversationModel) {
         nameLabel.text = model.name
         messageLabel.text = model.message ?? "No message yet"
@@ -31,15 +30,13 @@ class ConversationTableViewCell: UITableViewCell {
                                                                      blue: 1.00,
                                                                      alpha: 1)
         
-        let userInitials = UserProfileModel.userNameToInitials(name: model.name ?? "UP")
-        
         userImage.layer.cornerRadius = userImage.frame.size.height / 2
         userImage.backgroundColor = .orange
         let imageViewHeight = userImage.bounds.height
         let imageViewWidth = userImage.bounds.width
+        let userInitials = UserProfileModel.userNameToInitials(name: model.name ?? "User Profile")
         
         userImage.image = UserProfileModel.userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
-
     }
     
     private func compareDate(_ dialogDate: Date, _dateLabel: UILabel) {

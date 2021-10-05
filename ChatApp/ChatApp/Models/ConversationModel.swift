@@ -13,7 +13,6 @@ struct ConversationModel: ConversationCellConfiguretion {
     var date: Date?
     var online: Bool
     var hasUnreadMessage: Bool
-    
 }
 
 protocol ConversationCellConfiguretion {

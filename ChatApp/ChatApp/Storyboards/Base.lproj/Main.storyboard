@@ -20,14 +20,7 @@
                         <viewLayoutGuide key="safeArea" id="Qri-XH-KnJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="qH7-Ed-vxg">
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="sLI-2m-Exq">
-                            <color key="tintColor" name="AccentColor"/>
-                            <connections>
-                                <segue destination="vtQ-IR-tYA" kind="presentation" id="hVT-Z6-BnP"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="qH7-Ed-vxg"/>
                     <connections>
                         <segue destination="vtQ-IR-tYA" kind="presentation" identifier="profileVC" id="Tez-A3-TvI"/>
                     </connections>
@@ -159,9 +152,6 @@
             <point key="canvasLocation" x="-438.75" y="138.38028169014083"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="Tez-A3-TvI"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

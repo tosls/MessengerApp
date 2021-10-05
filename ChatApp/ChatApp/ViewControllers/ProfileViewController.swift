@@ -14,9 +14,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userInfoLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     
-    let user = userProfile
-//    private var userName = user.userName
-//    private var userInfo = user.userInfo
+    private let user = userProfile
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

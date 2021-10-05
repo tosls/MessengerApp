@@ -22,6 +22,8 @@
 		19E978FA2708D4A30077D249 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978F92708D4A30077D249 /* ConversationModel.swift */; };
 		19E978FC2708E81E0077D249 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978FB2708E81E0077D249 /* MessageModel.swift */; };
 		19E97900270B0FD80077D249 /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978FF270B0FD80077D249 /* UserProfileModel.swift */; };
+		19E97903270C35490077D249 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E97901270C35490077D249 /* MessageTableViewCell.swift */; };
+		19E97906270C561A0077D249 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E97905270C561A0077D249 /* Messages.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		19E978F92708D4A30077D249 /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		19E978FB2708E81E0077D249 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		19E978FF270B0FD80077D249 /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
+		19E97901270C35490077D249 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		19E97905270C561A0077D249 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 			children = (
 				1994C02626FFABE800E4F6B9 /* UserProfile.swift */,
 				19E978F62708CF430077D249 /* Conversations.swift */,
+				19E97905270C561A0077D249 /* Messages.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -100,6 +105,7 @@
 			children = (
 				1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */,
 				19E978F427088C8F0077D249 /* ConversationViewController.swift */,
+				19E97901270C35490077D249 /* MessageTableViewCell.swift */,
 				19E978EE270863100077D249 /* ConversationsListViewController.swift */,
 				19E978F027086D540077D249 /* ConversationTableViewCell.swift */,
 			);
@@ -110,8 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				19E978F127086D540077D249 /* ConversationTableViewCell.xib */,
-				191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */,
 				191F772226F3BC7800A30032 /* Main.storyboard */,
+				191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -202,6 +208,8 @@
 				19E978F72708CF430077D249 /* Conversations.swift in Sources */,
 				19E978EF270863100077D249 /* ConversationsListViewController.swift in Sources */,
 				19E978F227086D540077D249 /* ConversationTableViewCell.swift in Sources */,
+				19E97903270C35490077D249 /* MessageTableViewCell.swift in Sources */,
+				19E97906270C561A0077D249 /* Messages.swift in Sources */,
 				19E978FC2708E81E0077D249 /* MessageModel.swift in Sources */,
 				1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */,
 				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,

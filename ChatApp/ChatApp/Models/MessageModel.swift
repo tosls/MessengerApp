@@ -9,8 +9,10 @@ import UIKit
 
 struct MessageModel: MessageCellConfiguration {
     var text: String?
-    
+    var isIncoming: Bool
 }
+
 protocol MessageCellConfiguration {
     var text: String? {get set}
+    var isIncoming:Bool {get set}
 }
