@@ -17,12 +17,10 @@ class ConversationViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = titleName ?? "Messages"
-        view.backgroundColor = .white
         tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.separatorStyle = .none
         
         setupLastMessage()
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -30,6 +28,7 @@ class ConversationViewController: UITableViewController {
         
         let chatMessage = chat[indexPath.row]
         cell.messageLabel.text = chatMessage.text
+        cell.messageLabel.textColor = .black
         cell.chatMessage = chatMessage
         return cell
     }
