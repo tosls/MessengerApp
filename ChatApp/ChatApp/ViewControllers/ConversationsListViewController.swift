@@ -32,10 +32,21 @@ class ConversationsListViewController: UIViewController {
         performSegue(withIdentifier: "profileVC", sender: nil)
     }
     
+    @objc func settingsButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "settingsVC", sender: nil)
+    }
+    
     private func setupView() {
         title = "Tinkoff Chat"
         view.addSubview(tableView)
         setupUserProfileButton()
+        settingsButton()
+    }
+    
+    private func settingsButton() {
+        
+        let barButtonItem = UIBarButtonItem(title: "test", style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
+        self.navigationItem.leftBarButtonItem = barButtonItem
     }
     
     private func setupUserProfileButton() {

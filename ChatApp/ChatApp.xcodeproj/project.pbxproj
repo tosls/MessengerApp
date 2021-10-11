@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1919D31E271407FC00C829F8 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1919D31D271407FB00C829F8 /* SettingsModel.swift */; };
+		1919D32027140BA100C829F8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1919D31F27140BA100C829F8 /* SettingsViewController.swift */; };
 		191F771D26F3BC7800A30032 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191F771C26F3BC7800A30032 /* AppDelegate.swift */; };
 		191F771F26F3BC7800A30032 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191F771E26F3BC7800A30032 /* SceneDelegate.swift */; };
 		191F772426F3BC7800A30032 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191F772226F3BC7800A30032 /* Main.storyboard */; };
 		191F772626F3BC7A00A30032 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191F772526F3BC7A00A30032 /* Assets.xcassets */; };
 		191F772926F3BC7A00A30032 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */; };
+		1984F64E2712D390005778D4 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984F64D2712D390005778D4 /* ThemesViewController.m */; };
+		1984F65B2712FA8F005778D4 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984F65A2712FA8F005778D4 /* Themes.m */; };
 		1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */; };
 		1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02626FFABE800E4F6B9 /* UserProfile.swift */; };
 		19E978EF270863100077D249 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978EE270863100077D249 /* ConversationsListViewController.swift */; };
@@ -27,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1919D31D271407FB00C829F8 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		1919D31F27140BA100C829F8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		191F771926F3BC7800A30032 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		191F771C26F3BC7800A30032 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		191F771E26F3BC7800A30032 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +40,12 @@
 		191F772526F3BC7A00A30032 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		191F772826F3BC7A00A30032 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191F772A26F3BC7A00A30032 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1984F64B2712D390005778D4 /* ChatApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChatApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		1984F64C2712D390005778D4 /* ThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewController.h; sourceTree = "<group>"; };
+		1984F64D2712D390005778D4 /* ThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
+		1984F6552712EE81005778D4 /* ThemesViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewControllerDelegate.h; sourceTree = "<group>"; };
+		1984F6592712FA8F005778D4 /* Themes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Themes.h; sourceTree = "<group>"; };
+		1984F65A2712FA8F005778D4 /* Themes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Themes.m; sourceTree = "<group>"; };
 		1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1994C02626FFABE800E4F6B9 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		19E978EE270863100077D249 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +98,12 @@
 				191F771C26F3BC7800A30032 /* AppDelegate.swift */,
 				191F772526F3BC7A00A30032 /* Assets.xcassets */,
 				191F772A26F3BC7A00A30032 /* Info.plist */,
+				1984F6592712FA8F005778D4 /* Themes.h */,
+				1984F65A2712FA8F005778D4 /* Themes.m */,
+				1984F64C2712D390005778D4 /* ThemesViewController.h */,
+				1984F64D2712D390005778D4 /* ThemesViewController.m */,
+				1984F64B2712D390005778D4 /* ChatApp-Bridging-Header.h */,
+				1984F6552712EE81005778D4 /* ThemesViewControllerDelegate.h */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -103,6 +121,7 @@
 		1994C02B2700A63100E4F6B9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1919D31F27140BA100C829F8 /* SettingsViewController.swift */,
 				1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */,
 				19E978F427088C8F0077D249 /* ConversationViewController.swift */,
 				19E97901270C35490077D249 /* MessageTableViewCell.swift */,
@@ -125,6 +144,7 @@
 		19E978F82708D4720077D249 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1919D31D271407FB00C829F8 /* SettingsModel.swift */,
 				19E978F92708D4A30077D249 /* ConversationModel.swift */,
 				19E978FB2708E81E0077D249 /* MessageModel.swift */,
 				19E978FF270B0FD80077D249 /* UserProfileModel.swift */,
@@ -163,6 +183,7 @@
 				TargetAttributes = {
 					191F771826F3BC7800A30032 = {
 						CreatedOnToolsVersion = 12.5.1;
+						LastSwiftMigration = 1300;
 					};
 				};
 			};
@@ -203,8 +224,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1984F64E2712D390005778D4 /* ThemesViewController.m in Sources */,
+				1919D32027140BA100C829F8 /* SettingsViewController.swift in Sources */,
 				19E978F527088C8F0077D249 /* ConversationViewController.swift in Sources */,
 				191F771D26F3BC7800A30032 /* AppDelegate.swift in Sources */,
+				1919D31E271407FC00C829F8 /* SettingsModel.swift in Sources */,
 				19E978F72708CF430077D249 /* Conversations.swift in Sources */,
 				19E978EF270863100077D249 /* ConversationsListViewController.swift in Sources */,
 				19E978F227086D540077D249 /* ConversationTableViewCell.swift in Sources */,
@@ -214,6 +238,7 @@
 				1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */,
 				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,
 				19E978FA2708D4A30077D249 /* ConversationModel.swift in Sources */,
+				1984F65B2712FA8F005778D4 /* Themes.m in Sources */,
 				19E97900270B0FD80077D249 /* UserProfileModel.swift in Sources */,
 				191F771F26F3BC7800A30032 /* SceneDelegate.swift in Sources */,
 			);
@@ -250,7 +275,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -311,7 +336,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -362,6 +387,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8YBV46KYC9;
 				INFOPLIST_FILE = ChatApp/Info.plist;
@@ -372,6 +398,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Anton-Bobryshev.ChatApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ChatApp/ChatApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -382,6 +410,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8YBV46KYC9;
 				INFOPLIST_FILE = ChatApp/Info.plist;
@@ -392,6 +421,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Anton-Bobryshev.ChatApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ChatApp/ChatApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
