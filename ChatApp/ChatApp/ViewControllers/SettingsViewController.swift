@@ -12,7 +12,13 @@ class SettingsViewController: UIViewController {
     @IBOutlet var lightThemeButton: UIButton!
     @IBOutlet var darkThemeButton: UIButton!
     @IBOutlet var customThemeButton: UIButton!
+    @IBOutlet var settingsLabel: UILabel!
+
+    private var themeOne: UIColor = .white
+    private var themeTwo: UIColor = .black
+    private var themeThree: UIColor = .orange
     
+    var closure: ((ThemeSettings) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +27,20 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func lightThemeButtonTapped(_ sender: UIButton) {
+        closure?(lightTheme)
+        UserSettings.userTheme = "LightTheme"
     }
+    
     @IBAction func darkThemeButtonTapped(_ sender: UIButton) {
+        closure?(darkTheme)
+        UserSettings.userTheme = "DarkTheme"
     }
+    
     @IBAction func customThemeButtonTapped(_ sender: UIButton) {
+        closure?(customTheme)
+        UserSettings.userTheme = "CustomTheme"
     }
+    
     @IBAction func closeButtonTapped(_ sender: UIButton) {
         dismiss(animated: true)
     }
@@ -34,8 +49,5 @@ class SettingsViewController: UIViewController {
         lightThemeButton.layer.cornerRadius = 10
         darkThemeButton.layer.cornerRadius = 10
         customThemeButton.layer.cornerRadius = 10
-    }
-    
-    private func logThemeChanging(selectedTheme: UIColor) {
     }
 }

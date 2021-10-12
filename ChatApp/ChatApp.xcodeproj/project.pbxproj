@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1919D31E271407FC00C829F8 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1919D31D271407FB00C829F8 /* SettingsModel.swift */; };
+		1919D31E271407FC00C829F8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1919D31D271407FB00C829F8 /* Theme.swift */; };
 		1919D32027140BA100C829F8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1919D31F27140BA100C829F8 /* SettingsViewController.swift */; };
 		191F771D26F3BC7800A30032 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191F771C26F3BC7800A30032 /* AppDelegate.swift */; };
 		191F771F26F3BC7800A30032 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191F771E26F3BC7800A30032 /* SceneDelegate.swift */; };
 		191F772426F3BC7800A30032 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191F772226F3BC7800A30032 /* Main.storyboard */; };
 		191F772626F3BC7A00A30032 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191F772526F3BC7A00A30032 /* Assets.xcassets */; };
 		191F772926F3BC7A00A30032 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */; };
+		195144252714490800DDE4A1 /* ThemeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195144242714490800DDE4A1 /* ThemeSettings.swift */; };
+		19514427271588FF00DDE4A1 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19514426271588FF00DDE4A1 /* UserSettings.swift */; };
 		1984F64E2712D390005778D4 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984F64D2712D390005778D4 /* ThemesViewController.m */; };
 		1984F65B2712FA8F005778D4 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984F65A2712FA8F005778D4 /* Themes.m */; };
 		1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */; };
@@ -31,7 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1919D31D271407FB00C829F8 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		1919D31D271407FB00C829F8 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1919D31F27140BA100C829F8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		191F771926F3BC7800A30032 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		191F771C26F3BC7800A30032 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +42,8 @@
 		191F772526F3BC7A00A30032 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		191F772826F3BC7A00A30032 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191F772A26F3BC7A00A30032 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		195144242714490800DDE4A1 /* ThemeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettings.swift; sourceTree = "<group>"; };
+		19514426271588FF00DDE4A1 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		1984F64B2712D390005778D4 /* ChatApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChatApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		1984F64C2712D390005778D4 /* ThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewController.h; sourceTree = "<group>"; };
 		1984F64D2712D390005778D4 /* ThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 				1994C02626FFABE800E4F6B9 /* UserProfile.swift */,
 				19E978F62708CF430077D249 /* Conversations.swift */,
 				19E97905270C561A0077D249 /* Messages.swift */,
+				195144242714490800DDE4A1 /* ThemeSettings.swift */,
+				19514426271588FF00DDE4A1 /* UserSettings.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -144,7 +150,7 @@
 		19E978F82708D4720077D249 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1919D31D271407FB00C829F8 /* SettingsModel.swift */,
+				1919D31D271407FB00C829F8 /* Theme.swift */,
 				19E978F92708D4A30077D249 /* ConversationModel.swift */,
 				19E978FB2708E81E0077D249 /* MessageModel.swift */,
 				19E978FF270B0FD80077D249 /* UserProfileModel.swift */,
@@ -228,14 +234,16 @@
 				1919D32027140BA100C829F8 /* SettingsViewController.swift in Sources */,
 				19E978F527088C8F0077D249 /* ConversationViewController.swift in Sources */,
 				191F771D26F3BC7800A30032 /* AppDelegate.swift in Sources */,
-				1919D31E271407FC00C829F8 /* SettingsModel.swift in Sources */,
+				1919D31E271407FC00C829F8 /* Theme.swift in Sources */,
 				19E978F72708CF430077D249 /* Conversations.swift in Sources */,
 				19E978EF270863100077D249 /* ConversationsListViewController.swift in Sources */,
 				19E978F227086D540077D249 /* ConversationTableViewCell.swift in Sources */,
 				19E97903270C35490077D249 /* MessageTableViewCell.swift in Sources */,
+				19514427271588FF00DDE4A1 /* UserSettings.swift in Sources */,
 				19E97906270C561A0077D249 /* Messages.swift in Sources */,
 				19E978FC2708E81E0077D249 /* MessageModel.swift in Sources */,
 				1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */,
+				195144252714490800DDE4A1 /* ThemeSettings.swift in Sources */,
 				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,
 				19E978FA2708D4A30077D249 /* ConversationModel.swift in Sources */,
 				1984F65B2712FA8F005778D4 /* Themes.m in Sources */,

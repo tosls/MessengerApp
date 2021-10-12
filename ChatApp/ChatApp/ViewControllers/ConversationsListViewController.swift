@@ -11,6 +11,7 @@ class ConversationsListViewController: UIViewController {
     
     private let profileUserName = userProfile.userName
     private let identifier = String(describing: ConversationTableViewCell.self)
+    private var testText: [String] = [""]
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
@@ -24,28 +25,41 @@ class ConversationsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
+       
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = segue.destination as? SettingsViewController else {return}
+        destination.closure = { [weak self] theme in self?.logThemeChanging(selectedTheme: theme) }
+        
     }
     
     @objc func profileButtonTapped(_ sender: Any) {
+        print(testText)
         performSegue(withIdentifier: "profileVC", sender: nil)
     }
     
     @objc func settingsButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "settingsVC", sender: nil)
+        
+    }
+    
+    func logThemeChanging(selectedTheme: ThemeSettings) {
+        ThemeSettings.themeChanging(selectedTheme: selectedTheme)
+        self.navigationController?.loadView()
     }
     
     private func setupView() {
         title = "Tinkoff Chat"
         view.addSubview(tableView)
+        
         setupUserProfileButton()
         settingsButton()
     }
     
     private func settingsButton() {
-        
-        let barButtonItem = UIBarButtonItem(title: "test", style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
+        let barButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
         self.navigationItem.leftBarButtonItem = barButtonItem
     }
     
@@ -107,9 +121,11 @@ extension ConversationsListViewController: UITableViewDataSource {
         case .history:
             return "History"
         }
+    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let conversation = conversations[indexPath.section]
         let dialog = conversation.conversation[indexPath.row]
 
@@ -121,7 +137,7 @@ extension ConversationsListViewController: UITableViewDataSource {
                                                date: dialog.date,
                                                online: dialog.status,
                                                hasUnreadMessage: dialog.hasUnreadMessage))
-        
+    
         return cell
     }
 }

@@ -16,6 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var showLog = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        guard let theme = UserSettings.userTheme else {return true}
+        switch theme {
+        case "DarkTheme":
+            ThemeSettings.themeChanging(selectedTheme: darkTheme)
+        case "LightTheme":
+            ThemeSettings.themeChanging(selectedTheme: lightTheme)
+        case "CustomTheme":
+            ThemeSettings.themeChanging(selectedTheme: customTheme)
+        default:
+            return true
+        }
+      
         // Override point for customization after application launch.
 //        if showLog {
 //            print("Application launch: \(#function)")

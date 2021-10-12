@@ -7,10 +7,9 @@
 
 import UIKit
 
-struct ThemesSettings {
+struct Theme {
     
-    let lightTheme: UIColor?
-    let darkTheme: UIColor?
-    let customTheme: UIColor?
-    
+    var themeBackgroundColor: UIColor?
+    var themeFontColor: UIColor?
 }
+
