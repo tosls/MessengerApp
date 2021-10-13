@@ -11,7 +11,6 @@ struct UserProfile {
     
     let userName: String?
     let userInfo: String?
-    
 }
 
 var userProfile: UserProfile = UserProfile(

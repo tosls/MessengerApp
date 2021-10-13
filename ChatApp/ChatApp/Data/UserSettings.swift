@@ -15,7 +15,6 @@ final class UserSettings {
   
     static var userTheme: String! {
         get {
-            print(SettingsKey.themeName.rawValue)
             return UserDefaults.standard.string(forKey: SettingsKey.themeName.rawValue)
             
         }

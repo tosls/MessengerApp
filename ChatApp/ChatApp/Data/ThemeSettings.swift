@@ -10,15 +10,16 @@ import UIKit
 struct ThemeSettings {
     
     var themeName: String
-    var backgrounColor: UIColor
+    var backgroundColor: UIColor
     var fontColor: UIColor
 
 static func themeChanging(selectedTheme: ThemeSettings) {
     
-    UITableView.appearance().backgroundColor = selectedTheme.backgrounColor
+    UITableView.appearance().backgroundColor = selectedTheme.backgroundColor
+    
     UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: selectedTheme.fontColor]
-    UINavigationBar.appearance().backgroundColor = selectedTheme.backgrounColor
-    UINavigationBar.appearance().barTintColor = selectedTheme.backgrounColor
+    UINavigationBar.appearance().backgroundColor = selectedTheme.backgroundColor
+    UINavigationBar.appearance().barTintColor = selectedTheme.backgroundColor
     UINavigationBar.appearance().tintColor = selectedTheme.fontColor
     UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: selectedTheme.fontColor]
     }
@@ -26,16 +27,16 @@ static func themeChanging(selectedTheme: ThemeSettings) {
 
 var lightTheme: ThemeSettings = ThemeSettings(
     themeName: "LightTheme",
-    backgrounColor: .white,
+    backgroundColor: .white,
     fontColor: .black
 )
 var darkTheme: ThemeSettings = ThemeSettings(
     themeName: "DarkTheme",
-    backgrounColor: .black,
+    backgroundColor: .black,
     fontColor: .white
 )
 var customTheme: ThemeSettings = ThemeSettings(
     themeName: "CustomTheme",
-    backgrounColor: .orange,
+    backgroundColor: .orange,
     fontColor: .white
 )

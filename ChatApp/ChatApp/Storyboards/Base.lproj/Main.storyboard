@@ -10,6 +10,93 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Themes View Controller-->
+        <scene sceneID="7gn-ij-okt">
+            <objects>
+                <viewController id="KKe-tH-76m" customClass="ThemesViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ylf-OR-xdG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="rXZ-3t-9JK">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings ObjC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdt-HC-vY9">
+                                        <rect key="frame" x="16" y="29.5" width="169" height="31.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yol-Nc-zpO">
+                                        <rect key="frame" x="359" y="30" width="39" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Close"/>
+                                        <connections>
+                                            <action selector="closeButtonTapped:" destination="KKe-tH-76m" eventType="touchUpInside" id="GcB-h7-uJc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="Ym9-7c-3Sf"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Cg2-qU-Sed">
+                                <rect key="frame" x="30" y="352" width="354" height="138"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nx9-D1-wpA">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="30"/>
+                                        <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Light Theme"/>
+                                        <connections>
+                                            <action selector="lightThemeButtonTapped:" destination="KKe-tH-76m" eventType="touchUpInside" id="i1X-z2-YQ3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfc-Dm-Xd1">
+                                        <rect key="frame" x="0.0" y="54" width="354" height="30"/>
+                                        <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Dark Theme"/>
+                                        <connections>
+                                            <action selector="darkThemeButtonTapped:" destination="KKe-tH-76m" eventType="touchUpInside" id="yBY-0J-TdN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cF-66-Oob">
+                                        <rect key="frame" x="0.0" y="108" width="354" height="30"/>
+                                        <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Custom Theme"/>
+                                        <connections>
+                                            <action selector="customThemeButtonTapped:" destination="KKe-tH-76m" eventType="touchUpInside" id="u5o-rV-VK8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yyz-GH-mNN"/>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <constraints>
+                            <constraint firstItem="rXZ-3t-9JK" firstAttribute="top" secondItem="yyz-GH-mNN" secondAttribute="top" id="9Qz-tf-iMQ"/>
+                            <constraint firstItem="Cg2-qU-Sed" firstAttribute="centerX" secondItem="ylf-OR-xdG" secondAttribute="centerX" id="HCN-xp-HGe"/>
+                            <constraint firstItem="Cg2-qU-Sed" firstAttribute="leading" secondItem="yyz-GH-mNN" secondAttribute="leading" constant="30" id="LSp-lF-6Dw"/>
+                            <constraint firstItem="Cg2-qU-Sed" firstAttribute="centerY" secondItem="ylf-OR-xdG" secondAttribute="centerY" id="S8d-ed-wLa"/>
+                            <constraint firstItem="yyz-GH-mNN" firstAttribute="trailing" secondItem="Cg2-qU-Sed" secondAttribute="trailing" constant="30" id="jwL-NU-FyD"/>
+                            <constraint firstItem="rXZ-3t-9JK" firstAttribute="leading" secondItem="yyz-GH-mNN" secondAttribute="leading" id="rgk-3S-Urh"/>
+                            <constraint firstItem="yyz-GH-mNN" firstAttribute="trailing" secondItem="rXZ-3t-9JK" secondAttribute="trailing" id="vGK-bU-hJ7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="customThemeBotton" destination="7cF-66-Oob" id="XV6-mJ-JX8"/>
+                        <outlet property="darkThemeButton" destination="mfc-Dm-Xd1" id="DMa-gh-s8e"/>
+                        <outlet property="lightThemeButton" destination="Nx9-D1-wpA" id="Tvm-bu-I1G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="euC-w2-RbZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="410" y="-676"/>
+        </scene>
         <!--Settings View Controller-->
         <scene sceneID="KZ1-Kl-zFh">
             <objects>
@@ -68,6 +155,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="AoT-cv-tw4"/>
                                 </constraints>
@@ -75,7 +163,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1VJ-M3-Ewg"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="GJo-H2-AVA" firstAttribute="leading" secondItem="1VJ-M3-Ewg" secondAttribute="leading" id="GbP-GL-K6h"/>
                             <constraint firstItem="1VJ-M3-Ewg" firstAttribute="trailing" secondItem="vsa-2k-jAu" secondAttribute="trailing" constant="30" id="HGF-vE-kyG"/>
@@ -104,11 +192,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="5Mo-jS-5js"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="qH7-Ed-vxg"/>
                     <connections>
                         <segue destination="vtQ-IR-tYA" kind="presentation" identifier="profileVC" id="Tez-A3-TvI"/>
                         <segue destination="rFA-ff-1gu" kind="presentation" identifier="settingsVC" id="0K5-gK-na7"/>
+                        <segue destination="KKe-tH-76m" kind="presentation" identifier="settingsObjCVC" id="qVb-8F-FMr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hsz-CF-Y5C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -219,75 +309,6 @@
             </objects>
             <point key="canvasLocation" x="1350" y="137"/>
         </scene>
-        <!--Themes View Controller-->
-        <scene sceneID="qr4-sr-obr">
-            <objects>
-                <viewController id="CZJ-ex-dIO" customClass="ThemesViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4Ot-Yo-Y4u">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Nf5-f5-Mhd">
-                                <rect key="frame" x="20" y="373" width="374" height="150"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxS-ec-ZiA">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
-                                        <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Light Theme"/>
-                                        <connections>
-                                            <action selector="lightThemeButtonTapped:" destination="CZJ-ex-dIO" eventType="touchUpInside" id="j9A-Tn-4FY"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SfS-03-eVd">
-                                        <rect key="frame" x="0.0" y="60" width="374" height="30"/>
-                                        <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Dark Theme"/>
-                                        <connections>
-                                            <action selector="darkThemeButtonTapped:" destination="CZJ-ex-dIO" eventType="touchUpInside" id="12a-8q-igH"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYN-hk-5XK">
-                                        <rect key="frame" x="0.0" y="120" width="374" height="30"/>
-                                        <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Orange Theme"/>
-                                        <connections>
-                                            <action selector="orangeThemeButtonTapped:" destination="CZJ-ex-dIO" eventType="touchUpInside" id="0Ex-um-SuO"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0V0-TK-Prl">
-                                <rect key="frame" x="0.0" y="44" width="414" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pts-v2-cau">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Close"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="sE0-CQ-Lon"/>
-                        <color key="backgroundColor" systemColor="systemYellowColor"/>
-                        <constraints>
-                            <constraint firstItem="Nf5-f5-Mhd" firstAttribute="centerY" secondItem="4Ot-Yo-Y4u" secondAttribute="centerY" id="4X0-wS-5HX"/>
-                            <constraint firstItem="0V0-TK-Prl" firstAttribute="leading" secondItem="sE0-CQ-Lon" secondAttribute="leading" id="DpP-HH-WXj"/>
-                            <constraint firstItem="sE0-CQ-Lon" firstAttribute="trailing" secondItem="Nf5-f5-Mhd" secondAttribute="trailing" constant="20" id="KEE-Nw-cAE"/>
-                            <constraint firstItem="Nf5-f5-Mhd" firstAttribute="leading" secondItem="sE0-CQ-Lon" secondAttribute="leading" constant="20" id="KpW-CP-OMF"/>
-                            <constraint firstItem="sE0-CQ-Lon" firstAttribute="trailing" secondItem="0V0-TK-Prl" secondAttribute="trailing" id="d4s-ZU-2NG"/>
-                            <constraint firstItem="0V0-TK-Prl" firstAttribute="top" secondItem="sE0-CQ-Lon" secondAttribute="top" id="gn3-yH-pR2"/>
-                            <constraint firstItem="Nf5-f5-Mhd" firstAttribute="centerX" secondItem="sE0-CQ-Lon" secondAttribute="centerX" id="zoj-Qr-HFu"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TI6-TX-bo4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1176" y="882"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="SjH-X9-YXG">
             <objects>
@@ -314,11 +335,8 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

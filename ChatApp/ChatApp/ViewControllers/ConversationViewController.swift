@@ -30,6 +30,7 @@ class ConversationViewController: UITableViewController {
         cell.messageLabel.text = chatMessage.text
         cell.messageLabel.textColor = .black
         cell.chatMessage = chatMessage
+        cell.backgroundColor = .white
         return cell
     }
     

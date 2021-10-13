@@ -28,16 +28,19 @@ class SettingsViewController: UIViewController {
 
     @IBAction func lightThemeButtonTapped(_ sender: UIButton) {
         closure?(lightTheme)
+        view.backgroundColor = lightTheme.backgroundColor
         UserSettings.userTheme = "LightTheme"
     }
     
     @IBAction func darkThemeButtonTapped(_ sender: UIButton) {
         closure?(darkTheme)
+        view.backgroundColor = darkTheme.backgroundColor
         UserSettings.userTheme = "DarkTheme"
     }
     
     @IBAction func customThemeButtonTapped(_ sender: UIButton) {
         closure?(customTheme)
+        view.backgroundColor = customTheme.backgroundColor
         UserSettings.userTheme = "CustomTheme"
     }
     

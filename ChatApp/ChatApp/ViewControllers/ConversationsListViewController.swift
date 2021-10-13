@@ -7,11 +7,10 @@
 
 import UIKit
 
-class ConversationsListViewController: UIViewController {
-    
+class ConversationsListViewController: UIViewController, ThemesViewControllerDelegate {
+
     private let profileUserName = userProfile.userName
     private let identifier = String(describing: ConversationTableViewCell.self)
-    private var testText: [String] = [""]
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
@@ -30,32 +29,58 @@ class ConversationsListViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? SettingsViewController else {return}
-        destination.closure = { [weak self] theme in self?.logThemeChanging(selectedTheme: theme) }
-        
+        if let destinationObjC = segue.destination as? ThemesViewController {
+            destinationObjC.delegate = self
+        }
+        if let destination = segue.destination as? SettingsViewController {
+            destination.closure = { [weak self] theme in self?.themeChanging(selectedTheme: theme) }
+        }
+
+
+//        guard let destination = segue.destination as? SettingsViewController else {return}
+//        destination.closure = { [weak self] theme in self?.logThemeChanging(selectedTheme: theme) }
     }
     
     @objc func profileButtonTapped(_ sender: Any) {
-        print(testText)
         performSegue(withIdentifier: "profileVC", sender: nil)
     }
     
     @objc func settingsButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "settingsVC", sender: nil)
-        
     }
     
-    func logThemeChanging(selectedTheme: ThemeSettings) {
-        ThemeSettings.themeChanging(selectedTheme: selectedTheme)
-        self.navigationController?.loadView()
+    @objc func settingsObjCButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "settingsObjCVC", sender: nil)
     }
     
+    func themesViewController(_ controller: ThemesViewController, didSelectedTheme selectedTheme: UIColor) {
+        logThemeChanging(themeColor: selectedTheme)
+    }
+    
+    private func themeChanging(selectedTheme: ThemeSettings) {
+            ThemeSettings.themeChanging(selectedTheme: selectedTheme)
+            self.navigationController?.loadView()
+    }
+    
+    private func logThemeChanging(themeColor: UIColor) {
+        print(themeColor)
+    }
+
     private func setupView() {
         title = "Tinkoff Chat"
         view.addSubview(tableView)
         
         setupUserProfileButton()
-        settingsButton()
+//        settingsButton()
+        setupSettingsButtons()
+    }
+ 
+    private func setupSettingsButtons() {
+        let barButtonItemObjC = UIBarButtonItem(title: "Obj-C", style: .plain, target: self, action: #selector((settingsObjCButtonTapped(_:))))
+        
+        let barButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
+        
+        self.navigationItem .setLeftBarButtonItems([barButtonItem, barButtonItemObjC], animated: false)
     }
     
     private func settingsButton() {
