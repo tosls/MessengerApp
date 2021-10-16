@@ -10,69 +10,105 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var userInfoLabel: UILabel!
-    @IBOutlet weak var userNameLabel: UILabel!
     
-    private let user = userProfile
+    @IBOutlet var userNameTF: UITextField!
+    @IBOutlet var infoAboutUserTF: UITextField!
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
+    @IBOutlet var editProfileImageButton: UIButton!
+    @IBOutlet var editProfileButton: UIButton!
+    @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var saveGCDButton: UIButton!
+    @IBOutlet var saveButtonOperations: UIButton!
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-//        printButtonFrame() - печать Frame не возможна т.к.view еще не создана и его(frame) еще не существует
-    }
-    
+    @IBOutlet var saveProcessIndicator: UIActivityIndicatorView!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-//        printButtonFrame()
+        userNameTF.delegate = self
+        infoAboutUserTF.delegate = self
+        
+        userNameTF.isUserInteractionEnabled = false
+        infoAboutUserTF.isUserInteractionEnabled = false
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-//        printButtonFrame()
-        //Значение Frame здесь отличаются от значения во viewDidLoad, так как размеры view становятся окончательно актульны только сейчас, при вызове viewDidAppear, когда выводятся на экран. До этого они не находтся в системе отображений
-    }
+ 
     
     @IBAction func editProfileButtonTapped(_ sender: UIButton) {
+        userNameTF.isUserInteractionEnabled = true
+        userNameTF.returnKeyType = UIReturnKeyType.done
+        userNameTF.enablesReturnKeyAutomatically = true
+        infoAboutUserTF.isUserInteractionEnabled = true
+        userNameTF.becomeFirstResponder()
+        
+        saveGCDButton.isEnabled = false
+        saveButtonOperations.isEnabled = false
+        
+        userNameTF.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
+        hideAButtons()
+    }
+    
+    @IBAction func editProfileImageButtonTapped(_ sender: UIButton) {
         actionSheetController()
     }
+    
     @IBAction func closeButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
-    private func printButtonFrame() {
-        let buttonFrame = saveButton.frame
-        print(buttonFrame)
+    @IBAction func saveGCDButtonTapped(_ sender: UIButton) {
+        
     }
     
+    @IBAction func saveOperationsButtonTapped(_ sender: UIButton) {
+       
+    }
+   
+    @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        userNameTF.text = ""
+        infoAboutUserTF.text = ""
+        setupProfileImageView()
+        
+        hideAButtons()
+    }
     
     //MARK: Setuping a view
     
+    @objc func textFieldDidChange(textField: UITextField){
+        enableAButtons()
+    }
     
     private func setupView() {
         view.backgroundColor = .white
         
-        userInfoLabel.text = user.userInfo
-        userInfoLabel.textAlignment = .center
-        userInfoLabel.textColor = .black
-        userNameLabel.text = user.userName
-        userNameLabel.textColor = .black
-        
-        setupSaveButton()
         setupProfileImageView()
+        
+        saveGCDButton.layer.cornerRadius = 10
+        cancelButton.layer.cornerRadius = 10
+        saveButtonOperations.layer.cornerRadius = 10
+        
+        saveProcessIndicator.isHidden = true
+        
+        editProfileButton.isHidden = false
+        saveButtonOperations.isHidden = true
+        saveGCDButton.isHidden = true
+        cancelButton.isHidden = true
+        editProfileImageButton.isHidden = true
     }
     
-    private func setupSaveButton() {
-        saveButton.backgroundColor = UIColor(red: 0.965,
-                                             green: 0.965,
-                                             blue: 0.965,
-                                             alpha: 1)
-        saveButton.layer.cornerRadius = 14
+    private func hideAButtons() {
+        editProfileButton.isHidden.toggle()
+        cancelButton.isHidden.toggle()
+        saveGCDButton.isHidden.toggle()
+        saveButtonOperations.isHidden.toggle()
+        editProfileImageButton.isHidden.toggle()
     }
+    
+    private func enableAButtons() {
+        saveGCDButton.isEnabled.toggle()
+        saveButtonOperations.isEnabled.toggle()
+    }
+ 
     
     private func setupProfileImageView() {
         profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
@@ -83,7 +119,7 @@ class ProfileViewController: UIViewController {
         
         let imageViewHeight = profileImageView.bounds.height
         let imageViewWidth = profileImageView.bounds.width
-        let userInitials = UserProfileModel.userNameToInitials(name: user.userName ?? "User Profile")
+        let userInitials = UserProfileModel.userNameToInitials(name: userNameTF.text ?? "User Name")
         profileImageView.image = userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
     }
     
@@ -145,10 +181,16 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         if let editedImage = info[.editedImage] as? UIImage {
             profileImage = editedImage
+            
+            enableAButtons()
+
         } else if let originalImage = info[.originalImage] as? UIImage {
             profileImage = originalImage
+            
+            enableAButtons()
         }
         profileImageView.image = profileImage
+        
         dismiss(animated: true)
         
         guard profileImage != nil else {
@@ -172,4 +214,24 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         imagePicker.delegate = self
         present(imagePicker, animated: true)
     }
+}
+
+
+//MARK: Extension UITextFieldDelegate
+
+extension ProfileViewController: UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        self.view.endEditing(true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+        }
 }

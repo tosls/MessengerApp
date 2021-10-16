@@ -11,6 +11,7 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
 
     private let profileUserName = userProfile.userName
     private let identifier = String(describing: ConversationTableViewCell.self)
+    var userPhoto = UIImage()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
@@ -35,7 +36,7 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
         if let destination = segue.destination as? SettingsViewController {
             destination.closure = { [weak self] theme in self?.themeChanging(selectedTheme: theme) }
         }
-
+    
 
 //        guard let destination = segue.destination as? SettingsViewController else {return}
 //        destination.closure = { [weak self] theme in self?.logThemeChanging(selectedTheme: theme) }
@@ -116,7 +117,7 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
         
         let imageViewHeight = buttonImage.bounds.height
         let imageViewWidth = buttonImage.bounds.width
-        
+
         let userInitials = UserProfileModel.userNameToInitials(name: profileUserName ?? "User Profile")
         buttonImage.image = UserProfileModel.userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
     }

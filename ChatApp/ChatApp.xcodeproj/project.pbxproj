@@ -98,8 +98,8 @@
 				19E978F82708D4720077D249 /* Models */,
 				1994C02B2700A63100E4F6B9 /* ViewControllers */,
 				19B334E62703160000315358 /* Storyboards */,
-				191F771E26F3BC7800A30032 /* SceneDelegate.swift */,
 				191F771C26F3BC7800A30032 /* AppDelegate.swift */,
+				191F771E26F3BC7800A30032 /* SceneDelegate.swift */,
 				1984F64B2712D390005778D4 /* ChatApp-Bridging-Header.h */,
 				191F772526F3BC7A00A30032 /* Assets.xcassets */,
 				191F772A26F3BC7A00A30032 /* Info.plist */,
@@ -122,11 +122,11 @@
 		1994C02B2700A63100E4F6B9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */,
+				19E97901270C35490077D249 /* MessageTableViewCell.swift */,
 				1919D31F27140BA100C829F8 /* SettingsViewController.swift */,
 				19E978EE270863100077D249 /* ConversationsListViewController.swift */,
-				1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */,
 				19E978F427088C8F0077D249 /* ConversationViewController.swift */,
-				19E97901270C35490077D249 /* MessageTableViewCell.swift */,
 				19E978F027086D540077D249 /* ConversationTableViewCell.swift */,
 				1984F64D2712D390005778D4 /* ThemesViewController.m */,
 				1984F64C2712D390005778D4 /* ThemesViewController.h */,
