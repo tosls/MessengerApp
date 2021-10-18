@@ -8,7 +8,7 @@
 import UIKit
 
 
-struct UserProfileModel {
+struct UserProfileModel: Codable {
     
     var userName: String?
     var userInfo: String?

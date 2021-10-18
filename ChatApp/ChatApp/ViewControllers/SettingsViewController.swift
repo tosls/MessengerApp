@@ -18,7 +18,7 @@ class SettingsViewController: UIViewController {
     private var themeTwo: UIColor = .black
     private var themeThree: UIColor = .orange
     
-    var closure: ((ThemeSettings) -> ())?
+    var settingsClosure: ((ThemeSettings) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,19 +27,19 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func lightThemeButtonTapped(_ sender: UIButton) {
-        closure?(lightTheme)
+        settingsClosure?(lightTheme)
         view.backgroundColor = lightTheme.backgroundColor
         UserSettings.userTheme = "LightTheme"
     }
     
     @IBAction func darkThemeButtonTapped(_ sender: UIButton) {
-        closure?(darkTheme)
+        settingsClosure?(darkTheme)
         view.backgroundColor = darkTheme.backgroundColor
         UserSettings.userTheme = "DarkTheme"
     }
     
     @IBAction func customThemeButtonTapped(_ sender: UIButton) {
-        closure?(customTheme)
+        settingsClosure?(customTheme)
         view.backgroundColor = customTheme.backgroundColor
         UserSettings.userTheme = "CustomTheme"
     }

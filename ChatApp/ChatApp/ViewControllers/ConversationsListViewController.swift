@@ -9,7 +9,6 @@ import UIKit
 
 class ConversationsListViewController: UIViewController, ThemesViewControllerDelegate {
 
-    private let profileUserName = userProfile.userName
     private let identifier = String(describing: ConversationTableViewCell.self)
     var userPhoto = UIImage()
     
@@ -34,7 +33,7 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
             destinationObjC.delegate = self
         }
         if let destination = segue.destination as? SettingsViewController {
-            destination.closure = { [weak self] theme in self?.themeChanging(selectedTheme: theme) }
+            destination.settingsClosure = { [weak self] theme in self?.themeChanging(selectedTheme: theme) }
         }
     
 
@@ -118,7 +117,7 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
         let imageViewHeight = buttonImage.bounds.height
         let imageViewWidth = buttonImage.bounds.width
 
-        let userInitials = UserProfileModel.userNameToInitials(name: profileUserName ?? "User Profile")
+        let userInitials = UserProfileModel.userNameToInitials(name: "User Profile")
         buttonImage.image = UserProfileModel.userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
     }
 }

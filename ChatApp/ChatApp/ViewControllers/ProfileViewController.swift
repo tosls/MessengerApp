@@ -21,7 +21,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet var saveButtonOperations: UIButton!
     
     @IBOutlet var saveProcessIndicator: UIActivityIndicatorView!
-   
+    
+    let user = UserProfile.shared.getUserProfile()
+    
+    private var changeUserInfo: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,8 +35,9 @@ class ProfileViewController: UIViewController {
         
         userNameTF.isUserInteractionEnabled = false
         infoAboutUserTF.isUserInteractionEnabled = false
+        
+        checkATextFieldChange()
     }
- 
     
     @IBAction func editProfileButtonTapped(_ sender: UIButton) {
         userNameTF.isUserInteractionEnabled = true
@@ -43,8 +48,7 @@ class ProfileViewController: UIViewController {
         
         saveGCDButton.isEnabled = false
         saveButtonOperations.isEnabled = false
-        
-        userNameTF.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
+
         hideAButtons()
     }
     
@@ -55,31 +59,28 @@ class ProfileViewController: UIViewController {
     @IBAction func closeButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     @IBAction func saveGCDButtonTapped(_ sender: UIButton) {
-        
+        saveWithGSD()
     }
     
     @IBAction func saveOperationsButtonTapped(_ sender: UIButton) {
-       
+        saveWithPerations()
     }
-   
+
+    
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
-        userNameTF.text = ""
-        infoAboutUserTF.text = ""
-        setupProfileImageView()
-        
-        hideAButtons()
+        cancelChanges()
     }
     
     //MARK: Setuping a view
     
-    @objc func textFieldDidChange(textField: UITextField){
-        enableAButtons()
-    }
     
     private func setupView() {
         view.backgroundColor = .white
+        
+        userNameTF.text = user.userName
+        infoAboutUserTF.text = user.userInfo
         
         setupProfileImageView()
         
@@ -109,7 +110,6 @@ class ProfileViewController: UIViewController {
         saveButtonOperations.isEnabled.toggle()
     }
  
-    
     private func setupProfileImageView() {
         profileImageView.layer.cornerRadius = profileImageView.frame.size.height / 2
         profileImageView.backgroundColor = UIColor(red: 0.894,
@@ -119,8 +119,84 @@ class ProfileViewController: UIViewController {
         
         let imageViewHeight = profileImageView.bounds.height
         let imageViewWidth = profileImageView.bounds.width
-        let userInitials = UserProfileModel.userNameToInitials(name: userNameTF.text ?? "User Name")
+        let userInitials = UserProfileModel.userNameToInitials(name: user.userName ?? "User Name")
         profileImageView.image = userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
+    }
+    
+    
+    //MARK: Work with User Profile
+    
+    
+    private func saveWithPerations() {
+        hideAButtons()
+    }
+
+    private func saveWithGSD() {
+        saveProcessIndicator.isHidden = false
+        saveProcessIndicator.startAnimating()
+
+        let userProfile = GSDManager()
+        
+        if userNameTF.text != user.userName && infoAboutUserTF.text != user.userInfo {
+            userProfile.saveProfileSettings(userData: UserProfileModel(
+                                                                    userName: userNameTF.text,
+                                                                    userInfo: infoAboutUserTF.text))
+            { [weak self] Result in switch Result {
+            case .success(_):
+                DispatchQueue.main.async {
+                    
+                    self?.saveProcessIndicator.isHidden = true
+                    self?.saveProcessIndicator.stopAnimating()
+                    self?.showSuccessAlert()
+                }
+            case .failure(_):
+                self?.showFailAlert()
+            }
+            }
+        }
+        
+        if userNameTF.text != user.userName && infoAboutUserTF.text == user.userInfo {
+            userProfile.saveProfileSettings(userData: UserProfileModel(
+                                                                    userName: userNameTF.text,
+                                                                    userInfo: user.userInfo))
+            { [weak self] Result in switch Result {
+            case .success(_):
+                DispatchQueue.main.async {
+                    self?.saveProcessIndicator.isHidden = true
+                    self?.saveProcessIndicator.stopAnimating()
+                    self?.showSuccessAlert()
+                }
+            case .failure(_):
+                self?.showFailAlert()
+            }
+            }
+        }
+        
+        if userNameTF.text != user.userName && infoAboutUserTF.text == user.userInfo {
+            userProfile.saveProfileSettings(userData: UserProfileModel(
+                userName: user.userName,
+                userInfo: userNameTF.text))
+            { [weak self] Result in switch Result {
+            case .success(_):
+                DispatchQueue.main.async {
+                    self?.saveProcessIndicator.isHidden = true
+                    self?.saveProcessIndicator.stopAnimating()
+                    self?.showSuccessAlert()
+                }
+            case .failure(_):
+                self?.showFailAlert()
+            }
+            }
+        }
+        hideAButtons()
+    }
+    
+    private func cancelChanges() {
+        userNameTF.text = user.userName
+        infoAboutUserTF.text = user.userInfo
+        setupProfileImageView()
+        
+        hideAButtons()
     }
     
     
@@ -163,6 +239,23 @@ class ProfileViewController: UIViewController {
         }))
         actionSheetController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         self.present(actionSheetController, animated: true)
+    }
+    
+    
+    //MARK: Alerts
+    
+    
+    func showSuccessAlert() {
+        let alert = UIAlertController(title: "Успешно!", message: "Данные сохранены.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showFailAlert() {
+        let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Повторить", style: UIAlertAction.Style.default, handler: {[weak self] _ in self?.saveWithGSD()}))
+        alert.addAction(UIAlertAction(title: "Отмена", style: UIAlertAction.Style.cancel, handler: { [weak self] _ in self?.cancelChanges()}))
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -221,6 +314,11 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 
 extension ProfileViewController: UITextFieldDelegate {
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+        }
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return true
     }
@@ -230,8 +328,21 @@ extension ProfileViewController: UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        view.endEditing(true)
+    private func checkATextFieldChange() {
+        let textFields = [userNameTF, infoAboutUserTF]
+        
+        for textField in textFields {
+            if changeUserInfo == false {
+                
+                textField?.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
+            }
         }
+    }
+    
+    @objc func textFieldDidChange(textField: UITextField){
+        if changeUserInfo == false {
+            enableAButtons()
+            changeUserInfo = true
+        }
+    }
 }
