@@ -7,14 +7,16 @@
 
 import UIKit
 
-struct UserProfile {
+class UserProfile {
     
-    let userName: String?
-    let userInfo: String?
+    static let shared = UserProfile()
+    private var user: UserProfileModel?
+    
+    private init() {}
+    
+    func getUserProfile() -> UserProfileModel {
+        return LoadUserProfile.loadUserProfile()
+    }
 }
-
-var userProfile: UserProfile = UserProfile(
-    userName: "Marina Dudarenko",
-    userInfo: "UX/UI designer, web-designer Moscow, Russia")
 
 

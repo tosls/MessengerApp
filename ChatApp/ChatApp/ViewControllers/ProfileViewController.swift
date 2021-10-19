@@ -22,7 +22,7 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet var saveProcessIndicator: UIActivityIndicatorView!
     
-    let user = UserProfile.shared.getUserProfile()
+    let userProfile = UserProfile.shared.getUserProfile()
     
     private var changeUserInfo: Bool = false
     
@@ -65,7 +65,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func saveOperationsButtonTapped(_ sender: UIButton) {
-        saveWithPerations()
+        saveWithOperations()
     }
 
     
@@ -73,14 +73,17 @@ class ProfileViewController: UIViewController {
         cancelChanges()
     }
     
+    private func getUserProfile() {
+        
+    }
+    
     //MARK: Setuping a view
-    
-    
+        
     private func setupView() {
         view.backgroundColor = .white
         
-        userNameTF.text = user.userName
-        infoAboutUserTF.text = user.userInfo
+        userNameTF.text = userProfile.userName
+        infoAboutUserTF.text = userProfile.userInfo
         
         setupProfileImageView()
         
@@ -119,7 +122,7 @@ class ProfileViewController: UIViewController {
         
         let imageViewHeight = profileImageView.bounds.height
         let imageViewWidth = profileImageView.bounds.width
-        let userInitials = UserProfileModel.userNameToInitials(name: user.userName ?? "User Name")
+        let userInitials = UserProfileModel.userNameToInitials(name: userProfile.userName ?? "User Name")
         profileImageView.image = userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
     }
     
@@ -127,7 +130,21 @@ class ProfileViewController: UIViewController {
     //MARK: Work with User Profile
     
     
-    private func saveWithPerations() {
+    private func saveWithOperations() {
+        saveProcessIndicator.isHidden = false
+        saveProcessIndicator.startAnimating()
+        
+        let operationManager = OperationsManager()
+        operationManager.saveProfile(userData: UserProfileModel(userName: userNameTF.text, userInfo: infoAboutUserTF.text)) { [weak self] in switch $0 {
+            
+        case .success(_):
+            self?.saveProcessIndicator.isHidden = true
+            self?.saveProcessIndicator.stopAnimating()
+            self?.showSuccessAlert()
+        case .failure(_):
+            self?.showFailAlert()
+        }
+        }
         hideAButtons()
     }
 
@@ -135,54 +152,48 @@ class ProfileViewController: UIViewController {
         saveProcessIndicator.isHidden = false
         saveProcessIndicator.startAnimating()
 
-        let userProfile = GSDManager()
+        let gsdManager = GSDManager()
         
-        if userNameTF.text != user.userName && infoAboutUserTF.text != user.userInfo {
-            userProfile.saveProfileSettings(userData: UserProfileModel(
+        if userNameTF.text != userProfile.userName && infoAboutUserTF.text != userProfile.userInfo {
+            gsdManager.saveUserProfile(userData: UserProfileModel(
                                                                     userName: userNameTF.text,
                                                                     userInfo: infoAboutUserTF.text))
-            { [weak self] Result in switch Result {
+            { [weak self] in switch $0 {
             case .success(_):
-                DispatchQueue.main.async {
-                    
-                    self?.saveProcessIndicator.isHidden = true
-                    self?.saveProcessIndicator.stopAnimating()
-                    self?.showSuccessAlert()
-                }
+                self?.saveProcessIndicator.isHidden = true
+                self?.saveProcessIndicator.stopAnimating()
+                self?.showSuccessAlert()
             case .failure(_):
                 self?.showFailAlert()
             }
             }
         }
         
-        if userNameTF.text != user.userName && infoAboutUserTF.text == user.userInfo {
-            userProfile.saveProfileSettings(userData: UserProfileModel(
+        if userNameTF.text != userProfile.userName && infoAboutUserTF.text == userProfile.userInfo {
+            gsdManager.saveUserProfile(userData: UserProfileModel(
                                                                     userName: userNameTF.text,
-                                                                    userInfo: user.userInfo))
-            { [weak self] Result in switch Result {
+                                                                    userInfo: userProfile.userInfo))
+            { [weak self] in switch $0 {
             case .success(_):
-                DispatchQueue.main.async {
-                    self?.saveProcessIndicator.isHidden = true
-                    self?.saveProcessIndicator.stopAnimating()
-                    self?.showSuccessAlert()
-                }
+                self?.saveProcessIndicator.isHidden = true
+                self?.saveProcessIndicator.stopAnimating()
+                self?.showSuccessAlert()
             case .failure(_):
                 self?.showFailAlert()
             }
             }
+            
         }
         
-        if userNameTF.text != user.userName && infoAboutUserTF.text == user.userInfo {
-            userProfile.saveProfileSettings(userData: UserProfileModel(
-                userName: user.userName,
+        if userNameTF.text != userProfile.userName && infoAboutUserTF.text == userProfile.userInfo {
+            gsdManager.saveUserProfile(userData: UserProfileModel(
+                userName: userProfile.userName,
                 userInfo: userNameTF.text))
-            { [weak self] Result in switch Result {
+            { [weak self] in switch $0 {
             case .success(_):
-                DispatchQueue.main.async {
-                    self?.saveProcessIndicator.isHidden = true
-                    self?.saveProcessIndicator.stopAnimating()
-                    self?.showSuccessAlert()
-                }
+                self?.saveProcessIndicator.isHidden = true
+                self?.saveProcessIndicator.stopAnimating()
+                self?.showSuccessAlert()
             case .failure(_):
                 self?.showFailAlert()
             }
@@ -192,8 +203,8 @@ class ProfileViewController: UIViewController {
     }
     
     private func cancelChanges() {
-        userNameTF.text = user.userName
-        infoAboutUserTF.text = user.userInfo
+        userNameTF.text = userProfile.userName
+        infoAboutUserTF.text = userProfile.userInfo
         setupProfileImageView()
         
         hideAButtons()
