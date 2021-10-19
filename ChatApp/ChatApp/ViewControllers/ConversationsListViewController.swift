@@ -24,9 +24,7 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        print("12")
-       
+        setupView()       
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

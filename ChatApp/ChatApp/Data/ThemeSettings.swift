@@ -23,6 +23,7 @@ static func themeChanging(selectedTheme: ThemeSettings) {
     UINavigationBar.appearance().tintColor = selectedTheme.fontColor
     UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: selectedTheme.fontColor]
     }
+    
 }
 
 var lightTheme: ThemeSettings = ThemeSettings(

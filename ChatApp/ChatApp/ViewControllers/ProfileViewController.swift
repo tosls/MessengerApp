@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func saveGCDButtonTapped(_ sender: UIButton) {
-        saveWithGSD()
+        saveWithGCD()
     }
     
     @IBAction func saveOperationsButtonTapped(_ sender: UIButton) {
@@ -123,7 +123,7 @@ class ProfileViewController: UIViewController {
         let imageViewHeight = profileImageView.bounds.height
         let imageViewWidth = profileImageView.bounds.width
         let userInitials = UserProfileModel.userNameToInitials(name: userProfile.userName ?? "User Name")
-        profileImageView.image = userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
+        profileImageView.image = UserProfileModel.userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
     }
     
     
@@ -148,16 +148,15 @@ class ProfileViewController: UIViewController {
         hideAButtons()
     }
 
-    private func saveWithGSD() {
+    private func saveWithGCD() {
         saveProcessIndicator.isHidden = false
         saveProcessIndicator.startAnimating()
 
-        let gsdManager = GSDManager()
+        let gcdManager = GCDManager()
         
-        if userNameTF.text != userProfile.userName && infoAboutUserTF.text != userProfile.userInfo {
-            gsdManager.saveUserProfile(userData: UserProfileModel(
-                                                                    userName: userNameTF.text,
-                                                                    userInfo: infoAboutUserTF.text))
+        gcdManager.saveUserProfile(userData: UserProfileModel(
+            userName: userNameTF.text,
+            userInfo: infoAboutUserTF.text))
             { [weak self] in switch $0 {
             case .success(_):
                 self?.saveProcessIndicator.isHidden = true
@@ -167,38 +166,6 @@ class ProfileViewController: UIViewController {
                 self?.showFailAlert()
             }
             }
-        }
-        
-        if userNameTF.text != userProfile.userName && infoAboutUserTF.text == userProfile.userInfo {
-            gsdManager.saveUserProfile(userData: UserProfileModel(
-                                                                    userName: userNameTF.text,
-                                                                    userInfo: userProfile.userInfo))
-            { [weak self] in switch $0 {
-            case .success(_):
-                self?.saveProcessIndicator.isHidden = true
-                self?.saveProcessIndicator.stopAnimating()
-                self?.showSuccessAlert()
-            case .failure(_):
-                self?.showFailAlert()
-            }
-            }
-            
-        }
-        
-        if userNameTF.text != userProfile.userName && infoAboutUserTF.text == userProfile.userInfo {
-            gsdManager.saveUserProfile(userData: UserProfileModel(
-                userName: userProfile.userName,
-                userInfo: userNameTF.text))
-            { [weak self] in switch $0 {
-            case .success(_):
-                self?.saveProcessIndicator.isHidden = true
-                self?.saveProcessIndicator.stopAnimating()
-                self?.showSuccessAlert()
-            case .failure(_):
-                self?.showFailAlert()
-            }
-            }
-        }
         hideAButtons()
     }
     
@@ -212,34 +179,7 @@ class ProfileViewController: UIViewController {
     
     
     //MARK: Getting a profile picture
-    
-    
-    private func userInitialsToImage(_ text: String, _ imageViewHeight: CGFloat, _ imageViewWidth: CGFloat) -> UIImage? {
         
-        UIGraphicsBeginImageContext(CGSize(width: imageViewWidth, height: imageViewHeight))
-        
-        let font = UIFont(name: "Helvetica", size: imageViewHeight / 2)
-        let fontStyle = NSMutableParagraphStyle()
-        fontStyle.alignment = NSTextAlignment.center
-        let attributes = [NSAttributedString.Key.foregroundColor:UIColor.black,
-                          NSAttributedString.Key.font: font,
-                          NSAttributedString.Key.paragraphStyle: fontStyle]
-        
-        let textSize = text.size(withAttributes: attributes as [NSAttributedString.Key : Any])
-        
-        let rectangle = CGRect(x: imageViewWidth / 2 - textSize.width / 2,
-                               y: imageViewHeight / 2 - textSize.height / 2 ,
-                               width: textSize.width,
-                               height: textSize.height)
-        
-        text.draw(in:rectangle, withAttributes: attributes as [NSAttributedString.Key : Any])
-        
-        let userInitialsImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return userInitialsImage
-    }
-    
     private func actionSheetController() {
         let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheetController.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
@@ -264,7 +204,7 @@ class ProfileViewController: UIViewController {
     
     func showFailAlert() {
         let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Повторить", style: UIAlertAction.Style.default, handler: {[weak self] _ in self?.saveWithGSD()}))
+        alert.addAction(UIAlertAction(title: "Повторить", style: UIAlertAction.Style.default, handler: {[weak self] _ in self?.saveWithGCD()}))
         alert.addAction(UIAlertAction(title: "Отмена", style: UIAlertAction.Style.cancel, handler: { [weak self] _ in self?.cancelChanges()}))
         present(alert, animated: true, completion: nil)
     }
@@ -335,7 +275,6 @@ extension ProfileViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         self.view.endEditing(true)
     }
     

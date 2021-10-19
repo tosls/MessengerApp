@@ -7,9 +7,8 @@
 
 import UIKit
 
-struct Theme {
+struct Theme: Codable {
     
-    var themeBackgroundColor: UIColor?
-    var themeFontColor: UIColor?
+    var themeName: String?
 }
 

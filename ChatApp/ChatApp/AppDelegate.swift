@@ -17,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        guard let theme = UserSettings.userTheme else {return true}
+//        guard let theme = SaveUserTheme.loadUserTheme() else {return true} for GCD method
+        
+        guard let theme = ThemeManager.userTheme else {return true}
         switch theme {
         case "DarkTheme":
             ThemeSettings.themeChanging(selectedTheme: darkTheme)
