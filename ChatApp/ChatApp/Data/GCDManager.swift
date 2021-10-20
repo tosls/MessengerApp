@@ -24,6 +24,24 @@ class GCDManager {
             ThemeManager.saveUserTheme(userTheme: themeName)
         }
     }
+    
+    func saveUserImage(userImage: UIImage) {
+        let queue = DispatchQueue.global(qos: .utility)
+        queue.async {
+            UserProfileImageManager.saveUserImage(userImage: userImage)
+        }
+    }
+    
+    func loadUserImage(completion: @escaping (UIImage?) -> Void){
+        let queue = DispatchQueue.global(qos: .utility)
+        queue.async {
+            UserProfileImageManager.loadUserImage { image in
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            }
+        }
+    }
 }
 
 

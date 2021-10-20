@@ -91,36 +91,27 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
     }
     
     private func setupUserProfileButton() {
-    
-        let buttonImage = UIImageView(frame: CGRect(x: 0.0,
-                                                    y: 0.0,
-                                                    width: 40.0,
-                                                    height: 40.0))
         
-        buttonImage.layer.cornerRadius = buttonImage.frame.size.height / 2
-        buttonImage.backgroundColor = UIColor(red: 0.894,
-                                              green: 0.908,
-                                              blue: 0.17,
-                                              alpha: 1)
+        let userInitials = UserProfileModel.userNameToInitials(name: UserProfile.shared.getUserProfile().userName ?? "User Name")
+        let userImage = UserProfileModel.userInitialsToImage(userInitials, 40, 40)
 
-        let button : UIButton = UIButton.init(type: .custom)
+        
+        let button = UIButton(type: .custom)
+        button.setImage(userImage, for: .normal)
+        button.backgroundColor = UIColor(red: 0.894,
+                                         green: 0.908,
+                                         blue: 0.17,
+                                         alpha: 1)
+        
+        button.addTarget(self, action: #selector(profileButtonTapped(_:)), for: .touchUpInside)
         button.frame = CGRect(x: 0,
                               y: 0,
                               width: 40,
                               height: 40)
         
-        button.addTarget(self, action: #selector(profileButtonTapped(_:)), for: .touchUpInside)
-        buttonImage.addSubview(button)
-        
-        let profileButton = UIBarButtonItem()
-        profileButton.customView = buttonImage
-        self.navigationItem.rightBarButtonItem = profileButton
-        
-        let imageViewHeight = buttonImage.bounds.height
-        let imageViewWidth = buttonImage.bounds.width
-
-        let userInitials = UserProfileModel.userNameToInitials(name: UserProfile.shared.getUserProfile().userName ?? "User Profile")
-        buttonImage.image = UserProfileModel.userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
+        button.layer.cornerRadius = button.bounds.size.height / 2
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = barButton
     }
 }
 

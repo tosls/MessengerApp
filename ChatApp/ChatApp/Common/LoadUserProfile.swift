@@ -21,6 +21,6 @@ class LoadUserProfile {
         } catch {
             print(error)
         }
-        return user ?? UserProfileModel(userName: "User Profile", userInfo: "About User")
+        return user ?? UserProfileModel(userName: "User Name", userInfo: "About User")
     }
 }

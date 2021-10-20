@@ -62,6 +62,7 @@ class ProfileViewController: UIViewController {
 
     @IBAction func saveGCDButtonTapped(_ sender: UIButton) {
         saveWithGCD()
+        
     }
     
     @IBAction func saveOperationsButtonTapped(_ sender: UIButton) {
@@ -85,6 +86,7 @@ class ProfileViewController: UIViewController {
         userNameTF.text = userProfile.userName
         infoAboutUserTF.text = userProfile.userInfo
         
+        raiseTheViewAboveTheKeyboard()
         setupProfileImageView()
         
         saveGCDButton.layer.cornerRadius = 10
@@ -123,7 +125,15 @@ class ProfileViewController: UIViewController {
         let imageViewHeight = profileImageView.bounds.height
         let imageViewWidth = profileImageView.bounds.width
         let userInitials = UserProfileModel.userNameToInitials(name: userProfile.userName ?? "User Name")
-        profileImageView.image = UserProfileModel.userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
+        let gcdManager = GCDManager()
+        
+        gcdManager.loadUserImage { [weak self] image in
+            if image != nil {
+                self?.profileImageView.image = image
+            } else {
+                self?.profileImageView.image = UserProfileModel.userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
+            }
+        }
     }
     
     
@@ -177,22 +187,6 @@ class ProfileViewController: UIViewController {
         hideAButtons()
     }
     
-    
-    //MARK: Getting a profile picture
-        
-    private func actionSheetController() {
-        let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheetController.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            self.fetchPhotoFromCamera()
-        }))
-        actionSheetController.addAction(UIAlertAction(title: "Open gallery", style: .default, handler: { _ in
-            self.fetchPhotoFromGallery()
-        }))
-        actionSheetController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        self.present(actionSheetController, animated: true)
-    }
-    
-    
     //MARK: Alerts
     
     
@@ -207,6 +201,20 @@ class ProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Повторить", style: UIAlertAction.Style.default, handler: {[weak self] _ in self?.saveWithGCD()}))
         alert.addAction(UIAlertAction(title: "Отмена", style: UIAlertAction.Style.cancel, handler: { [weak self] _ in self?.cancelChanges()}))
         present(alert, animated: true, completion: nil)
+    }
+    
+    //MARK: Getting a profile picture
+        
+    private func actionSheetController() {
+        let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheetController.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            self.fetchPhotoFromCamera()
+        }))
+        actionSheetController.addAction(UIAlertAction(title: "Open gallery", style: .default, handler: { _ in
+            self.fetchPhotoFromGallery()
+        }))
+        actionSheetController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(actionSheetController, animated: true)
     }
 }
 
@@ -225,15 +233,14 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         if let editedImage = info[.editedImage] as? UIImage {
             profileImage = editedImage
-            
             enableAButtons()
 
         } else if let originalImage = info[.originalImage] as? UIImage {
             profileImage = originalImage
-            
             enableAButtons()
         }
         profileImageView.image = profileImage
+        UserProfileImageManager.saveUserImage(userImage: profileImage!)
         
         dismiss(animated: true)
         
@@ -293,6 +300,27 @@ extension ProfileViewController: UITextFieldDelegate {
         if changeUserInfo == false {
             enableAButtons()
             changeUserInfo = true
+        }
+    }
+    
+    private func raiseTheViewAboveTheKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height / 2
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
         }
     }
 }
