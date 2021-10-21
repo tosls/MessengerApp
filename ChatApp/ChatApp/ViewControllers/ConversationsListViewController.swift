@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import Firebase
 
 class ConversationsListViewController: UIViewController, ThemesViewControllerDelegate {
 
     private let identifier = String(describing: ConversationTableViewCell.self)
     var userPhoto = UIImage()
+    
+    private lazy var db = Firestore.firestore()
+    private lazy var reference = db.collection("channels")
+   
+    
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
@@ -24,7 +30,32 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()       
+//        reference.addSnapshotListener { [weak self] snapshot, error in
+//            print(snapshot?.documents[0].data()) }
+        setupView()
+      
+        
+//        lazy var db = Firestore.firestore()
+//        lazy var reference = db.collection("channels")
+//        reference.addSnapshotListener { [weak self] snapshot, error in
+//            print(snapshot)
+//        }
+        
+//        private lazy var db = Firestore.firestore()
+//        private lazy var reference: CollectionReference = {
+//        guard let channelIdentifier = channel?.identifier else { fatalError() }
+//        return db.collection("channels").document(channelIdentifier).collection("messages")
+//         }()
+//        reference.addDocument(data: newMessage.toDict)
+//
+//        extension Message {
+//         var toDict: [String: Any] {
+//         return ["content": content,
+//         "created": Timestamp(date: created),
+//         "senderID": senderId,
+//         "senderName": senderName]
+//         }
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

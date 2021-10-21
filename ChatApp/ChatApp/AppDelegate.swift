@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,9 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var showLog = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        FirebaseApp.configure() 
 //        guard let theme = SaveUserTheme.loadUserTheme() else {return true} for GCD method
-        
+//        FirebaseApp.configure() 
         guard let theme = ThemeManager.userTheme else {return true}
         switch theme {
         case "DarkTheme":

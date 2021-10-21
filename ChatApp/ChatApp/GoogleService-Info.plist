@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>681731781183-c3stelb6f0vm84sqb757umk3gk6jhp50.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.681731781183-c3stelb6f0vm84sqb757umk3gk6jhp50</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDGnHAwr3ZjU_UQoZ_VRmQtZQN_syGaKsM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>681731781183</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ru.tcsbank.TinkoffChat</string>
+	<key>PROJECT_ID</key>
+	<string>tinkoffchat-39869</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tinkoffchat-39869.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:681731781183:ios:66d4a2afa55e101e157e8a</string>
+</dict>
+</plist>
