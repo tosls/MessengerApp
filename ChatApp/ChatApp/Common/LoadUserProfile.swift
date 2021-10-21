@@ -24,3 +24,4 @@ class LoadUserProfile {
         return user ?? UserProfileModel(userName: "User Name", userInfo: "About User")
     }
 }
+

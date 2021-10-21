@@ -11,7 +11,22 @@ class OperationsManager {
     private let queue = OperationQueue()
     
     func saveProfile(userData: UserProfileModel, completion: @escaping (Result<Bool, Error>) -> Void ) {
-        let saveOperation = saveUserProfileOperation(userProfile: userData)
+        let saveOperation = SaveUserProfileOperation(userProfile: userData)
+        
+        saveOperation.completionBlock = {
+            OperationQueue.main.addOperation {
+                if let result = saveOperation.result {
+                    completion(result)
+                } else {
+                    print("Error")
+                }
+            }
+        }
+        queue.addOperation(saveOperation)
+    }
+    
+    func saveUserProfileImage(userImage: UIImage, completion: @escaping (Result<Bool,Error>) -> Void) {
+        let saveOperation = SaveUserProfileImage(userImage: userImage)
         
         saveOperation.completionBlock = {
             OperationQueue.main.addOperation {
@@ -84,7 +99,7 @@ extension AsyncOperation {
     }
 }
 
-class saveUserProfileOperation: AsyncOperation  {
+class SaveUserProfileOperation: AsyncOperation  {
     let userProfile: UserProfileModel
     private(set) var result: Result<Bool, Error>?
     
@@ -98,9 +113,37 @@ class saveUserProfileOperation: AsyncOperation  {
             state = .finished
             return
         }
-        SaveUserProfile.saveUserProfileSettings(userData: userProfile) { [weak self] result in
+        let userManager: UserProfileManagerProtocol = OperationsManager()
+        userManager.saveUserProfileSettings(userData: userProfile) { [weak self] result in
             self?.result = result
             self?.state = .finished
         }
+
     }
+}
+
+class SaveUserProfileImage: AsyncOperation {
+    let userImage: UIImage
+    private(set) var result: Result<Bool, Error>?
+    
+    init(userImage: UIImage) {
+        self.userImage = userImage
+        super.init()
+    }
+    
+    override func main() {
+        if isCancelled {
+            state = .finished
+            return
+        }
+        UserProfileImageManager.saveUserImage(userImage: userImage) { result in
+            self.result = result
+            self.state = .finished
+        }
+    }
+    
+}
+
+extension OperationsManager: UserProfileManagerProtocol {
+    
 }

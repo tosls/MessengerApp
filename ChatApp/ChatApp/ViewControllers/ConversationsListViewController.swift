@@ -34,6 +34,18 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
         if let destination = segue.destination as? SettingsViewController {
             destination.settingsClosure = { [weak self] theme in self?.themeChanging(selectedTheme: theme) }
         }
+        
+        if let destination = segue.destination as? ProfileViewController {
+            destination.updateProfileImageClosure = { switch $0 {
+            case true:
+                print("Test12")
+                self.setupUserProfileButton()
+            case false:
+                print("Test13")
+                return
+            }
+            }
+        }
 
 //        guard let destination = segue.destination as? SettingsViewController else {return}
 //        destination.closure = { [weak self] theme in self?.logThemeChanging(selectedTheme: theme) }
@@ -64,6 +76,10 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
         self.navigationController?.loadView()
     }
     
+    private func updateView() {
+        setupUserProfileButton()
+    }
+    
     private func logThemeChanging(themeColor: UIColor) {
         print(themeColor)
     }
@@ -92,22 +108,35 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
     
     private func setupUserProfileButton() {
         
-        let userInitials = UserProfileModel.userNameToInitials(name: UserProfile.shared.getUserProfile().userName ?? "User Name")
-        let userImage = UserProfileModel.userInitialsToImage(userInitials, 40, 40)
-
+        let gcdManager = GCDManager()
         
         let button = UIButton(type: .custom)
-        button.setImage(userImage, for: .normal)
-        button.backgroundColor = UIColor(red: 0.894,
-                                         green: 0.908,
-                                         blue: 0.17,
-                                         alpha: 1)
         
         button.addTarget(self, action: #selector(profileButtonTapped(_:)), for: .touchUpInside)
         button.frame = CGRect(x: 0,
                               y: 0,
                               width: 40,
                               height: 40)
+        
+        button.backgroundColor = UIColor(red: 0.894,
+                                         green: 0.908,
+                                         blue: 0.17,
+                                         alpha: 1)
+        
+        let buttonImage = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: button.frame.width, height: button.frame.height))
+        buttonImage.layer.cornerRadius = buttonImage.frame.height / 2
+        buttonImage.clipsToBounds = true
+        
+        gcdManager.loadUserImage { userImage in
+            if userImage != nil {
+                buttonImage.image = userImage
+                button.addSubview(buttonImage)
+            } else {
+                let userInitials = UserProfileModel.userNameToInitials(name: UserProfile.shared.getUserProfile().userName ?? "User Name")
+                let userInitialsImage = UserProfileModel.userInitialsToImage(userInitials, button.frame.width, button.frame.height)
+                button.setImage(userInitialsImage, for: .normal)
+            }
+        }
         
         button.layer.cornerRadius = button.bounds.size.height / 2
         let barButton = UIBarButtonItem(customView: button)

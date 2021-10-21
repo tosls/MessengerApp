@@ -11,7 +11,7 @@ class UserProfileImageManager {
     
     static let userProfileImageName = "userProfileImage"
     
-    static func saveUserImage(userImage: UIImage) {
+    static func saveUserImage(userImage: UIImage, completion: @escaping (Result<Bool,Error>) -> Void) {
         
         do {
             let fileName = userProfileImageName
@@ -29,17 +29,19 @@ class UserProfileImageManager {
             }
             do {
                 try data.write(to: filePath)
-            } catch let Error {
-                print(Error)
+                completion(.success(true))
+            } catch  {
+                completion(.failure(error))
+                print(error)
             }
-        } catch let Error {
-            print(Error)
+        } catch {
+            completion(.failure(error))
+            print(error)
         }
     }
     
     static func loadUserImage(comoletion: @escaping (UIImage?) -> Void) {
 
-        do {
         let documentDirectory = FileManager.SearchPathDirectory.applicationSupportDirectory
         
         let filePath = NSSearchPathForDirectoriesInDomains(documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
@@ -48,7 +50,6 @@ class UserProfileImageManager {
             let userImageUrl = URL(fileURLWithPath: path).appendingPathComponent(userProfileImageName)
             let userImage = UIImage(contentsOfFile: userImageUrl.path)
             comoletion(userImage)
-        }
         }
     }
 }

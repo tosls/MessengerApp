@@ -50,7 +50,7 @@ final class ThemeManager {
         }
     }
     
-    static func loadUserTheme() -> String! {
+    static func loadUserTheme() -> String {
         
         var userThemeName: String?
         do {

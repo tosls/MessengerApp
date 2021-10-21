@@ -23,8 +23,10 @@ class ProfileViewController: UIViewController {
     @IBOutlet var saveProcessIndicator: UIActivityIndicatorView!
     
     let userProfile = UserProfile.shared.getUserProfile()
+    var updateProfileImageClosure: ((Bool) -> ())?
     
     private var changeUserInfo: Bool = false
+    private var changeUserImage: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,24 +64,20 @@ class ProfileViewController: UIViewController {
 
     @IBAction func saveGCDButtonTapped(_ sender: UIButton) {
         saveWithGCD()
-        
     }
     
     @IBAction func saveOperationsButtonTapped(_ sender: UIButton) {
         saveWithOperations()
     }
 
-    
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         cancelChanges()
     }
     
-    private func getUserProfile() {
-        
-    }
     
     //MARK: Setuping a view
-        
+     
+    
     private func setupView() {
         view.backgroundColor = .white
         
@@ -121,10 +119,12 @@ class ProfileViewController: UIViewController {
                                                    green: 0.908,
                                                    blue: 0.17,
                                                    alpha: 1)
+        profileImageView.clipsToBounds = true
         
         let imageViewHeight = profileImageView.bounds.height
         let imageViewWidth = profileImageView.bounds.width
         let userInitials = UserProfileModel.userNameToInitials(name: userProfile.userName ?? "User Name")
+        
         let gcdManager = GCDManager()
         
         gcdManager.loadUserImage { [weak self] image in
@@ -135,7 +135,7 @@ class ProfileViewController: UIViewController {
             }
         }
     }
-    
+
     
     //MARK: Work with User Profile
     
@@ -144,9 +144,9 @@ class ProfileViewController: UIViewController {
         saveProcessIndicator.isHidden = false
         saveProcessIndicator.startAnimating()
         
-        let operationManager = OperationsManager()
-        operationManager.saveProfile(userData: UserProfileModel(userName: userNameTF.text, userInfo: infoAboutUserTF.text)) { [weak self] in switch $0 {
-            
+        let manager = OperationsManager()
+        manager.saveProfile(userData: UserProfileModel(userName: userNameTF.text, userInfo: infoAboutUserTF.text)) { [weak self] in switch $0 {
+
         case .success(_):
             self?.saveProcessIndicator.isHidden = true
             self?.saveProcessIndicator.stopAnimating()
@@ -155,27 +155,49 @@ class ProfileViewController: UIViewController {
             self?.showFailAlert()
         }
         }
+        if changeUserImage {
+            
+            manager.saveUserProfileImage(userImage: profileImageView.image!) { result in switch result {
+            case .success(_):
+                print("Save")
+                self.updateProfileImageClosure?(true)
+            case .failure(_):
+                print("Error save")
+            }
+            
+            }
+        }
         hideAButtons()
     }
 
     private func saveWithGCD() {
         saveProcessIndicator.isHidden = false
         saveProcessIndicator.startAnimating()
-
-        let gcdManager = GCDManager()
         
+        let gcdManager = GCDManager()
         gcdManager.saveUserProfile(userData: UserProfileModel(
             userName: userNameTF.text,
             userInfo: infoAboutUserTF.text))
-            { [weak self] in switch $0 {
+        { [weak self] in switch $0 {
+        case .success(_):
+            self?.saveProcessIndicator.isHidden = true
+            self?.saveProcessIndicator.stopAnimating()
+            self?.showSuccessAlert()
+        case .failure(_):
+            self?.showFailAlert()
+        }
+        }
+        
+        if changeUserImage {
+            gcdManager.saveUserImage(userImage: profileImageView.image!) { result in switch result {
             case .success(_):
-                self?.saveProcessIndicator.isHidden = true
-                self?.saveProcessIndicator.stopAnimating()
-                self?.showSuccessAlert()
+                print("Save")
+                self.updateProfileImageClosure?(true)
             case .failure(_):
-                self?.showFailAlert()
+                print("Error save")
             }
             }
+        }
         hideAButtons()
     }
     
@@ -186,6 +208,7 @@ class ProfileViewController: UIViewController {
         
         hideAButtons()
     }
+    
     
     //MARK: Alerts
     
@@ -239,8 +262,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             profileImage = originalImage
             enableAButtons()
         }
+        changeUserImage = true
         profileImageView.image = profileImage
-        UserProfileImageManager.saveUserImage(userImage: profileImage!)
         
         dismiss(animated: true)
         
@@ -302,6 +325,10 @@ extension ProfileViewController: UITextFieldDelegate {
             changeUserInfo = true
         }
     }
+    
+    
+    //MARK: TextField Keyboard
+    
     
     private func raiseTheViewAboveTheKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
