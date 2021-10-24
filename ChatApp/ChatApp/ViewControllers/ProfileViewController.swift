@@ -22,7 +22,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet var saveProcessIndicator: UIActivityIndicatorView!
     
     let userProfile = UserProfile.shared.getUserProfile()
-    var updateProfileImageClosure: ((Bool) -> ())?
+    var updateProfileImageClosure: ((Bool) -> Void)?
     
     private var changeUserInfo: Bool = false
     private var changeUserImage: Bool = false
@@ -68,10 +68,8 @@ class ProfileViewController: UIViewController {
         cancelChanges()
     }
     
-    
-    //MARK: Setuping a view
+    // MARK: Setuping a view
      
-    
     private func setupView() {
         view.backgroundColor = .white
         
@@ -126,8 +124,7 @@ class ProfileViewController: UIViewController {
         }
     }
 
-    
-    //MARK: Work with User Profile
+    // MARK: Work with User Profile
     
     private func saveWithGCD() {
         saveProcessIndicator.isHidden = false
@@ -136,8 +133,7 @@ class ProfileViewController: UIViewController {
         let gcdManager = GCDManager()
         gcdManager.saveUserProfile(userData: UserProfileModel(
             userName: userNameTF.text,
-            userInfo: infoAboutUserTF.text))
-        { [weak self] in
+            userInfo: infoAboutUserTF.text)) { [weak self] in
         switch $0 {
         case true:
             self?.saveProcessIndicator.isHidden = true
@@ -170,9 +166,7 @@ class ProfileViewController: UIViewController {
         hideAButtons()
     }
     
-    
-    //MARK: Alerts
-    
+    // MARK: Alerts
     
     func showSuccessAlert() {
         let alert = UIAlertController(title: "Успешно!", message: "Данные сохранены.", preferredStyle: .alert)
@@ -187,7 +181,7 @@ class ProfileViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    //MARK: Getting a profile picture
+    // MARK: Getting a profile picture
         
     private func actionSheetController() {
         let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -202,9 +196,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
-
-    //MARK: Extension ImagePickerController
-
+    // MARK: Extension ImagePickerController
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -212,7 +204,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         dismiss(animated: true)
     }
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         var profileImage: UIImage?
         
         if let editedImage = info[.editedImage] as? UIImage {
@@ -251,8 +243,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
 }
 
-
-//MARK: Extension UITextFieldDelegate
+// MARK: Extension UITextFieldDelegate
 
 extension ProfileViewController: UITextFieldDelegate {
     
@@ -272,31 +263,27 @@ extension ProfileViewController: UITextFieldDelegate {
     private func checkATextFieldChange() {
         let textFields = [userNameTF, infoAboutUserTF]
         
-        for textField in textFields {
-            if changeUserInfo == false {
-                
+        if changeUserInfo == false {
+            for textField in textFields {
                 textField?.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
             }
         }
     }
     
-    @objc func textFieldDidChange(textField: UITextField){
+    @objc func textFieldDidChange(textField: UITextField) {
         if changeUserInfo == false {
             enableAButtons()
             changeUserInfo = true
         }
     }
     
-    
-    //MARK: TextField Keyboard
-    
+    // MARK: TextField Keyboard
     
     private func raiseTheViewAboveTheKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {

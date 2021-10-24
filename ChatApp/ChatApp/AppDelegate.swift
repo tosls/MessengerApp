@@ -38,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    
     // MARK: UISceneSession Lifecycle
 
     @available(iOS 13.0, *)
@@ -78,7 +77,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Application moved from the FOREGROUND to the BACKGROUND: \(#function)")
         }
     }
-
-
 }
-

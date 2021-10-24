@@ -14,5 +14,5 @@ struct MessageModel: MessageCellConfiguration {
 
 protocol MessageCellConfiguration {
     var text: String? {get set}
-    var isIncoming:Bool {get set}
+    var isIncoming: Bool {get set}
 }

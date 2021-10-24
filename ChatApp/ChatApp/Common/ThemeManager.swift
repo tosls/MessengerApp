@@ -13,9 +13,7 @@ final class ThemeManager {
         case themeName
     }
   
-    
-    //MARK: Save with userDefaults
-    
+    // MARK: Save with userDefaults
     
     static var userTheme: String! {
         get {
@@ -32,9 +30,7 @@ final class ThemeManager {
         }
     }
     
-    
-    //MARK: Save and Load json for GCD
-    
+    // MARK: Save and Load json for GCD
     
     static func saveUserTheme(userTheme: Theme) {
         do {

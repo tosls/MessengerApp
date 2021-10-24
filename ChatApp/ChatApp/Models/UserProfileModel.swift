@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 struct UserProfileModel: Codable {
     
     var userName: String?
@@ -22,8 +21,8 @@ struct UserProfileModel: Codable {
         var firstInitalFound = false
         var secondInitialFound = false
         
-        for (_, item) in words.enumerated() {
-                for (_, char) in item.unicodeScalars.enumerated() {
+        for (item) in words {
+                for (char) in item.unicodeScalars {
                     if letters .contains(char) {
                         if firstInitalFound != true {
                             firstInital = String(char)
@@ -52,18 +51,18 @@ struct UserProfileModel: Codable {
         let font = UIFont(name: "Helvetica", size: imageViewHeight / 2)
         let fontStyle = NSMutableParagraphStyle()
         fontStyle.alignment = NSTextAlignment.center
-        let attributes = [NSAttributedString.Key.foregroundColor:UIColor.black,
+        let attributes = [NSAttributedString.Key.foregroundColor: UIColor.black,
                           NSAttributedString.Key.font: font,
                           NSAttributedString.Key.paragraphStyle: fontStyle]
         
-        let textSize = text.size(withAttributes: attributes as [NSAttributedString.Key : Any])
+        let textSize = text.size(withAttributes: attributes as [NSAttributedString.Key: Any])
         
         let rectangle = CGRect(x: imageViewWidth / 2 - textSize.width / 2,
                                y: imageViewHeight / 2 - textSize.height / 2 ,
                                width: textSize.width,
                                height: textSize.height)
         
-        text.draw(in:rectangle, withAttributes: attributes as [NSAttributedString.Key : Any])
+        text.draw(in: rectangle, withAttributes: attributes as [NSAttributedString.Key: Any])
         
         let userInitialsImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -71,5 +70,3 @@ struct UserProfileModel: Codable {
         return userInitialsImage
     }
 }
-
-

@@ -30,7 +30,7 @@ class UserProfileImageManager {
             do {
                 try data.write(to: filePath)
                 completion(true)
-            } catch  {
+            } catch {
                 completion(false)
                 print(error)
             }
@@ -53,4 +53,3 @@ class UserProfileImageManager {
         }
     }
 }
-

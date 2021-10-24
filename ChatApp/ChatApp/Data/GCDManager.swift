@@ -16,7 +16,7 @@ class GCDManager {
         }
     }
     
-    func loadUserImage(completion: @escaping (UIImage?) -> Void){
+    func loadUserImage(completion: @escaping (UIImage?) -> Void) {
         let queue = DispatchQueue.global(qos: .utility)
         queue.async {
             UserProfileImageManager.loadUserImage { image in
@@ -61,5 +61,3 @@ extension GCDManager: UserProfileManagerProtocol {
         }
     }
 }
-
-

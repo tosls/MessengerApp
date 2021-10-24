@@ -18,7 +18,7 @@ class SettingsViewController: UIViewController {
     private var themeTwo: UIColor = .black
     private var themeThree: UIColor = .orange
     
-    var settingsClosure: ((ThemeSettings) -> ())?
+    var settingsClosure: ((ThemeSettings) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()

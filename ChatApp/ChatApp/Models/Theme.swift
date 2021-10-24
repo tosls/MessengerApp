@@ -11,4 +11,3 @@ struct Theme: Codable {
     
     var themeName: String?
 }
-

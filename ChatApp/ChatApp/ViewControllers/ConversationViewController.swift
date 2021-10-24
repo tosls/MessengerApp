@@ -24,7 +24,7 @@ class ConversationViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! MessageTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? MessageTableViewCell else {return UITableViewCell()}
         
         let chatMessage = chat[indexPath.row]
         cell.messageLabel.text = chatMessage.text
@@ -42,4 +42,3 @@ class ConversationViewController: UITableViewController {
         chat.append(chatLastMessage ?? Message(text: "Никакая", isIncoming: true))
     }
 }
-

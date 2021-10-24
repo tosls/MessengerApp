@@ -18,5 +18,3 @@ class UserProfile {
         return LoadUserProfile.loadUserProfile()
     }
 }
-
-
