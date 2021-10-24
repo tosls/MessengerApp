@@ -18,7 +18,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet var editProfileButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var saveGCDButton: UIButton!
-    @IBOutlet var saveButtonOperations: UIButton!
     
     @IBOutlet var saveProcessIndicator: UIActivityIndicatorView!
     
@@ -49,7 +48,6 @@ class ProfileViewController: UIViewController {
         userNameTF.becomeFirstResponder()
         
         saveGCDButton.isEnabled = false
-        saveButtonOperations.isEnabled = false
 
         hideAButtons()
     }
@@ -66,10 +64,6 @@ class ProfileViewController: UIViewController {
         saveWithGCD()
     }
     
-    @IBAction func saveOperationsButtonTapped(_ sender: UIButton) {
-        saveWithOperations()
-    }
-
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         cancelChanges()
     }
@@ -89,12 +83,10 @@ class ProfileViewController: UIViewController {
         
         saveGCDButton.layer.cornerRadius = 10
         cancelButton.layer.cornerRadius = 10
-        saveButtonOperations.layer.cornerRadius = 10
         
         saveProcessIndicator.isHidden = true
         
         editProfileButton.isHidden = false
-        saveButtonOperations.isHidden = true
         saveGCDButton.isHidden = true
         cancelButton.isHidden = true
         editProfileImageButton.isHidden = true
@@ -104,13 +96,11 @@ class ProfileViewController: UIViewController {
         editProfileButton.isHidden.toggle()
         cancelButton.isHidden.toggle()
         saveGCDButton.isHidden.toggle()
-        saveButtonOperations.isHidden.toggle()
         editProfileImageButton.isHidden.toggle()
     }
     
     private func enableAButtons() {
         saveGCDButton.isEnabled.toggle()
-        saveButtonOperations.isEnabled.toggle()
     }
  
     private func setupProfileImageView() {
@@ -139,37 +129,6 @@ class ProfileViewController: UIViewController {
     
     //MARK: Work with User Profile
     
-    
-    private func saveWithOperations() {
-        saveProcessIndicator.isHidden = false
-        saveProcessIndicator.startAnimating()
-        
-        let manager = OperationsManager()
-        manager.saveProfile(userData: UserProfileModel(userName: userNameTF.text, userInfo: infoAboutUserTF.text)) { [weak self] in switch $0 {
-
-        case .success(_):
-            self?.saveProcessIndicator.isHidden = true
-            self?.saveProcessIndicator.stopAnimating()
-            self?.showSuccessAlert()
-        case .failure(_):
-            self?.showFailAlert()
-        }
-        }
-        if changeUserImage {
-            
-            manager.saveUserProfileImage(userImage: profileImageView.image!) { result in switch result {
-            case .success(_):
-                print("Save")
-                self.updateProfileImageClosure?(true)
-            case .failure(_):
-                print("Error save")
-            }
-            
-            }
-        }
-        hideAButtons()
-    }
-
     private func saveWithGCD() {
         saveProcessIndicator.isHidden = false
         saveProcessIndicator.startAnimating()
@@ -178,22 +137,24 @@ class ProfileViewController: UIViewController {
         gcdManager.saveUserProfile(userData: UserProfileModel(
             userName: userNameTF.text,
             userInfo: infoAboutUserTF.text))
-        { [weak self] in switch $0 {
-        case .success(_):
+        { [weak self] in
+        switch $0 {
+        case true:
             self?.saveProcessIndicator.isHidden = true
             self?.saveProcessIndicator.stopAnimating()
             self?.showSuccessAlert()
-        case .failure(_):
+        case false:
             self?.showFailAlert()
         }
         }
         
         if changeUserImage {
-            gcdManager.saveUserImage(userImage: profileImageView.image!) { result in switch result {
-            case .success(_):
+            gcdManager.saveUserImage(userImage: profileImageView.image!) { result in
+            switch result {
+            case true:
                 print("Save")
                 self.updateProfileImageClosure?(true)
-            case .failure(_):
+            case false:
                 print("Error save")
             }
             }

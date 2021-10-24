@@ -16,14 +16,11 @@
 		191F772626F3BC7A00A30032 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191F772526F3BC7A00A30032 /* Assets.xcassets */; };
 		191F772926F3BC7A00A30032 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */; };
 		19380876271C021A001E3611 /* GCDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19380875271C021A001E3611 /* GCDManager.swift */; };
-		1938087A271C040C001E3611 /* OperationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19380879271C040C001E3611 /* OperationsManager.swift */; };
 		1938087F271EB71B001E3611 /* LoadUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1938087E271EB71B001E3611 /* LoadUserProfile.swift */; };
 		19380883271ED046001E3611 /* UserProfileImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19380882271ED046001E3611 /* UserProfileImageManager.swift */; };
 		1938088627212F42001E3611 /* UserProfileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1938088527212F42001E3611 /* UserProfileManagerProtocol.swift */; };
 		195144252714490800DDE4A1 /* ThemeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195144242714490800DDE4A1 /* ThemeSettings.swift */; };
 		19514427271588FF00DDE4A1 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19514426271588FF00DDE4A1 /* ThemeManager.swift */; };
-		1984F64E2712D390005778D4 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984F64D2712D390005778D4 /* ThemesViewController.m */; };
-		1984F65B2712FA8F005778D4 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984F65A2712FA8F005778D4 /* Themes.m */; };
 		1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */; };
 		1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02626FFABE800E4F6B9 /* UserProfile.swift */; };
 		19E978EF270863100077D249 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978EE270863100077D249 /* ConversationsListViewController.swift */; };
@@ -51,18 +48,11 @@
 		191F772826F3BC7A00A30032 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191F772A26F3BC7A00A30032 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19380875271C021A001E3611 /* GCDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDManager.swift; sourceTree = "<group>"; };
-		19380879271C040C001E3611 /* OperationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationsManager.swift; sourceTree = "<group>"; };
 		1938087E271EB71B001E3611 /* LoadUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserProfile.swift; sourceTree = "<group>"; };
 		19380882271ED046001E3611 /* UserProfileImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileImageManager.swift; sourceTree = "<group>"; };
 		1938088527212F42001E3611 /* UserProfileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManagerProtocol.swift; sourceTree = "<group>"; };
 		195144242714490800DDE4A1 /* ThemeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettings.swift; sourceTree = "<group>"; };
 		19514426271588FF00DDE4A1 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
-		1984F64B2712D390005778D4 /* ChatApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChatApp-Bridging-Header.h"; sourceTree = "<group>"; };
-		1984F64C2712D390005778D4 /* ThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewController.h; sourceTree = "<group>"; };
-		1984F64D2712D390005778D4 /* ThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
-		1984F6552712EE81005778D4 /* ThemesViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewControllerDelegate.h; sourceTree = "<group>"; };
-		1984F6592712FA8F005778D4 /* Themes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Themes.h; sourceTree = "<group>"; };
-		1984F65A2712FA8F005778D4 /* Themes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Themes.m; sourceTree = "<group>"; };
 		1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1994C02626FFABE800E4F6B9 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		19E978EE270863100077D249 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
@@ -120,7 +110,6 @@
 				19B334E62703160000315358 /* Storyboards */,
 				191F771C26F3BC7800A30032 /* AppDelegate.swift */,
 				191F771E26F3BC7800A30032 /* SceneDelegate.swift */,
-				1984F64B2712D390005778D4 /* ChatApp-Bridging-Header.h */,
 				191F772526F3BC7A00A30032 /* Assets.xcassets */,
 				191F772A26F3BC7A00A30032 /* Info.plist */,
 				190BE8532721DF76009AC720 /* GoogleService-Info.plist */,
@@ -147,7 +136,6 @@
 				19E978F62708CF430077D249 /* Conversations.swift */,
 				19E97905270C561A0077D249 /* Messages.swift */,
 				19380875271C021A001E3611 /* GCDManager.swift */,
-				19380879271C040C001E3611 /* OperationsManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -161,9 +149,6 @@
 				19E978EE270863100077D249 /* ConversationsListViewController.swift */,
 				19E978F427088C8F0077D249 /* ConversationViewController.swift */,
 				19E978F027086D540077D249 /* ConversationTableViewCell.swift */,
-				1984F64D2712D390005778D4 /* ThemesViewController.m */,
-				1984F64C2712D390005778D4 /* ThemesViewController.h */,
-				1984F6552712EE81005778D4 /* ThemesViewControllerDelegate.h */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -185,8 +170,6 @@
 				19E978F92708D4A30077D249 /* ConversationModel.swift */,
 				19E978FB2708E81E0077D249 /* MessageModel.swift */,
 				19E978FF270B0FD80077D249 /* UserProfileModel.swift */,
-				1984F65A2712FA8F005778D4 /* Themes.m */,
-				1984F6592712FA8F005778D4 /* Themes.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -325,7 +308,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1984F64E2712D390005778D4 /* ThemesViewController.m in Sources */,
 				1919D32027140BA100C829F8 /* SettingsViewController.swift in Sources */,
 				1938088627212F42001E3611 /* UserProfileManagerProtocol.swift in Sources */,
 				19E978F527088C8F0077D249 /* ConversationViewController.swift in Sources */,
@@ -343,9 +325,7 @@
 				19380883271ED046001E3611 /* UserProfileImageManager.swift in Sources */,
 				1938087F271EB71B001E3611 /* LoadUserProfile.swift in Sources */,
 				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,
-				1938087A271C040C001E3611 /* OperationsManager.swift in Sources */,
 				19E978FA2708D4A30077D249 /* ConversationModel.swift in Sources */,
-				1984F65B2712FA8F005778D4 /* Themes.m in Sources */,
 				19E97900270B0FD80077D249 /* UserProfileModel.swift in Sources */,
 				191F771F26F3BC7800A30032 /* SceneDelegate.swift in Sources */,
 				19380876271C021A001E3611 /* GCDManager.swift in Sources */,
@@ -507,7 +487,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ChatApp/ChatApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -531,7 +511,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ChatApp/ChatApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

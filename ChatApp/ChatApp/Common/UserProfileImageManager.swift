@@ -11,7 +11,7 @@ class UserProfileImageManager {
     
     static let userProfileImageName = "userProfileImage"
     
-    static func saveUserImage(userImage: UIImage, completion: @escaping (Result<Bool,Error>) -> Void) {
+    static func saveUserImage(userImage: UIImage, completion: @escaping (Bool) -> Void) {
         
         do {
             let fileName = userProfileImageName
@@ -29,13 +29,13 @@ class UserProfileImageManager {
             }
             do {
                 try data.write(to: filePath)
-                completion(.success(true))
+                completion(true)
             } catch  {
-                completion(.failure(error))
+                completion(false)
                 print(error)
             }
         } catch {
-            completion(.failure(error))
+            completion(false)
             print(error)
         }
     }

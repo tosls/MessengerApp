@@ -27,7 +27,7 @@ class GCDManager {
         }
     }
     
-    func saveUserImage(userImage: UIImage, completion: @escaping (Result<Bool,Error>) -> Void) {
+    func saveUserImage(userImage: UIImage, completion: @escaping (Bool) -> Void) {
         let queue = DispatchQueue.global(qos: .utility)
         queue.async {
             UserProfileImageManager.saveUserImage(userImage: userImage) { result in
@@ -39,7 +39,7 @@ class GCDManager {
 
 extension GCDManager: UserProfileManagerProtocol {
     
-    func saveUserProfile(userData: UserProfileModel, completion: @escaping (Result<Bool,Error>) -> Void) {
+    func saveUserProfile(userData: UserProfileModel, completion: @escaping (Bool) -> Void) {
         let queue = DispatchQueue.global(qos: .utility)
         queue.async {
             let userManager: UserProfileManagerProtocol = GCDManager()

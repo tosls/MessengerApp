@@ -25,7 +25,7 @@ extension UserProfileManagerProtocol {
         }
     }
     
-    func saveUserProfileSettings(userData: UserProfileModel, completion: @escaping (Result<Bool, Error>) -> Void ) {
+    func saveUserProfileSettings(userData: UserProfileModel, completion: @escaping (Bool) -> Void ) {
         do {
             let filePath = try FileManager.default
                 .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -33,9 +33,9 @@ extension UserProfileManagerProtocol {
             try JSONEncoder().encode(userData)
                 .write(to: filePath)
             sleep(2)
-            completion(.success(true))
+            completion(true)
         } catch {
-            completion(.failure(error))
+            completion(false)
             print(error)
         }
     }

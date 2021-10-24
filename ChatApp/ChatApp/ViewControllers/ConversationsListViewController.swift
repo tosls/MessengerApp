@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class ConversationsListViewController: UIViewController, ThemesViewControllerDelegate {
+class ConversationsListViewController: UIViewController {
 
     private let identifier = String(describing: ConversationTableViewCell.self)
     var userPhoto = UIImage()
@@ -59,9 +59,6 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationObjC = segue.destination as? ThemesViewController {
-            destinationObjC.delegate = self
-        }
         if let destination = segue.destination as? SettingsViewController {
             destination.settingsClosure = { [weak self] theme in self?.themeChanging(selectedTheme: theme) }
         }
@@ -69,10 +66,8 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
         if let destination = segue.destination as? ProfileViewController {
             destination.updateProfileImageClosure = { switch $0 {
             case true:
-                print("Test12")
                 self.setupUserProfileButton()
             case false:
-                print("Test13")
                 return
             }
             }
@@ -90,12 +85,8 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
         performSegue(withIdentifier: "settingsVC", sender: nil)
     }
     
-    @objc func settingsObjCButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "settingsObjCVC", sender: nil)
-    }
-    
-    func themesViewController(_ controller: ThemesViewController, didSelectedTheme selectedTheme: UIColor) {
-        logThemeChanging(themeColor: selectedTheme)
+    @objc func addNewChannelButtonTapped(_ sender: Any) {
+        newChannelAlert()
     }
     
     private func themeChanging(selectedTheme: ThemeSettings) {
@@ -120,21 +111,15 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
         view.addSubview(tableView)
         
         setupUserProfileButton()
-//        settingsButton()
-        setupSettingsButtons()
+        setupLeftBarButtons()
     }
  
-    private func setupSettingsButtons() {
-        let barButtonItemObjC = UIBarButtonItem(title: "Obj-C", style: .plain, target: self, action: #selector((settingsObjCButtonTapped(_:))))
+    private func setupLeftBarButtons() {
+        let newChannelBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewChannelButtonTapped(_:)))
         
-        let barButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
+        let settingsBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
         
-        self.navigationItem .setLeftBarButtonItems([barButtonItem, barButtonItemObjC], animated: false)
-    }
-    
-    private func settingsButton() {
-        let barButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
-        self.navigationItem.leftBarButtonItem = barButtonItem
+        self.navigationItem .setLeftBarButtonItems([newChannelBarButtonItem, settingsBarButtonItem], animated: false)
     }
     
     private func setupUserProfileButton() {
@@ -172,6 +157,28 @@ class ConversationsListViewController: UIViewController, ThemesViewControllerDel
         button.layer.cornerRadius = button.bounds.size.height / 2
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    private func newChannelAlert() {
+        let alert = UIAlertController(title: "Создать новый канал", message: nil, preferredStyle: .alert)
+        let createAChannel = UIAlertAction(title: "Создать", style: .default, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(createAChannel)
+        alert.addAction(cancel)
+        
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "Название канала"
+            createAChannel.isEnabled = false
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (notification) in
+                if textField.text?.isEmpty == false {
+                    createAChannel.isEnabled = true
+                } else {
+                    createAChannel.isEnabled = false
+                }
+            }
+        })
+        present(alert, animated: true, completion: nil)
     }
 }
 
