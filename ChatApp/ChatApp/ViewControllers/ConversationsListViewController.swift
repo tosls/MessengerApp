@@ -15,7 +15,11 @@ class ConversationsListViewController: UIViewController {
     
     private lazy var db = Firestore.firestore()
     private lazy var reference = db.collection("channels")
-
+    private lazy var channelsCount: Int = 0
+    
+    var channels = [ChannelModel]()
+    var message = [Message]()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
 
@@ -28,7 +32,33 @@ class ConversationsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
+        getChannels()
+        
+    }
+    
+    private func getChannels() {
+        
+        reference.addSnapshotListener { [weak self] snapshot, error in
+            if let error = error {
+                print(error)
+            } else {
+                guard let snap = snapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
+                for document in snap.documents {
+                    let chanelName = document.data()["name"] as? String ?? "Channel Name"
+                    let lastMessage = document.data()["lastMessage"] as? String ?? "Last Message"
+                    let identifier = document.data()["identifier"] as? String ?? "identifier"
+                    self?.channels.append(ChannelModel(identifier: identifier, name: chanelName, lastMessage: lastMessage))
+                }
+            }
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -46,9 +76,6 @@ class ConversationsListViewController: UIViewController {
             }
             }
         }
-
-//        guard let destination = segue.destination as? SettingsViewController else {return}
-//        destination.closure = { [weak self] theme in self?.logThemeChanging(selectedTheme: theme) }
     }
     
     @objc func profileButtonTapped(_ sender: Any) {
@@ -161,39 +188,20 @@ class ConversationsListViewController: UIViewController {
 extension ConversationsListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        conversations.count
-        }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        conversations[section].conversation.count
+        1
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        let sectionName = conversations[section].userStatus
-        switch sectionName {
-        case .online:
-            return "Online"
-        case .history:
-            return "History"
-        }
-    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        channels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let conversation = conversations[indexPath.section]
-        let dialog = conversation.conversation[indexPath.row]
 
+        let channel = channels[indexPath.row]
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? ConversationTableViewCell else {
             return UITableViewCell() }
-        
-        cell.configure(with: ConversationModel(name: dialog.userName,
-                                               message: dialog.message,
-                                               date: dialog.date,
-                                               online: dialog.status,
-                                               hasUnreadMessage: dialog.hasUnreadMessage))
+        cell.configure(with: ChannelModel(identifier: channel.identifier, name: channel.name, lastMessage: channel.lastMessage))
     
         return cell
     }
@@ -204,14 +212,11 @@ extension ConversationsListViewController: UITableViewDataSource {
 extension ConversationsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let conversationVC = ConversationViewController()
-        let conversation = conversations[indexPath.section]
-        let dialog = conversation.conversation[indexPath.row]
-        let userName = dialog.userName
-        let lastMessage = dialog.message
-        conversationVC.titleName = userName
-        conversationVC.chatLastMessage = Message(text: lastMessage, isIncoming: true)
+        let channelVC = ConversationViewController()
+        let chanel = channels[indexPath.row]
+        channelVC.channel = chanel
+        channelVC.titleName = chanel.name
         
-        navigationController?.pushViewController(conversationVC, animated: true)
+        navigationController?.pushViewController(channelVC, animated: true)
     }
 }

@@ -25,18 +25,28 @@ class MessageTableViewCell: UITableViewCell {
                                                 blue: 0.88,
                                                 alpha: 1.00)
     
-    var chatMessage: Message? {
+//    var chatMessage: MessageOld? {
+//        didSet {
+//            guard let message = chatMessage else {return}
+//            messageBackgroundView.backgroundColor = message.isIncoming ? inComingMessageColor : messageColor
+//        
+//            if message.isIncoming {
+//                leadingConstraint?.isActive = true
+//                trailingConstraint?.isActive = false
+//            } else {
+//                leadingConstraint?.isActive = false
+//                trailingConstraint?.isActive = true
+//            }
+//        }
+//    }
+    
+    var channelMessage: Message? {
         didSet {
-            guard let message = chatMessage else {return}
-            messageBackgroundView.backgroundColor = message.isIncoming ? inComingMessageColor : messageColor
-        
-            if message.isIncoming {
-                leadingConstraint?.isActive = true
-                trailingConstraint?.isActive = false
-            } else {
-                leadingConstraint?.isActive = false
-                trailingConstraint?.isActive = true
-            }
+            guard let message = channelMessage else {return}
+            messageBackgroundView.backgroundColor = messageColor
+            
+            leadingConstraint?.isActive = true
+            trailingConstraint?.isActive = false
         }
     }
     

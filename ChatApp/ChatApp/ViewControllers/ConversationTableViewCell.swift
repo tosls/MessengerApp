@@ -14,27 +14,29 @@ class ConversationTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
 
-    func configure(with model: ConversationModel) {
+    func configure(with model: ChannelModel) {
         nameLabel.text = model.name
-        messageLabel.text = model.message ?? "No message yet"
-        messageLabel.font = model.hasUnreadMessage ? UIFont.systemFont(ofSize: 13, weight: .bold) : UIFont.systemFont(ofSize: 13, weight: .thin)
+        messageLabel.text = model.lastMessage
+        messageLabel.font = UIFont.systemFont(ofSize: 13, weight: .thin)
         
-        let date = model.date ?? Date()
-        compareDate(date, _dateLabel: dateLabel)
+//        messageLabel.font = model.hasUnreadMessage ? UIFont.systemFont(ofSize: 13, weight: .bold) : UIFont.systemFont(ofSize: 13, weight: .thin)
+        
+//        let date = model.date ?? Date()
+//        compareDate(date, _dateLabel: dateLabel)
 
-        backgroundColor = model.online ? UIColor(red: 1.00,
-                                                 green: 0.95,
-                                                 blue: 0.74,
-                                                 alpha: 1) : UIColor(red: 1.00,
-                                                                     green: 1.00,
-                                                                     blue: 1.00,
-                                                                     alpha: 1)
+//        backgroundColor = model.online ? UIColor(red: 1.00,
+//                                                 green: 0.95,
+//                                                 blue: 0.74,
+//                                                 alpha: 1) : UIColor(red: 1.00,
+//                                                                     green: 1.00,
+//                                                                     blue: 1.00,
+//                                                                     alpha: 1)
         
         userImage.layer.cornerRadius = userImage.frame.size.height / 2
         userImage.backgroundColor = .orange
         let imageViewHeight = userImage.bounds.height
         let imageViewWidth = userImage.bounds.width
-        let userInitials = UserProfileModel.userNameToInitials(name: model.name ?? "User Profile")
+        let userInitials = UserProfileModel.userNameToInitials(name: model.name )
         
         userImage.image = UserProfileModel.userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
     }

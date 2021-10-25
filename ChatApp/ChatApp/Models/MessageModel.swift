@@ -6,13 +6,21 @@
 //
 
 import UIKit
+import Firebase
 
-struct MessageModel: MessageCellConfiguration {
-    var text: String?
-    var isIncoming: Bool
+struct Message {
+    
+    let content: String
+    let created: Date
+    let senderId: String
+    let senderName: String
 }
 
-protocol MessageCellConfiguration {
-    var text: String? {get set}
-    var isIncoming: Bool {get set}
+extension Message {
+    var toDict: [String: Any] {
+        return ["content": content,
+                "created": Timestamp(date: created),
+                "senderID": senderId,
+                "senderName": senderName]
+    }
 }
