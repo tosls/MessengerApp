@@ -25,9 +25,9 @@ class ConversationViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = titleName ?? "Messages"
+        
         tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.separatorStyle = .none
-        
         getChannelMessages()
         setupMessageButton()
     }
@@ -35,7 +35,8 @@ class ConversationViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? MessageTableViewCell else {return UITableViewCell()}
-        let channelMessage = channelMessages[indexPath.row]
+        let messages = channelMessages.sorted { $0.created < $1.created }
+        let channelMessage = messages[indexPath.row]
         cell.userNameLabel.text = channelMessage.senderName
         cell.messageLabel.text = channelMessage.content
         cell.channelMessage = channelMessage
@@ -67,16 +68,18 @@ class ConversationViewController: UITableViewController {
                     let content = data["content"] as? String ?? "Channel Name"
                     let senderName = data["senderName"] as? String ?? "Sender Name"
                     let sendeId = data["senderID"] as? String ?? "SenderID Name"
-                    let created = data["created"] as? Date ?? Date()
+                    let created = data["created"] as? Timestamp
                     
                     self?.channelMessages.append(Message(
                         content: content,
-                        created: created,
+                        created: created?.dateValue() ?? Date(),
                         senderId: sendeId,
                         senderName: senderName)
                     )
+                    
                 }
             }
+            
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }

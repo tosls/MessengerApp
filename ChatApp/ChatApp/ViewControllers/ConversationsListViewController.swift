@@ -83,10 +83,12 @@ class ConversationsListViewController: UIViewController {
 
     private func setupView() {
         title = "Channels"
+        
         view.addSubview(tableView)
         
         setupUserProfileButton()
         setupLeftBarButtons()
+        UILabel.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).adjustsFontSizeToFitWidth = true
     }
  
     private func setupLeftBarButtons() {
@@ -151,7 +153,7 @@ class ConversationsListViewController: UIViewController {
                     let identifier = document.documentID
                     let lastMessageDate = document.data()["lastActivity"] as? Timestamp
                     
-                    self?.channels.append(ChannelModel(identifier: identifier, name: chanelName, lastMessage: lastMessage, lastActivity: lastMessageDate?.dateValue()))
+                    self?.channels.append(ChannelModel(identifier: identifier, name: chanelName, lastMessage: lastMessage, lastActivity: lastMessageDate?.dateValue() ?? Date()))
                 }
             }
             DispatchQueue.main.async {
@@ -201,6 +203,7 @@ extension ConversationsListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
+        let channels = channels.sorted { $0.lastActivity ?? Date() < $1.lastActivity ?? Date() }
         let channel = channels[indexPath.row]
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? ConversationTableViewCell else {

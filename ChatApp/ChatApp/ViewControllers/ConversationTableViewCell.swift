@@ -15,11 +15,18 @@ class ConversationTableViewCell: UITableViewCell {
     @IBOutlet weak var userImage: UIImageView!
  
     func configure(with model: ChannelModel) {
-
         compareDate(messageDate: model.lastActivity ?? Date(), dateLabel: dateLabel)
-
         nameLabel.text = model.name
-        messageLabel.text = model.lastMessage
+        
+        switch model.lastMessage {
+        case nil:
+            messageLabel.text = "Сообщений еще нет"
+        case "":
+            messageLabel.text = "Пусто"
+        default:
+            messageLabel.text = model.lastMessage
+        }
+       
         messageLabel.font = UIFont.systemFont(ofSize: 13, weight: .thin)
         userImage.layer.cornerRadius = userImage.frame.size.height / 2
         userImage.backgroundColor = .orange
