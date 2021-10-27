@@ -29,16 +29,27 @@ class ConversationViewController: UITableViewController {
         tableView.separatorStyle = .none
         
         getChannelMessages()
-//        sendMessage()
+        setupMessageButton()
     }
     
-    private func sendMessage() {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let newMessage: Message = Message(content: "🦦",
-                                          created: Date(),
-                                          senderId: UserSenderID.shared.getUserSenderId(),
-                                          senderName: UserProfile.shared.getUserProfile().userName ?? "User Name")
-        messagesReference.addDocument(data: newMessage.toDict)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? MessageTableViewCell else {return UITableViewCell()}
+        let channelMessage = channelMessages[indexPath.row]
+        cell.userNameLabel.text = channelMessage.senderName
+        cell.messageLabel.text = channelMessage.content
+        cell.channelMessage = channelMessage
+        cell.messageLabel.textColor = .black
+        cell.backgroundColor = .white
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        channelMessages.count
+    }
+    
+    @objc func addNewChannelButtonTapped(_ sender: Any) {
+        newMessageAlert()
     }
     
     private func getChannelMessages() {
@@ -71,20 +82,47 @@ class ConversationViewController: UITableViewController {
             }
         }
     }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? MessageTableViewCell else {return UITableViewCell()}
-        let channelMessage = channelMessages[indexPath.row]
-        cell.userNameLabel.text = channelMessage.senderName
-        cell.messageLabel.text = channelMessage.content
-        cell.channelMessage = channelMessage
-        cell.messageLabel.textColor = .black
-        cell.backgroundColor = .white
-        return cell
+    // MARK: Sending Message
+    
+    private func setupMessageButton() {
+        
+        let newMessageBarButtonItem = UIBarButtonItem(title: "New Message", style: .plain, target: self, action: #selector(addNewChannelButtonTapped(_:)))
+        self.navigationItem.rightBarButtonItem = newMessageBarButtonItem
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        channelMessages.count
+    private func newMessageAlert() {
+        
+        var newMessage: String?
+        
+        let alert = UIAlertController(title: "Отправить новое сообщение", message: nil, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let sendMessage = UIAlertAction(title: "Отправить", style: .default) { [weak self] _ in
+            self?.sendMessage(message: newMessage ?? "")
+        }
+        alert.addAction(cancel)
+        alert.addAction(sendMessage)
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "Сообщение"
+            sendMessage.isEnabled = false
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (_) in
+                if textField.text?.isEmpty == false {
+                    sendMessage.isEnabled = true
+                    newMessage = textField.text
+                } else {
+                    sendMessage.isEnabled = false
+                }
+            }
+        })
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func sendMessage(message: String) {
+        
+        let newMessage: Message = Message(content: message,
+                                          created: Date(),
+                                          senderId: UserSenderID.shared.getUserSenderId(),
+                                          senderName: UserProfile.shared.getUserProfile().userName ?? "User Name")
+        messagesReference.addDocument(data: newMessage.toDict)
     }
 }

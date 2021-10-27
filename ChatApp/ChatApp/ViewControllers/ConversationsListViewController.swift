@@ -18,7 +18,6 @@ class ConversationsListViewController: UIViewController {
     private let identifier = String(describing: ConversationTableViewCell.self)
     private lazy var db = Firestore.firestore()
     private lazy var referenceChannel = db.collection("channels")    
-    private lazy var channelsCount: Int = 0
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
 
@@ -95,7 +94,7 @@ class ConversationsListViewController: UIViewController {
         
         let settingsBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
         
-        self.navigationItem .setLeftBarButtonItems([newChannelBarButtonItem, settingsBarButtonItem], animated: false)
+        self.navigationItem.setLeftBarButtonItems([newChannelBarButtonItem, settingsBarButtonItem], animated: false)
     }
     
     private func setupUserProfileButton() {
