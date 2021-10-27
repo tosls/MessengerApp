@@ -64,8 +64,7 @@ class MessageTableViewCell: UITableViewCell {
                            messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
                            messageLabel.widthAnchor.constraint(equalToConstant: self.bounds.width / 2),
                            
-                           userNameLabel.topAnchor.constraint(equalTo: messageLabel.topAnchor, constant: -70),
-                           userNameLabel.bottomAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 0),
+                           userNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 0),
                            userNameLabel.leadingAnchor.constraint(equalTo: messageLabel.leadingAnchor, constant: 0),
 
                            messageBackgroundView.topAnchor.constraint(equalTo: messageLabel.topAnchor, constant: -16),
