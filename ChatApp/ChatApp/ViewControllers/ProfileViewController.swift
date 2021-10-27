@@ -10,7 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
-    
+
     @IBOutlet var userNameTF: UITextField!
     @IBOutlet var infoAboutUserTF: UITextField!
     

@@ -17,6 +17,7 @@ struct Message {
 }
 
 extension Message {
+    
     var toDict: [String: Any] {
         return ["content": content,
                 "created": Timestamp(date: created),

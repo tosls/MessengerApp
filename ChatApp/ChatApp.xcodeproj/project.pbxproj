@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		190BE8542721DF76009AC720 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 190BE8532721DF76009AC720 /* GoogleService-Info.plist */; };
+		1910AE9E272705BB007F45A3 /* UserSenederID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1910AE9D272705BB007F45A3 /* UserSenederID.swift */; };
 		1919D31E271407FC00C829F8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1919D31D271407FB00C829F8 /* Theme.swift */; };
 		1919D32027140BA100C829F8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1919D31F27140BA100C829F8 /* SettingsViewController.swift */; };
 		191F771D26F3BC7800A30032 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191F771C26F3BC7800A30032 /* AppDelegate.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		190BE8532721DF76009AC720 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1910AE9D272705BB007F45A3 /* UserSenederID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSenederID.swift; sourceTree = "<group>"; };
 		1919D31D271407FB00C829F8 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1919D31F27140BA100C829F8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		191F771926F3BC7800A30032 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1910AE9C27270576007F45A3 /* Accesses */ = {
+			isa = PBXGroup;
+			children = (
+				1910AE9D272705BB007F45A3 /* UserSenederID.swift */,
+			);
+			path = Accesses;
+			sourceTree = "<group>";
+		};
 		191F771026F3BC7800A30032 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +109,7 @@
 		191F771B26F3BC7800A30032 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				1910AE9C27270576007F45A3 /* Accesses */,
 				1938087D271EB64A001E3611 /* Common */,
 				1994C02A2700A5A300E4F6B9 /* Data */,
 				19E978F82708D4720077D249 /* Models */,
@@ -332,6 +343,7 @@
 				19E978FC2708E81E0077D249 /* MessageModel.swift in Sources */,
 				1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */,
 				1951B362272592D900F01F2D /* ChannelModel.swift in Sources */,
+				1910AE9E272705BB007F45A3 /* UserSenederID.swift in Sources */,
 				195144252714490800DDE4A1 /* ThemeSettings.swift in Sources */,
 				19380883271ED046001E3611 /* UserProfileImageManager.swift in Sources */,
 				1938087F271EB71B001E3611 /* LoadUserProfile.swift in Sources */,

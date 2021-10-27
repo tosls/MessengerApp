@@ -13,7 +13,6 @@ struct UserProfileModel: Codable {
     var userInfo: String?
     
     static func userNameToInitials(name: String) -> String {
-        
         let words = name.components(separatedBy: .whitespacesAndNewlines)
         let letters = CharacterSet.letters
         var firstInital = ""

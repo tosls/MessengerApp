@@ -12,7 +12,6 @@ class UserProfileImageManager {
     static let userProfileImageName = "userProfileImage"
     
     static func saveUserImage(userImage: UIImage, completion: @escaping (Bool) -> Void) {
-        
         do {
             let fileName = userProfileImageName
             let filePath = try FileManager.default
@@ -41,7 +40,6 @@ class UserProfileImageManager {
     }
     
     static func loadUserImage(comoletion: @escaping (UIImage?) -> Void) {
-
         let documentDirectory = FileManager.SearchPathDirectory.applicationSupportDirectory
         
         let filePath = NSSearchPathForDirectoriesInDomains(documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)

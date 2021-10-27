@@ -7,19 +7,18 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 class ConversationsListViewController: UIViewController {
 
-    private let identifier = String(describing: ConversationTableViewCell.self)
-    var userPhoto = UIImage()
-    
-    private lazy var db = Firestore.firestore()
-    private lazy var reference = db.collection("channels")
-    private lazy var channelsCount: Int = 0
-    
     var channels = [ChannelModel]()
     var message = [Message]()
+    var userPhoto = UIImage()
     
+    private let identifier = String(describing: ConversationTableViewCell.self)
+    private lazy var db = Firestore.firestore()
+    private lazy var referenceChannel = db.collection("channels")    
+    private lazy var channelsCount: Int = 0
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
 
@@ -35,32 +34,8 @@ class ConversationsListViewController: UIViewController {
         
         setupView()
         getChannels()
-        
     }
-    
-    private func getChannels() {
-        
-        reference.addSnapshotListener { [weak self] snapshot, error in
-            if let error = error {
-                print(error)
-            } else {
-                guard let snap = snapshot else {
-                    print("Error fetching document: \(error!)")
-                    return
-                }
-                for document in snap.documents {
-                    let chanelName = document.data()["name"] as? String ?? "Channel Name"
-                    let lastMessage = document.data()["lastMessage"] as? String ?? "Last Message"
-                    let identifier = document.data()["identifier"] as? String ?? "identifier"
-                    self?.channels.append(ChannelModel(identifier: identifier, name: chanelName, lastMessage: lastMessage))
-                }
-            }
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
-        }
-    }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? SettingsViewController {
             destination.settingsClosure = { [weak self] theme in self?.themeChanging(selectedTheme: theme) }
@@ -108,7 +83,7 @@ class ConversationsListViewController: UIViewController {
     }
 
     private func setupView() {
-        title = "Tinkoff Chat"
+        title = "Channels"
         view.addSubview(tableView)
         
         setupUserProfileButton()
@@ -126,9 +101,7 @@ class ConversationsListViewController: UIViewController {
     private func setupUserProfileButton() {
         
         let gcdManager = GCDManager()
-        
         let button = UIButton(type: .custom)
-        
         button.addTarget(self, action: #selector(profileButtonTapped(_:)), for: .touchUpInside)
         button.frame = CGRect(x: 0,
                               y: 0,
@@ -154,26 +127,58 @@ class ConversationsListViewController: UIViewController {
                 button.setImage(userInitialsImage, for: .normal)
             }
         }
-        
         button.layer.cornerRadius = button.bounds.size.height / 2
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = barButton
     }
     
+    // MARK: Work with Channels
+    
+    private func getChannels() {
+        
+        referenceChannel.addSnapshotListener { [weak self] snapshot, error in
+            if let error = error {
+                print(error)
+            } else {
+                guard let snap = snapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
+                self?.channels.removeAll()
+                
+                for document in snap.documents {
+                    let chanelName = document.data()["name"] as? String ?? "Channel Name"
+                    let lastMessage = document.data()["lastMessage"] as? String ?? "Last Message"
+                    let identifier = document.documentID
+                    let lastMessageDate = document.data()["lastActivity"] as? Timestamp
+                    
+                    self?.channels.append(ChannelModel(identifier: identifier, name: chanelName, lastMessage: lastMessage, lastActivity: lastMessageDate?.dateValue()))
+                }
+            }
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
     private func newChannelAlert() {
+        
+        var channelName: String?
         let alert = UIAlertController(title: "Создать новый канал", message: nil, preferredStyle: .alert)
-        let createAChannel = UIAlertAction(title: "Создать", style: .default, handler: nil)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addAction(createAChannel)
+        let createAChannel = UIAlertAction(title: "Создать", style: .default) { [weak self] _ in
+            let newChannel = ChannelModel(identifier: "", name: channelName ?? "Channel Name", lastMessage: "", lastActivity: Date())
+            self?.referenceChannel.addDocument(data: newChannel.toDict)
+        }
         alert.addAction(cancel)
-        
+        alert.addAction(createAChannel)
         alert.addTextField(configurationHandler: { (textField) in
             textField.placeholder = "Название канала"
             createAChannel.isEnabled = false
             NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (_) in
                 if textField.text?.isEmpty == false {
                     createAChannel.isEnabled = true
+                    channelName = textField.text ?? "Channel Name"
                 } else {
                     createAChannel.isEnabled = false
                 }
@@ -201,7 +206,7 @@ extension ConversationsListViewController: UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? ConversationTableViewCell else {
             return UITableViewCell() }
-        cell.configure(with: ChannelModel(identifier: channel.identifier, name: channel.name, lastMessage: channel.lastMessage))
+        cell.configure(with: ChannelModel(identifier: channel.identifier, name: channel.name, lastMessage: channel.lastMessage, lastActivity: channel.lastActivity))
     
         return cell
     }

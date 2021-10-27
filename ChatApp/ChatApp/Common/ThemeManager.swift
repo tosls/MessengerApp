@@ -47,7 +47,6 @@ final class ThemeManager {
     }
     
     static func loadUserTheme() -> String {
-        
         var userThemeName: String?
         do {
             let filePath = try FileManager.default

@@ -11,5 +11,15 @@ struct ChannelModel {
     
     let identifier: String
     let name: String
-    let lastMessage: String
+    let lastMessage: String?
+    let lastActivity: Date?
+}
+
+extension ChannelModel {
+    
+    var toDict: [String: Any] {
+        return [
+                "name": name
+        ]
+    }
 }
