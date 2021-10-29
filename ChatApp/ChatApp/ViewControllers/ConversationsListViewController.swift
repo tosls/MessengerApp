@@ -20,7 +20,6 @@ class ConversationsListViewController: UIViewController {
     private lazy var referenceChannel = db.collection("channels")    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
-
         tableView.register(UINib(nibName: String(describing: ConversationTableViewCell.self), bundle: nil), forCellReuseIdentifier: identifier)
         tableView.dataSource = self
         tableView.delegate = self
@@ -39,7 +38,6 @@ class ConversationsListViewController: UIViewController {
         if let destination = segue.destination as? SettingsViewController {
             destination.settingsClosure = { [weak self] theme in self?.themeChanging(selectedTheme: theme) }
         }
-        
         if let destination = segue.destination as? ProfileViewController {
             destination.updateProfileImageClosure = {
             switch $0 {
@@ -93,7 +91,7 @@ class ConversationsListViewController: UIViewController {
  
     private func setupLeftBarButtons() {
         let newChannelBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewChannelButtonTapped(_:)))
-        
+    
         let settingsBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
         
         self.navigationItem.setLeftBarButtonItems([newChannelBarButtonItem, settingsBarButtonItem], animated: false)
@@ -146,7 +144,7 @@ class ConversationsListViewController: UIViewController {
                     return
                 }
                 self?.channels.removeAll()
-                
+
                 for document in snap.documents {
                     let chanelName = document.data()["name"] as? String ?? "Channel Name"
                     let lastMessage = document.data()["lastMessage"] as? String ?? "Last Message"

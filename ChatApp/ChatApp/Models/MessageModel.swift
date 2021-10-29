@@ -12,7 +12,7 @@ struct Message {
     
     let content: String
     let created: Date
-    let senderId: String
+    let senderid: String
     let senderName: String
 }
 
@@ -21,7 +21,7 @@ extension Message {
     var toDict: [String: Any] {
         return ["content": content,
                 "created": Timestamp(date: created),
-                "senderID": senderId,
+                "senderid": senderid,
                 "senderName": senderName]
     }
 }

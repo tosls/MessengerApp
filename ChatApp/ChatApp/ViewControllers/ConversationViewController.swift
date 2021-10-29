@@ -28,6 +28,7 @@ class ConversationViewController: UITableViewController {
         
         tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.separatorStyle = .none
+        
         getChannelMessages()
         setupMessageButton()
     }
@@ -73,7 +74,7 @@ class ConversationViewController: UITableViewController {
                     self?.channelMessages.append(Message(
                         content: content,
                         created: created?.dateValue() ?? Date(),
-                        senderId: sendeId,
+                        senderid: sendeId,
                         senderName: senderName)
                     )
                     
@@ -124,7 +125,7 @@ class ConversationViewController: UITableViewController {
         
         let newMessage: Message = Message(content: message,
                                           created: Date(),
-                                          senderId: UserSenderID.shared.getUserSenderId(),
+                                          senderid: UserSenderID.shared.getUserSenderId(),
                                           senderName: UserProfile.shared.getUserProfile().userName ?? "User Name")
         messagesReference.addDocument(data: newMessage.toDict)
     }

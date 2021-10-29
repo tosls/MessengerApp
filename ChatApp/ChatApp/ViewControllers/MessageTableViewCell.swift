@@ -32,7 +32,7 @@ class MessageTableViewCell: UITableViewCell {
             guard let message = channelMessage else {return}
             messageBackgroundView.backgroundColor = messageColor
             
-            if message.senderId == UserSenderID.shared.getUserSenderId() {
+            if message.senderid == UserSenderID.shared.getUserSenderId() {
                 leadingConstraint?.isActive = false
                 trailingConstraint?.isActive = true
                 userNameLabel.isHidden = true
