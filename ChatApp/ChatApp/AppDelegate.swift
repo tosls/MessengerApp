@@ -7,18 +7,40 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Chat")
+        container.loadPersistentStores { (persistent, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print(persistent.url ?? "")
+            }
+        }
+        container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        container.viewContext.shouldDeleteInaccessibleFaults = false
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        return container
+    }()
     
     private var showLog = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure() 
 //        guard let theme = SaveUserTheme.loadUserTheme() else {return true} for GCD method
-//        FirebaseApp.configure() 
+//        FirebaseApp.configure()
+        
+        if let rootVC = window?.rootViewController as? UINavigationController {
+//            rootVC.container = persistentContainer
+//            rootVC.themeName = "12"
+        }
+        
         guard let theme = ThemeManager.userTheme else {return true}
         switch theme {
         case "DarkTheme":
@@ -30,6 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         default:
             return true
         }
+        
+        
       
         // Override point for customization after application launch.
 //        if showLog {

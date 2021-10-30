@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DBChannel" representedClassName="DBChannel" syncable="YES">
+        <attribute name="identifier" attributeType="String"/>
+        <attribute name="lastActivity" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastMessage" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="message" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBMessage" inverseName="channel" inverseEntity="DBMessage"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="DBMessage" representedClassName="DBMessage" syncable="YES">
+        <attribute name="content" attributeType="String"/>
+        <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="senderId" attributeType="String"/>
+        <attribute name="senderName" attributeType="String"/>
+        <relationship name="channel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBChannel" inverseName="message" inverseEntity="DBChannel"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="content"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="DBChannel" positionX="-426.33984375" positionY="14.3203125" width="128" height="103"/>
+        <element name="DBMessage" positionX="-18" positionY="54" width="128" height="103"/>
+    </elements>
+</model>

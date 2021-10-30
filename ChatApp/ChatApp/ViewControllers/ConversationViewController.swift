@@ -7,12 +7,14 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class ConversationViewController: UITableViewController {
     
     var titleName: String?
     var channel: ChannelModel?
     var channelMessages = [Message]()
+    var conteiner: NSPersistentContainer!
     
     private lazy var db = Firestore.firestore()
     private lazy var messagesReference: CollectionReference = {
