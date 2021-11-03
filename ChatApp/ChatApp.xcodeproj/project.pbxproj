@@ -30,6 +30,7 @@
 		19DA7CA4272D57AA007B8570 /* DBChannel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA7CA0272D57AA007B8570 /* DBChannel+CoreDataProperties.swift */; };
 		19DA7CA5272D57AA007B8570 /* DBMessage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA7CA1272D57AA007B8570 /* DBMessage+CoreDataClass.swift */; };
 		19DA7CA6272D57AA007B8570 /* DBMessage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA7CA2272D57AA007B8570 /* DBMessage+CoreDataProperties.swift */; };
+		19DA7CCB27316CDC007B8570 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA7CCA27316CDC007B8570 /* CoreDataManager.swift */; };
 		19E978EF270863100077D249 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978EE270863100077D249 /* ConversationsListViewController.swift */; };
 		19E978F227086D540077D249 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978F027086D540077D249 /* ConversationTableViewCell.swift */; };
 		19E978F327086D540077D249 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19E978F127086D540077D249 /* ConversationTableViewCell.xib */; };
@@ -66,6 +67,7 @@
 		19DA7CA0272D57AA007B8570 /* DBChannel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBChannel+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		19DA7CA1272D57AA007B8570 /* DBMessage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBMessage+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		19DA7CA2272D57AA007B8570 /* DBMessage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBMessage+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		19DA7CCA27316CDC007B8570 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		19E978EE270863100077D249 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		19E978F027086D540077D249 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		19E978F127086D540077D249 /* ConversationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationTableViewCell.xib; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				19DA7CA0272D57AA007B8570 /* DBChannel+CoreDataProperties.swift */,
 				19DA7CA1272D57AA007B8570 /* DBMessage+CoreDataClass.swift */,
 				19DA7CA2272D57AA007B8570 /* DBMessage+CoreDataProperties.swift */,
+				19DA7CCA27316CDC007B8570 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				19DA7CA6272D57AA007B8570 /* DBMessage+CoreDataProperties.swift in Sources */,
 				19380883271ED046001E3611 /* UserProfileImageManager.swift in Sources */,
 				1938087F271EB71B001E3611 /* LoadUserProfile.swift in Sources */,
+				19DA7CCB27316CDC007B8570 /* CoreDataManager.swift in Sources */,
 				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,
 				19E97900270B0FD80077D249 /* UserProfileModel.swift in Sources */,
 				19DA7CA4272D57AA007B8570 /* DBChannel+CoreDataProperties.swift in Sources */,

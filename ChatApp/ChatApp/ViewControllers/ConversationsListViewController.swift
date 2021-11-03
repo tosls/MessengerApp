@@ -16,8 +16,6 @@ class ConversationsListViewController: UIViewController {
     var message = [Message]()
     var userPhoto = UIImage()
     var themeName: String!
-
-    var container: NSPersistentContainer!
     
     private let identifier = String(describing: ConversationTableViewCell.self)
     private lazy var db = Firestore.firestore()
@@ -33,13 +31,9 @@ class ConversationsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        guard container != nil else {
-//            fatalError("This view needs a persistent container.")
-//        }
         
         setupView()
         getChannels()
-        print(themeName)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,6 +49,47 @@ class ConversationsListViewController: UIViewController {
                 return
             }
             }
+        }
+    }
+    
+    // MARK: Work with CoreData
+    
+    private func saveChannelsWithCoreData(channel: ChannelModel) {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let contex = appDelegate!.persistentContainer.newBackgroundContext()
+        
+        guard let channelObject = NSEntityDescription.entity(forEntityName: "DBChannel", in: contex) else {return}
+        let channelData = DBChannel(entity: channelObject, insertInto: contex)
+        
+        channelData.name = channel.name
+        channelData.lastMessage = channel.lastMessage
+        channelData.lastActivity = channel.lastActivity
+        channelData.identifier = channel.identifier
+        
+        contex.perform {
+            if contex.hasChanges {
+                do {
+                    try contex.save()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            } else {
+                print("YEP")
+            }
+            contex.reset()
+        }
+    }
+    
+    private func getChannelsFromCoreDate() {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let contex = appDelegate!.persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
+        do {
+            let channelsData = try contex.fetch(fetchRequest)
+            print(channelsData)
+        } catch let error as NSError {
+            print(error.localizedDescription)
         }
     }
     
@@ -139,23 +174,6 @@ class ConversationsListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = barButton
     }
     
-    // MARK: Work with CoreData
-    
-//    private func saveContex(channel: ChannelModel) {
-//        let contex = container.newBackgroundContext()
-//        let fetchRequest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
-//
-//        do {
-//            let channels = try contex.fetch(fetchRequest)
-//
-//        } catch {}
-//    }
-    
-//    private func getContex() {
-//        let fetchRequest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
-//        let channels = try container.viewContext.fetch(fetchRequest)
-//    }
-//
     // MARK: Work with Channels
     
     private func getChannels() {
@@ -176,13 +194,23 @@ class ConversationsListViewController: UIViewController {
                     let identifier = document.documentID
                     let lastMessageDate = document.data()["lastActivity"] as? Timestamp
                     
-                    self?.channels.append(ChannelModel(identifier: identifier, name: chanelName, lastMessage: lastMessage, lastActivity: lastMessageDate?.dateValue() ?? Date()))
+                    self?.channels.append(ChannelModel(identifier: identifier,
+                                                       name: chanelName,
+                                                       lastMessage: lastMessage,
+                                                       lastActivity: lastMessageDate?.dateValue() ?? Date()
+                                                      )
+                    )
+                    
+                    self?.saveChannelsWithCoreData(channel: ChannelModel(identifier: identifier,
+                                                           name: chanelName,
+                                                           lastMessage: lastMessage,
+                                                           lastActivity: lastMessageDate?.dateValue() ?? Date()
+                                                          )
+                    )
                 }
             }
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
-                print(self?.channels)
-                print(self?.channels[1])
             }
         }
     }
@@ -248,7 +276,6 @@ extension ConversationsListViewController: UITableViewDelegate {
         let chanel = channels[indexPath.row]
         channelVC.channel = chanel
         channelVC.titleName = chanel.name
-        channelVC.conteiner = container
         
         navigationController?.pushViewController(channelVC, animated: true)
     }

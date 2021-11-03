@@ -13,6 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Chat")
         container.loadPersistentStores { (persistent, error) in
@@ -22,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(persistent.url ?? "")
             }
         }
-        container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-        container.viewContext.shouldDeleteInaccessibleFaults = false
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.shouldDeleteInaccessibleFaults = true
         container.viewContext.automaticallyMergesChangesFromParent = true
         
         return container
@@ -35,12 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure() 
 //        guard let theme = SaveUserTheme.loadUserTheme() else {return true} for GCD method
 //        FirebaseApp.configure()
-        
-        if let rootVC = window?.rootViewController as? UINavigationController {
-//            rootVC.container = persistentContainer
-//            rootVC.themeName = "12"
-        }
-        
+
         guard let theme = ThemeManager.userTheme else {return true}
         switch theme {
         case "DarkTheme":
@@ -53,12 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
-        
-      
         // Override point for customization after application launch.
 //        if showLog {
 //            print("Application launch: \(#function)")
 //        }
+       
         return true
     }
 

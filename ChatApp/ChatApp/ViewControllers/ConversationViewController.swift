@@ -79,13 +79,56 @@ class ConversationViewController: UITableViewController {
                         senderid: sendeId,
                         senderName: senderName)
                     )
-                    
+                    self?.saveMessagesWithCoreData(message: Message(
+                        content: content,
+                        created: created?.dateValue() ?? Date(),
+                        senderid: sendeId,
+                        senderName: senderName)
+                    )
                 }
             }
             
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
+        }
+    }
+    
+    // MARK: Work with CoreData
+    
+    private func saveMessagesWithCoreData(message: Message) {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let contex = appDelegate!.persistentContainer.newBackgroundContext()
+        
+        guard let messageObject = NSEntityDescription.entity(forEntityName: "DBMessage", in: contex) else {return}
+        let messageData = DBMessage(entity: messageObject, insertInto: contex)
+        
+        messageData.senderName = message.senderName
+        messageData.created = message.created
+        messageData.senderId = message.senderid
+        messageData.content = message.content
+//        let needChannel = DBChannel.mutableSetValue(forKey: <#T##String#>)
+//        let needChannel = DBChannel.mutableSetValue(forKey: channel?.identifier ?? "")
+//        print(needChannel)
+        
+//        @NSManaged public var content: String?
+//        @NSManaged public var created: Date?
+//        @NSManaged public var senderId: String?
+//        @NSManaged public var senderName: String?
+//        @NSManaged public var channel: DBChannel?
+        
+        contex.perform {
+            if contex.hasChanges {
+                do {
+                    try contex.save()
+                } catch {
+                    print("Test300")
+                    print(error.localizedDescription)
+                }
+            } else {
+                print("YEP")
+            }
+            contex.reset()
         }
     }
         
