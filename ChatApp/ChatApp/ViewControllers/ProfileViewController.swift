@@ -116,11 +116,11 @@ class ProfileViewController: UIViewController {
         let gcdManager = GCDManager()
         
         gcdManager.loadUserImage { [weak self] image in
-            if image != nil {
-                self?.profileImageView.image = image
-            } else {
+            guard image != nil else {
                 self?.profileImageView.image = UserProfileModel.userInitialsToImage(userInitials, imageViewHeight, imageViewWidth)
+                return
             }
+            self?.profileImageView.image = image
         }
     }
 
@@ -169,29 +169,57 @@ class ProfileViewController: UIViewController {
     // MARK: Alerts
     
     func showSuccessAlert() {
-        let alert = UIAlertController(title: "Успешно!", message: "Данные сохранены.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        let alert = UIAlertController(title: "Успешно!",
+                                      message: "Данные сохранены.",
+                                      preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Ok",
+                                      style: UIAlertAction.Style.default,
+                                      handler: nil
+                                     )
+        )
         self.present(alert, animated: true, completion: nil)
     }
     
     func showFailAlert() {
-        let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Повторить", style: UIAlertAction.Style.default, handler: {[weak self] _ in self?.saveWithGCD()}))
-        alert.addAction(UIAlertAction(title: "Отмена", style: UIAlertAction.Style.cancel, handler: { [weak self] _ in self?.cancelChanges()}))
+        let alert = UIAlertController(title: "Ошибка",
+                                      message: "Не удалось сохранить данные",
+                                      preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Повторить",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {[weak self] _ in self?.saveWithGCD()}
+                                     )
+        )
+        alert.addAction(UIAlertAction(title: "Отмена",
+                                      style: UIAlertAction.Style.cancel,
+                                      handler: { [weak self] _ in self?.cancelChanges()}
+                                     )
+        )
         present(alert, animated: true, completion: nil)
     }
     
     // MARK: Getting a profile picture
         
     private func actionSheetController() {
-        let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheetController.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            self.fetchPhotoFromCamera()
-        }))
-        actionSheetController.addAction(UIAlertAction(title: "Open gallery", style: .default, handler: { _ in
-            self.fetchPhotoFromGallery()
-        }))
-        actionSheetController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        let actionSheetController = UIAlertController(title: nil,
+                                                      message: nil,
+                                                      preferredStyle: .actionSheet)
+        
+        actionSheetController.addAction(UIAlertAction(title: "Camera",
+                                                      style: .default,
+                                                      handler: { _ in self.fetchPhotoFromCamera()}
+                                                     )
+        )
+        actionSheetController.addAction(UIAlertAction(title: "Open gallery",
+                                                      style: .default,
+                                                      handler: { _ in self.fetchPhotoFromGallery()}
+                                                     )
+        )
+        actionSheetController.addAction(UIAlertAction(title: "Cancel",
+                                                      style: .cancel
+                                                     )
+        )
         self.present(actionSheetController, animated: true)
     }
 }

@@ -15,7 +15,12 @@ class UserProfileImageManager {
         do {
             let fileName = userProfileImageName
             let filePath = try FileManager.default
-                .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                .url(
+                    for: .applicationSupportDirectory,
+                       in: .userDomainMask,
+                       appropriateFor: nil,
+                       create: true
+                )
                 .appendingPathComponent(fileName)
             guard let data = userImage.jpegData(compressionQuality: 1) else {return}
             if FileManager.default.fileExists(atPath: filePath.path) {
@@ -44,10 +49,9 @@ class UserProfileImageManager {
         
         let filePath = NSSearchPathForDirectoriesInDomains(documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         
-        if let path = filePath.first {
-            let userImageUrl = URL(fileURLWithPath: path).appendingPathComponent(userProfileImageName)
-            let userImage = UIImage(contentsOfFile: userImageUrl.path)
-            comoletion(userImage)
-        }
+        guard let path = filePath.first else {return}
+        let userImageUrl = URL(fileURLWithPath: path).appendingPathComponent(userProfileImageName)
+        let userImage = UIImage(contentsOfFile: userImageUrl.path)
+        comoletion(userImage)
     }
 }

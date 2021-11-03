@@ -15,10 +15,16 @@ extension UserProfileManagerProtocol {
     func loadUserProfile(completion: @escaping (UserProfileModel) -> Void) {
         do {
             let filePath = try FileManager.default
-                .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                .url(
+                    for: .applicationSupportDirectory,
+                       in: .userDomainMask,
+                       appropriateFor: nil,
+                       create: false
+                )
                 .appendingPathComponent("ProfileSettings.json")
             let data = try Data(contentsOf: filePath)
-            let profileData = try JSONDecoder().decode(UserProfileModel.self, from: data)
+            let profileData = try JSONDecoder()
+                .decode(UserProfileModel.self, from: data)
             completion(profileData)
         } catch {
             print(error)
@@ -28,9 +34,15 @@ extension UserProfileManagerProtocol {
     func saveUserProfileSettings(userData: UserProfileModel, completion: @escaping (Bool) -> Void ) {
         do {
             let filePath = try FileManager.default
-                .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                .url(
+                    for: .applicationSupportDirectory,
+                       in: .userDomainMask,
+                       appropriateFor: nil,
+                       create: true
+                )
                 .appendingPathComponent("ProfileSettings.json")
-            try JSONEncoder().encode(userData)
+            try JSONEncoder()
+                .encode(userData)
                 .write(to: filePath)
             sleep(2)
             completion(true)

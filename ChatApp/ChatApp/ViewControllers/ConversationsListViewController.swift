@@ -18,8 +18,10 @@ class ConversationsListViewController: UIViewController {
     var themeName: String!
     
     private let identifier = String(describing: ConversationTableViewCell.self)
+    
     private lazy var db = Firestore.firestore()
-    private lazy var referenceChannel = db.collection("channels")    
+    private lazy var referenceChannel = db.collection("channels")
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
         tableView.register(UINib(nibName: String(describing: ConversationTableViewCell.self), bundle: nil), forCellReuseIdentifier: identifier)
@@ -34,8 +36,9 @@ class ConversationsListViewController: UIViewController {
         
         setupView()
         getChannels()
+        getChannelsFromCoreData()
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? SettingsViewController {
             destination.settingsClosure = { [weak self] theme in self?.themeChanging(selectedTheme: theme) }
@@ -51,48 +54,7 @@ class ConversationsListViewController: UIViewController {
             }
         }
     }
-    
-    // MARK: Work with CoreData
-    
-    private func saveChannelsWithCoreData(channel: ChannelModel) {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let contex = appDelegate!.persistentContainer.newBackgroundContext()
-        
-        guard let channelObject = NSEntityDescription.entity(forEntityName: "DBChannel", in: contex) else {return}
-        let channelData = DBChannel(entity: channelObject, insertInto: contex)
-        
-        channelData.name = channel.name
-        channelData.lastMessage = channel.lastMessage
-        channelData.lastActivity = channel.lastActivity
-        channelData.identifier = channel.identifier
-        
-        contex.perform {
-            if contex.hasChanges {
-                do {
-                    try contex.save()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            } else {
-                print("YEP")
-            }
-            contex.reset()
-        }
-    }
-    
-    private func getChannelsFromCoreDate() {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let contex = appDelegate!.persistentContainer.viewContext
-        
-        let fetchRequest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
-        do {
-            let channelsData = try contex.fetch(fetchRequest)
-            print(channelsData)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-    }
-    
+
     @objc func profileButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "profileVC", sender: nil)
     }
@@ -106,8 +68,8 @@ class ConversationsListViewController: UIViewController {
     }
     
     private func themeChanging(selectedTheme: ThemeSettings) {
-            ThemeSettings.themeChanging(selectedTheme: selectedTheme)
-            self.navigationController?.loadView()
+        ThemeSettings.themeChanging(selectedTheme: selectedTheme)
+        self.navigationController?.loadView()
     }
     
     private func userImageChanging() {
@@ -133,10 +95,17 @@ class ConversationsListViewController: UIViewController {
     }
  
     private func setupLeftBarButtons() {
-        let newChannelBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewChannelButtonTapped(_:)))
-    
-        let settingsBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
-        
+        let newChannelBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                      target: self,
+                                                      action: #selector(addNewChannelButtonTapped(_:)
+                                                                       )
+        )
+        let settingsBarButtonItem = UIBarButtonItem(title: "Settings",
+                                                    style: .plain,
+                                                    target: self,
+                                                    action: #selector(settingsButtonTapped(_:)
+                                                                     )
+        )
         self.navigationItem.setLeftBarButtonItems([newChannelBarButtonItem, settingsBarButtonItem], animated: false)
     }
     
@@ -148,14 +117,19 @@ class ConversationsListViewController: UIViewController {
         button.frame = CGRect(x: 0,
                               y: 0,
                               width: 40,
-                              height: 40)
-        
+                              height: 40
+        )
         button.backgroundColor = UIColor(red: 0.894,
                                          green: 0.908,
                                          blue: 0.17,
-                                         alpha: 1)
-        
-        let buttonImage = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: button.frame.width, height: button.frame.height))
+                                         alpha: 1
+        )
+        let buttonImage = UIImageView(frame: CGRect(x: 0.0,
+                                                    y: 0.0,
+                                                    width: button.frame.width,
+                                                    height: button.frame.height
+                                                   )
+        )
         buttonImage.layer.cornerRadius = buttonImage.frame.height / 2
         buttonImage.clipsToBounds = true
         
@@ -200,7 +174,6 @@ class ConversationsListViewController: UIViewController {
                                                        lastActivity: lastMessageDate?.dateValue() ?? Date()
                                                       )
                     )
-                    
                     self?.saveChannelsWithCoreData(channel: ChannelModel(identifier: identifier,
                                                            name: chanelName,
                                                            lastMessage: lastMessage,
@@ -215,15 +188,62 @@ class ConversationsListViewController: UIViewController {
         }
     }
     
+    // MARK: Work with CoreData
+    
+    private func saveChannelsWithCoreData(channel: ChannelModel) {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let contex = appDelegate!.persistentContainer.newBackgroundContext()
+        
+        guard let channelObject = NSEntityDescription.entity(forEntityName: "DBChannel", in: contex) else {return}
+        let channelData = DBChannel(entity: channelObject, insertInto: contex)
+        
+        channelData.name = channel.name
+        channelData.lastMessage = channel.lastMessage
+        channelData.lastActivity = channel.lastActivity
+        channelData.identifier = channel.identifier
+        
+        contex.perform {
+            if contex.hasChanges {
+                do {
+                    try contex.save()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            contex.reset()
+            }
+        }
+    }
+    
+    private func getChannelsFromCoreData() {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let contex = appDelegate!.persistentContainer.viewContext
+        
+        let fetchReuqest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
+        do {
+            let channelData = try contex.fetch(fetchReuqest)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
     private func newChannelAlert() {
         
         var channelName: String?
-        let alert = UIAlertController(title: "Создать новый канал", message: nil, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let createAChannel = UIAlertAction(title: "Создать", style: .default) { [weak self] _ in
+        let alert = UIAlertController(title: "Создать новый канал",
+                                      message: nil,
+                                      preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel",
+                                   style: .cancel,
+                                   handler: nil)
+        
+        let createAChannel = UIAlertAction(title: "Создать",
+                                           style: .default)
+        { [weak self] _ in
             let newChannel = ChannelModel(identifier: "", name: channelName ?? "Channel Name", lastMessage: "", lastActivity: Date())
             self?.referenceChannel.addDocument(data: newChannel.toDict)
         }
+        
         alert.addAction(cancel)
         alert.addAction(createAChannel)
         alert.addTextField(configurationHandler: { (textField) in
@@ -261,8 +281,12 @@ extension ConversationsListViewController: UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? ConversationTableViewCell else {
             return UITableViewCell() }
-        cell.configure(with: ChannelModel(identifier: channel.identifier, name: channel.name, lastMessage: channel.lastMessage, lastActivity: channel.lastActivity))
-    
+        cell.configure(with: ChannelModel(identifier: channel.identifier,
+                                          name: channel.name,
+                                          lastMessage: channel.lastMessage,
+                                          lastActivity: channel.lastActivity
+                                         )
+        )
         return cell
     }
 }

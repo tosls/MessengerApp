@@ -87,7 +87,6 @@ class ConversationViewController: UITableViewController {
                     )
                 }
             }
-            
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -107,36 +106,55 @@ class ConversationViewController: UITableViewController {
         messageData.created = message.created
         messageData.senderId = message.senderid
         messageData.content = message.content
-//        let needChannel = DBChannel.mutableSetValue(forKey: <#T##String#>)
-//        let needChannel = DBChannel.mutableSetValue(forKey: channel?.identifier ?? "")
-//        print(needChannel)
         
-//        @NSManaged public var content: String?
-//        @NSManaged public var created: Date?
-//        @NSManaged public var senderId: String?
-//        @NSManaged public var senderName: String?
-//        @NSManaged public var channel: DBChannel?
+        let fetchRequest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
+        guard let identifierChannel = channel?.identifier else {return}
+        
+        let predicate = NSPredicate(format: "identifier == %@", identifierChannel)
+        fetchRequest.predicate = predicate
+        fetchRequest.includesSubentities = true
+        
+        do {
+            let channelData = try contex.fetch(fetchRequest)
+            channelData.first?.addToMessage(messageData)
+        } catch {
+            print(error.localizedDescription)
+        }
         
         contex.perform {
             if contex.hasChanges {
                 do {
                     try contex.save()
                 } catch {
-                    print("Test300")
                     print(error.localizedDescription)
                 }
-            } else {
-                print("YEP")
             }
             contex.reset()
         }
     }
+    
+    private func getChannelsFromCoreData() {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let contex = appDelegate!.persistentContainer.viewContext
         
+        let fetchReuqest: NSFetchRequest<DBMessage> = DBMessage.fetchRequest()
+        do {
+            let messageData = try contex.fetch(fetchReuqest)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
     // MARK: Sending Message
     
     private func setupMessageButton() {
         
-        let newMessageBarButtonItem = UIBarButtonItem(title: "New Message", style: .plain, target: self, action: #selector(addNewChannelButtonTapped(_:)))
+        let newMessageBarButtonItem = UIBarButtonItem(title: "New Message",
+                                                      style: .plain,
+                                                      target: self,
+                                                      action: #selector(addNewChannelButtonTapped(_:)
+                                                                       )
+        )
         self.navigationItem.rightBarButtonItem = newMessageBarButtonItem
     }
     
@@ -144,11 +162,18 @@ class ConversationViewController: UITableViewController {
         
         var newMessage: String?
         
-        let alert = UIAlertController(title: "Отправить новое сообщение", message: nil, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let sendMessage = UIAlertAction(title: "Отправить", style: .default) { [weak self] _ in
-            self?.sendMessage(message: newMessage ?? "")
-        }
+        let alert = UIAlertController(title: "Отправить новое сообщение",
+                                      message: nil,
+                                      preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel",
+                                   style: .cancel,
+                                   handler: nil)
+        
+        let sendMessage = UIAlertAction(title: "Отправить",
+                                        style: .default)
+        { [weak self] _ in self?.sendMessage(message: newMessage ?? "") }
+        
         alert.addAction(cancel)
         alert.addAction(sendMessage)
         alert.addTextField(configurationHandler: { (textField) in
@@ -171,7 +196,8 @@ class ConversationViewController: UITableViewController {
         let newMessage: Message = Message(content: message,
                                           created: Date(),
                                           senderid: UserSenderID.shared.getUserSenderId(),
-                                          senderName: UserProfile.shared.getUserProfile().userName ?? "User Name")
+                                          senderName: UserProfile.shared.getUserProfile().userName ?? "User Name"
+        )
         messagesReference.addDocument(data: newMessage.toDict)
     }
 }

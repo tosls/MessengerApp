@@ -31,7 +31,6 @@ class SettingsViewController: UIViewController {
         view.backgroundColor = lightTheme.backgroundColor
         ThemeManager.userTheme = "LightTheme"
 //        SaveUserTheme.saveUserTheme(userTheme: Theme(themeName: "LightTheme")) for GCD method
-        
     }
     
     @IBAction func darkThemeButtonTapped(_ sender: UIButton) {
@@ -39,7 +38,6 @@ class SettingsViewController: UIViewController {
         view.backgroundColor = darkTheme.backgroundColor
         ThemeManager.userTheme = "DarkTheme"
 //        SaveUserTheme.saveUserTheme(userTheme: Theme(themeName: "DarkTheme")) for GCD method
-        
     }
     
     @IBAction func customThemeButtonTapped(_ sender: UIButton) {

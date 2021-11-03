@@ -35,14 +35,18 @@ final class ThemeManager {
     static func saveUserTheme(userTheme: Theme) {
         do {
             let filePath = try FileManager.default
-                .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                .url(
+                    for: .applicationSupportDirectory,
+                       in: .userDomainMask,
+                       appropriateFor: nil,
+                       create: true
+                )
                 .appendingPathComponent("ThemeSettings.json")
-            try JSONEncoder().encode(userTheme)
+            try JSONEncoder()
+                .encode(userTheme)
                 .write(to: filePath)
-            print("Ok")
-            print(filePath)
         } catch {
-            print("Fail")
+            print("Fail saved a user theme")
         }
     }
     
@@ -50,14 +54,20 @@ final class ThemeManager {
         var userThemeName: String?
         do {
             let filePath = try FileManager.default
-                .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                .url(
+                    for: .applicationSupportDirectory,
+                       in: .userDomainMask,
+                       appropriateFor: nil,
+                       create: false
+                )
                 .appendingPathComponent("ThemeSettings.json")
             let data = try Data(contentsOf: filePath)
-            let themeData = try JSONDecoder().decode(Theme.self, from: data)
+            let themeData = try JSONDecoder()
+                .decode(Theme.self, from: data)
             userThemeName = themeData.themeName
         } catch {
             print(error)
         }
-        return userThemeName ?? "LightTheme"
+        return userThemeName ?? lightTheme.themeName
     }
  }

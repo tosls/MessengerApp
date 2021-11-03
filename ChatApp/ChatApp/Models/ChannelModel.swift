@@ -18,8 +18,6 @@ struct ChannelModel {
 extension ChannelModel {
     
     var toDict: [String: Any] {
-        return [
-                "name": name
-        ]
+        return ["name": name]
     }
 }
