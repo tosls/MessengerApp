@@ -28,7 +28,7 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="DBChannel" positionX="-426.33984375" positionY="14.3203125" width="128" height="103"/>
+        <element name="DBChannel" positionX="-426.33984375" positionY="14.3203125" width="128" height="104"/>
         <element name="DBMessage" positionX="-18" positionY="54" width="128" height="103"/>
     </elements>
 </model>

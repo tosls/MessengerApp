@@ -25,6 +25,7 @@
 		1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */; };
 		1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02626FFABE800E4F6B9 /* UserProfile.swift */; };
 		199DC64C273274C9004893D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 199DC64B273274C9004893D0 /* GoogleService-Info.plist */; };
+		199DC64E2732D1C2004893D0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199DC64D2732D1C2004893D0 /* CoreDataManager.swift */; };
 		19DA7C96272D560E007B8570 /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 19DA7C94272D560E007B8570 /* Chat.xcdatamodeld */; };
 		19DA7CA3272D57AA007B8570 /* DBChannel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA7C9F272D57AA007B8570 /* DBChannel+CoreDataClass.swift */; };
 		19DA7CA4272D57AA007B8570 /* DBChannel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DA7CA0272D57AA007B8570 /* DBChannel+CoreDataProperties.swift */; };
@@ -61,6 +62,7 @@
 		1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1994C02626FFABE800E4F6B9 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		199DC64B273274C9004893D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		199DC64D2732D1C2004893D0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		19DA7C95272D560E007B8570 /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
 		19DA7C9F272D57AA007B8570 /* DBChannel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBChannel+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		19DA7CA0272D57AA007B8570 /* DBChannel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBChannel+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
@@ -187,6 +189,7 @@
 				19DA7CA0272D57AA007B8570 /* DBChannel+CoreDataProperties.swift */,
 				19DA7CA1272D57AA007B8570 /* DBMessage+CoreDataClass.swift */,
 				19DA7CA2272D57AA007B8570 /* DBMessage+CoreDataProperties.swift */,
+				199DC64D2732D1C2004893D0 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				19DA7CA6272D57AA007B8570 /* DBMessage+CoreDataProperties.swift in Sources */,
 				19380883271ED046001E3611 /* UserProfileImageManager.swift in Sources */,
 				1938087F271EB71B001E3611 /* LoadUserProfile.swift in Sources */,
+				199DC64E2732D1C2004893D0 /* CoreDataManager.swift in Sources */,
 				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,
 				19E97900270B0FD80077D249 /* UserProfileModel.swift in Sources */,
 				19DA7CA4272D57AA007B8570 /* DBChannel+CoreDataProperties.swift in Sources */,

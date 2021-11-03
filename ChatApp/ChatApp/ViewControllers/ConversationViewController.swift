@@ -15,6 +15,7 @@ class ConversationViewController: UITableViewController {
     var channel: ChannelModel?
     var channelMessages = [Message]()
     var conteiner: NSPersistentContainer!
+    let coreDataManager = CoreDataManager()
     
     private lazy var db = Firestore.firestore()
     private lazy var messagesReference: CollectionReference = {
@@ -70,20 +71,21 @@ class ConversationViewController: UITableViewController {
                     
                     let content = data["content"] as? String ?? "Channel Name"
                     let senderName = data["senderName"] as? String ?? "Sender Name"
-                    let sendeId = data["senderID"] as? String ?? "SenderID Name"
+                    let senderId = data["senderid"] as? String ?? "senderid Name"
                     let created = data["created"] as? Timestamp
                     
                     self?.channelMessages.append(Message(
                         content: content,
                         created: created?.dateValue() ?? Date(),
-                        senderid: sendeId,
+                        senderid: senderId,
                         senderName: senderName)
                     )
-                    self?.saveMessagesWithCoreData(message: Message(
+                    self?.coreDataManager.saveMessagesWithCoreData(message: Message(
                         content: content,
                         created: created?.dateValue() ?? Date(),
-                        senderid: sendeId,
-                        senderName: senderName)
+                        senderid: senderId,
+                        senderName: senderName),
+                                                                   channel: self?.channel
                     )
                 }
             }
@@ -92,59 +94,7 @@ class ConversationViewController: UITableViewController {
             }
         }
     }
-    
-    // MARK: Work with CoreData
-    
-    private func saveMessagesWithCoreData(message: Message) {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let contex = appDelegate!.persistentContainer.newBackgroundContext()
-        
-        guard let messageObject = NSEntityDescription.entity(forEntityName: "DBMessage", in: contex) else {return}
-        let messageData = DBMessage(entity: messageObject, insertInto: contex)
-        
-        messageData.senderName = message.senderName
-        messageData.created = message.created
-        messageData.senderId = message.senderid
-        messageData.content = message.content
-        
-        let fetchRequest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
-        guard let identifierChannel = channel?.identifier else {return}
-        
-        let predicate = NSPredicate(format: "identifier == %@", identifierChannel)
-        fetchRequest.predicate = predicate
-        fetchRequest.includesSubentities = true
-        
-        do {
-            let channelData = try contex.fetch(fetchRequest)
-            channelData.first?.addToMessage(messageData)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        contex.perform {
-            if contex.hasChanges {
-                do {
-                    try contex.save()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-            contex.reset()
-        }
-    }
-    
-    private func getChannelsFromCoreData() {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let contex = appDelegate!.persistentContainer.viewContext
-        
-        let fetchReuqest: NSFetchRequest<DBMessage> = DBMessage.fetchRequest()
-        do {
-            let messageData = try contex.fetch(fetchReuqest)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-
+ 
     // MARK: Sending Message
     
     private func setupMessageButton() {
@@ -171,8 +121,9 @@ class ConversationViewController: UITableViewController {
                                    handler: nil)
         
         let sendMessage = UIAlertAction(title: "Отправить",
-                                        style: .default)
-        { [weak self] _ in self?.sendMessage(message: newMessage ?? "") }
+                                        style: .default) { [weak self] _ in
+            self?.sendMessage(message: newMessage ?? "")
+        }
         
         alert.addAction(cancel)
         alert.addAction(sendMessage)

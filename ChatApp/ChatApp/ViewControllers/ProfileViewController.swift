@@ -48,7 +48,6 @@ class ProfileViewController: UIViewController {
         userNameTF.becomeFirstResponder()
         
         saveGCDButton.isEnabled = false
-
         hideAButtons()
     }
     
@@ -155,7 +154,10 @@ class ProfileViewController: UIViewController {
             }
             }
         }
+        userNameTF.isUserInteractionEnabled = false
+        infoAboutUserTF.isUserInteractionEnabled = false
         hideAButtons()
+        changeUserInfo.toggle()
     }
     
     private func cancelChanges() {

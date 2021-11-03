@@ -17,6 +17,7 @@ class ConversationsListViewController: UIViewController {
     var userPhoto = UIImage()
     var themeName: String!
     
+    let coreDataManager = CoreDataManager()
     private let identifier = String(describing: ConversationTableViewCell.self)
     
     private lazy var db = Firestore.firestore()
@@ -35,9 +36,8 @@ class ConversationsListViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        getChannels()
-        getChannelsFromCoreData()
-    }
+        getChannels()     
+   }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? SettingsViewController {
@@ -168,17 +168,19 @@ class ConversationsListViewController: UIViewController {
                     let identifier = document.documentID
                     let lastMessageDate = document.data()["lastActivity"] as? Timestamp
                     
-                    self?.channels.append(ChannelModel(identifier: identifier,
-                                                       name: chanelName,
-                                                       lastMessage: lastMessage,
-                                                       lastActivity: lastMessageDate?.dateValue() ?? Date()
-                                                      )
+                    self?.channels.append(ChannelModel(
+                        identifier: identifier,
+                        name: chanelName,
+                        lastMessage: lastMessage,
+                        lastActivity: lastMessageDate?.dateValue() ?? Date()
                     )
-                    self?.saveChannelsWithCoreData(channel: ChannelModel(identifier: identifier,
-                                                           name: chanelName,
-                                                           lastMessage: lastMessage,
-                                                           lastActivity: lastMessageDate?.dateValue() ?? Date()
-                                                          )
+                    )
+                    self?.coreDataManager.saveChannelsWithCoreData(channel: ChannelModel(
+                        identifier: identifier,
+                        name: chanelName,
+                        lastMessage: lastMessage,
+                        lastActivity: lastMessageDate?.dateValue() ?? Date()
+                    )
                     )
                 }
             }
@@ -188,44 +190,6 @@ class ConversationsListViewController: UIViewController {
         }
     }
     
-    // MARK: Work with CoreData
-    
-    private func saveChannelsWithCoreData(channel: ChannelModel) {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let contex = appDelegate!.persistentContainer.newBackgroundContext()
-        
-        guard let channelObject = NSEntityDescription.entity(forEntityName: "DBChannel", in: contex) else {return}
-        let channelData = DBChannel(entity: channelObject, insertInto: contex)
-        
-        channelData.name = channel.name
-        channelData.lastMessage = channel.lastMessage
-        channelData.lastActivity = channel.lastActivity
-        channelData.identifier = channel.identifier
-        
-        contex.perform {
-            if contex.hasChanges {
-                do {
-                    try contex.save()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            contex.reset()
-            }
-        }
-    }
-    
-    private func getChannelsFromCoreData() {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let contex = appDelegate!.persistentContainer.viewContext
-        
-        let fetchReuqest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
-        do {
-            let channelData = try contex.fetch(fetchReuqest)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-
     private func newChannelAlert() {
         
         var channelName: String?
@@ -238,9 +202,12 @@ class ConversationsListViewController: UIViewController {
                                    handler: nil)
         
         let createAChannel = UIAlertAction(title: "Создать",
-                                           style: .default)
-        { [weak self] _ in
-            let newChannel = ChannelModel(identifier: "", name: channelName ?? "Channel Name", lastMessage: "", lastActivity: Date())
+                                           style: .default) { [weak self] _ in let
+            newChannel = ChannelModel(
+                identifier: "",
+                name: channelName ?? "Channel Name",
+                lastMessage: "", lastActivity: Date()
+            )
             self?.referenceChannel.addDocument(data: newChannel.toDict)
         }
         

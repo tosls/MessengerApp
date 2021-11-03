@@ -23,20 +23,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(persistent.url ?? "")
             }
         }
-        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         container.viewContext.shouldDeleteInaccessibleFaults = true
         container.viewContext.automaticallyMergesChangesFromParent = true
-        
         return container
     }()
     
     private var showLog = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure() 
-//        guard let theme = SaveUserTheme.loadUserTheme() else {return true} for GCD method
-//        FirebaseApp.configure()
-
+        FirebaseApp.configure()
+        
         guard let theme = ThemeManager.userTheme else {return true}
         switch theme {
         case "DarkTheme":
@@ -48,12 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         default:
             return true
         }
-        
-        // Override point for customization after application launch.
 //        if showLog {
 //            print("Application launch: \(#function)")
 //        }
-       
         return true
     }
 
