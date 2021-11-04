@@ -14,21 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Chat")
-        container.loadPersistentStores { (persistent, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print(persistent.url ?? "")
-            }
-        }
-        container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-        container.viewContext.shouldDeleteInaccessibleFaults = true
-        container.viewContext.automaticallyMergesChangesFromParent = true
-        return container
-    }()
-    
     private var showLog = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
