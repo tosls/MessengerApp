@@ -243,7 +243,7 @@ extension ConversationsListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let channels = channels.sorted { $0.lastActivity ?? Date() < $1.lastActivity ?? Date() }
+//        let channels = channels.sorted { $0.lastActivity ?? Date() < $1.lastActivity ?? Date() }
         let channel = channels[indexPath.row]
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? ConversationTableViewCell else {
@@ -256,6 +256,36 @@ extension ConversationsListViewController: UITableViewDataSource {
         )
         return cell
     }
+    
+    // MARK: Swipe Actions
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = self.contextualDeleteAction(forRowAtIndexPath: indexPath)
+        let swipeConfigure = UISwipeActionsConfiguration(actions: [deleteAction])
+        return swipeConfigure
+    }
+    
+   private func contextualDeleteAction (forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
+       let action = UIContextualAction(style: .destructive, title: "Delete") {(_, _, _) in
+           let channel = self.channels[indexPath.row]
+           self.coreDataManager.deleteChannelsInCoreData(channel: channel)
+           self.channels.remove(at: indexPath.row)
+           self.tableView.deleteRows(at: [indexPath], with: .automatic)
+           print("Delete Action Test")
+//           completion(true)
+           
+           print("Delete Action Test 3")
+           self.tableView.reloadData()
+       }
+       action.backgroundColor = .red
+       action.image = UIImage(named: "delete")
+       return action
+   }
+
 }
 
 // MARK: extension UITableViewDelegate

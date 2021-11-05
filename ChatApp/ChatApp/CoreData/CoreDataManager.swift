@@ -52,17 +52,38 @@ class CoreDataManager {
                     self.backgroundContex.rollback()
                     print(error.debugDescription)
                 }
-                self.backgroundContex.reset()
+//                self.backgroundContex.reset()
             }
         }
     }
     
     func getChannelsFromCoreData() {
-        let fetchReuqest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
+        let fetchRequest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
         do {
-            let channelData = try contex.fetch(fetchReuqest)
+            let channelData = try contex.fetch(fetchRequest)
             print(channelData)
         } catch let error as NSError {
+            print(error.debugDescription)
+        }
+    }
+
+    func deleteChannelsInCoreData(channel: ChannelModel?) {
+        let fetchRequest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
+        
+        guard let identifierChannel = channel?.identifier else {return}
+        let predicate = NSPredicate(format: "identifier == %@", identifierChannel)
+        fetchRequest.predicate = predicate
+        fetchRequest.includesSubentities = true
+        
+        guard let channelForDelete = try? contex.fetch(fetchRequest).first else {return}
+        print(channelForDelete.name)
+        print(channelForDelete.identifier)
+        contex.delete(channelForDelete)        
+        do {
+            try contex.save()
+            print("Core Data Delete 2")
+        } catch let error as NSError {
+            self.backgroundContex.rollback()
             print(error.debugDescription)
         }
     }
@@ -109,9 +130,9 @@ class CoreDataManager {
     }
     
     func getMessagesFromCoreData() {
-        let fetchReuqest: NSFetchRequest<DBMessage> = DBMessage.fetchRequest()
+        let fetchRequest: NSFetchRequest<DBMessage> = DBMessage.fetchRequest()
         do {
-            let messageData = try contex.fetch(fetchReuqest)
+            let messageData = try contex.fetch(fetchRequest)
             print(messageData)
         } catch let error as NSError {
             print(error.debugDescription)
