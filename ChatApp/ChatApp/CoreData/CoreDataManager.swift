@@ -52,8 +52,8 @@ class CoreDataManager {
                     self.backgroundContex.rollback()
                     print(error.debugDescription)
                 }
-//                self.backgroundContex.reset()
             }
+            self.backgroundContex.reset()
         }
     }
     
@@ -76,12 +76,9 @@ class CoreDataManager {
         fetchRequest.includesSubentities = true
         
         guard let channelForDelete = try? contex.fetch(fetchRequest).first else {return}
-        print(channelForDelete.name)
-        print(channelForDelete.identifier)
         contex.delete(channelForDelete)        
         do {
             try contex.save()
-            print("Core Data Delete 2")
         } catch let error as NSError {
             self.backgroundContex.rollback()
             print(error.debugDescription)

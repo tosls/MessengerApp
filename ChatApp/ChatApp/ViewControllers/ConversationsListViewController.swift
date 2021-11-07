@@ -36,7 +36,8 @@ class ConversationsListViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        getChannels()     
+        getChannels()
+        
    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -149,7 +150,7 @@ class ConversationsListViewController: UIViewController {
     }
     
     // MARK: Work with Channels
-    
+
     private func getChannels() {
         
         referenceChannel.addSnapshotListener { [weak self] snapshot, error in
@@ -190,6 +191,11 @@ class ConversationsListViewController: UIViewController {
         }
     }
     
+    private func deleteChannel(channel: ChannelModel?) {
+        guard let identifierChannel = channel?.identifier else {return}
+        referenceChannel.document(identifierChannel).delete()
+    }
+
     private func newChannelAlert() {
         
         var channelName: String?
@@ -272,20 +278,16 @@ extension ConversationsListViewController: UITableViewDataSource {
    private func contextualDeleteAction (forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
        let action = UIContextualAction(style: .destructive, title: "Delete") {(_, _, _) in
            let channel = self.channels[indexPath.row]
+           self.deleteChannel(channel: channel)
            self.coreDataManager.deleteChannelsInCoreData(channel: channel)
            self.channels.remove(at: indexPath.row)
            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-           print("Delete Action Test")
-//           completion(true)
-           
-           print("Delete Action Test 3")
            self.tableView.reloadData()
        }
        action.backgroundColor = .red
        action.image = UIImage(named: "delete")
        return action
    }
-
 }
 
 // MARK: extension UITableViewDelegate
