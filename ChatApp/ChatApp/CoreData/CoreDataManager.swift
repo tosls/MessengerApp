@@ -10,6 +10,10 @@ import CoreData
 
 class CoreDataManager {
     
+    static let shared = CoreDataManager()
+    
+    private init() {}
+    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Chat")
         container.loadPersistentStores { (persistent, error) in
@@ -63,24 +67,6 @@ class CoreDataManager {
             let channelData = try contex.fetch(fetchRequest)
             print(channelData)
         } catch let error as NSError {
-            print(error.debugDescription)
-        }
-    }
-
-    func deleteChannelsInCoreData(channel: ChannelModel?) {
-        let fetchRequest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
-        
-        guard let identifierChannel = channel?.identifier else {return}
-        let predicate = NSPredicate(format: "identifier == %@", identifierChannel)
-        fetchRequest.predicate = predicate
-        fetchRequest.includesSubentities = true
-        
-        guard let channelForDelete = try? contex.fetch(fetchRequest).first else {return}
-        contex.delete(channelForDelete)        
-        do {
-            try contex.save()
-        } catch let error as NSError {
-            self.backgroundContex.rollback()
             print(error.debugDescription)
         }
     }

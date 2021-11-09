@@ -15,9 +15,8 @@ class ConversationsListViewController: UIViewController {
     var channels = [ChannelModel]()
     var message = [Message]()
     var userPhoto = UIImage()
-    var themeName: String!
-    
-    let coreDataManager = CoreDataManager()
+    var themeName: String?
+
     private let identifier = String(describing: ConversationTableViewCell.self)
     
     private lazy var db = Firestore.firestore()
@@ -32,12 +31,29 @@ class ConversationsListViewController: UIViewController {
         return tableView
     }()
     
+    var fetchedResultsController: NSFetchedResultsController<DBChannel> = {
+        let request: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "lastActivity", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
+                                                                  managedObjectContext: CoreDataManager.shared.contex,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
+        return fetchedResultsController
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         getChannels()
-        
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+            
+        } catch {
+            print(error)
+        }
    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -176,7 +192,7 @@ class ConversationsListViewController: UIViewController {
                         lastActivity: lastMessageDate?.dateValue() ?? Date()
                     )
                     )
-                    self?.coreDataManager.saveChannelsWithCoreData(channel: ChannelModel(
+                    CoreDataManager.shared.saveChannelsWithCoreData(channel: ChannelModel(
                         identifier: identifier,
                         name: chanelName,
                         lastMessage: lastMessage,
@@ -191,9 +207,9 @@ class ConversationsListViewController: UIViewController {
         }
     }
     
-    private func deleteChannel(channel: ChannelModel?) {
-        guard let identifierChannel = channel?.identifier else {return}
-        referenceChannel.document(identifierChannel).delete()
+    private func deleteChannel(identifier: String?) {
+        guard let channelIdentifier = identifier else {return}
+        referenceChannel.document(channelIdentifier).delete()
     }
 
     private func newChannelAlert() {
@@ -244,22 +260,20 @@ extension ConversationsListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        channels.count
+        guard let sections = fetchedResultsController.sections else {return 0}
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-//        let channels = channels.sorted { $0.lastActivity ?? Date() < $1.lastActivity ?? Date() }
-        let channel = channels[indexPath.row]
-        
+        let channels = fetchedResultsController.object(at: indexPath)
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? ConversationTableViewCell else {
-            return UITableViewCell() }
-        cell.configure(with: ChannelModel(identifier: channel.identifier,
-                                          name: channel.name,
-                                          lastMessage: channel.lastMessage,
-                                          lastActivity: channel.lastActivity
-                                         )
-        )
+            return UITableViewCell()
+        }
+        cell.configure(with: ChannelModel(identifier: channels.identifier ?? "no identifier",
+                                          name: channels.name ?? "No name",
+                                          lastMessage: channels.lastMessage,
+                                          lastActivity: channels.lastActivity))
         return cell
     }
     
@@ -277,12 +291,9 @@ extension ConversationsListViewController: UITableViewDataSource {
     
    private func contextualDeleteAction (forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
        let action = UIContextualAction(style: .destructive, title: "Delete") {(_, _, _) in
-           let channel = self.channels[indexPath.row]
-           self.deleteChannel(channel: channel)
-           self.coreDataManager.deleteChannelsInCoreData(channel: channel)
-           self.channels.remove(at: indexPath.row)
-           self.tableView.deleteRows(at: [indexPath], with: .automatic)
-           self.tableView.reloadData()
+           let managedObject = self.fetchedResultsController.object(at: indexPath)
+           CoreDataManager.shared.contex.delete(managedObject)
+           self.deleteChannel(identifier: managedObject.identifier)
        }
        action.backgroundColor = .red
        action.image = UIImage(named: "delete")
@@ -295,11 +306,59 @@ extension ConversationsListViewController: UITableViewDataSource {
 extension ConversationsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let channelVC = ConversationViewController()
+        let newChannel = fetchedResultsController.object(at: indexPath)
+
         let chanel = channels[indexPath.row]
         channelVC.channel = chanel
-        channelVC.titleName = chanel.name
-        
+        channelVC.newChannel = newChannel
+        channelVC.titleName = newChannel.name
+        channelVC.channelIdentifier = newChannel.identifier
+
         navigationController?.pushViewController(channelVC, animated: true)
+    }
+}
+
+// MARK: fetched Results Controller Delegate
+
+extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath {
+                tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+        case .move:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        @unknown default:
+            print("Error fetched Results Controller Delegate")
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.endUpdates()
     }
 }

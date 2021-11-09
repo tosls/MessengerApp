@@ -13,14 +13,35 @@ class ConversationViewController: UITableViewController {
     
     var titleName: String?
     var channel: ChannelModel?
+    var newChannel: DBChannel?
+    var channelIdentifier: String?
+    var messagesDB: DBMessage?
+    
     var channelMessages = [Message]()
     var conteiner: NSPersistentContainer!
-    let coreDataManager = CoreDataManager()
     
     private lazy var db = Firestore.firestore()
     private lazy var messagesReference: CollectionReference = {
         guard let channelIdentifier = channel?.identifier else {fatalError()}
         return db.collection("channels").document(channelIdentifier).collection("messages")
+    }()
+    
+    lazy var fetchedResultsController: NSFetchedResultsController<DBMessage> = {
+        let request: NSFetchRequest<DBMessage> = DBMessage.fetchRequest()
+        guard let identifierChannel = channelIdentifier else { fatalError()}
+        let predicate = NSPredicate(format: "ANY channel == %@", identifierChannel)
+        
+        
+        
+//        let predicate = NSPredicate(format: "identifier == %@", identifierChannel)
+        request.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "created", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
+                                                                  managedObjectContext: CoreDataManager.shared.contex,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
+        return fetchedResultsController
     }()
     
     private let cellID = "messageCell"
@@ -34,11 +55,26 @@ class ConversationViewController: UITableViewController {
         
         getChannelMessages()
         setupMessageButton()
+        guard let sections = fetchedResultsController.sections else {
+            print("TEst 13")
+            return
+        }
+        print(sections.count)
+   
+    
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? MessageTableViewCell else {return UITableViewCell()}
+        
+        let newMessages = fetchedResultsController.object(at: indexPath)
+        print(newMessages.content)
+//        let channelMessage = newMessages[indexPat]
+//        cell.userNameLabel.text = newMessages.senderName
+//        cell.messageLabel.text = newMessages.content
+        
+        
         let messages = channelMessages.sorted { $0.created < $1.created }
         let channelMessage = messages[indexPath.row]
         cell.userNameLabel.text = channelMessage.senderName
@@ -51,6 +87,14 @@ class ConversationViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         channelMessages.count
+//        guard let sections = fetchedResultsController.sections else {fatalError()}
+//        let sectionInfo = sections[section]
+//        print(sectionInfo.numberOfObjects)
+//        return sectionInfo.numberOfObjects
+//
+//        guard let sections = fetchedResultsController.sections else {fatalError()}
+//        let sectionInfo = sections[section]
+//        return sectionInfo.numberOfObjects
     }
     
     @objc func addNewChannelButtonTapped(_ sender: Any) {
@@ -80,7 +124,7 @@ class ConversationViewController: UITableViewController {
                         senderid: senderId,
                         senderName: senderName)
                     )
-                    self?.coreDataManager.saveMessagesWithCoreData(message: Message(
+                    CoreDataManager.shared.saveMessagesWithCoreData(message: Message(
                         content: content,
                         created: created?.dateValue() ?? Date(),
                         senderid: senderId,
