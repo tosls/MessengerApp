@@ -12,18 +12,14 @@ import CoreData
 class ConversationViewController: UITableViewController {
     
     var titleName: String?
-    var channel: ChannelModel?
-    var newChannel: DBChannel?
-    var messagesDB: DBMessage?
-    
+    var actualChannel: DBChannel?
     var channelMessages = [Message]()
-//    var conteiner: NSPersistentContainer!
     
     private let cellID = "messageCell"
     
     private lazy var db = Firestore.firestore()
     private lazy var messagesReference: CollectionReference = {
-        guard let channelID = newChannel?.identifier else {fatalError()}
+        guard let channelID = actualChannel?.identifier else {fatalError()}
         return db.collection("channels").document(channelID).collection("messages")
     }()
     
@@ -32,9 +28,10 @@ class ConversationViewController: UITableViewController {
     
         let sortDescription = NSSortDescriptor(key: "created", ascending: true)
         request.sortDescriptors = [sortDescription]
-        let channelID = newChannel?.identifier ?? ""
+        let channelID = actualChannel?.identifier ?? ""
         let predicate = NSPredicate(format: "channel.identifier == %@", channelID)
         request.predicate = predicate
+        request.fetchBatchSize = 20
         let fetchedResultController = NSFetchedResultsController(fetchRequest: request,
                                                                  managedObjectContext: CoreDataManager.shared.contex,
                                                                  sectionNameKeyPath: nil,
@@ -60,13 +57,15 @@ class ConversationViewController: UITableViewController {
         setupMessageButton()
     }
     
-        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            guard let sections = fetchedResultsController.sections else {
-                print("Sections error")
-                return 0}
-            let sectionInfo = sections[section]
-            return sectionInfo.numberOfObjects
-        }
+    // MARK: Work with TableView
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let sections = fetchedResultsController.sections else {
+            print("Sections error")
+            return 0}
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
@@ -83,6 +82,8 @@ class ConversationViewController: UITableViewController {
     @objc func addNewChannelButtonTapped(_ sender: Any) {
         newMessageAlert()
     }
+    
+    // MARK: Work with messages
 
     private func getChannelMessages() {
         messagesReference.addSnapshotListener { [weak self] snapshot, error in
@@ -107,19 +108,30 @@ class ConversationViewController: UITableViewController {
                         senderid: senderId,
                         senderName: senderName
                     )
-                    )
-                    CoreDataManager.shared.saveMessagesWithCoreData(message: Message(
-                        content: content,
-                        created: created?.dateValue() ?? Date(),
-                        senderid: senderId,
-                        senderName: senderName),
-                                                                    identifier: self?.newChannel?.identifier ?? ""
-                    )
-
+                    )                    
                 }
+                self?.checkingTheMessages()
             }
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    private func checkingTheMessages() {
+        guard let messagesCD = fetchedResultsController.fetchedObjects else {return}
+        
+        if channelMessages.count > messagesCD.count {
+            for message in channelMessages {
+                CoreDataManager.shared.saveMessagesWithCoreData(message:
+                                                                    Message(
+                                                                        content: message.content,
+                                                                        created: message.created,
+                                                                        senderid: message.senderid,
+                                                                        senderName: message.senderName
+                                                                    ),
+                                                                identifier: self.actualChannel?.identifier ?? ""
+                )
             }
         }
     }
@@ -180,6 +192,8 @@ class ConversationViewController: UITableViewController {
         messagesReference.addDocument(data: newMessage.toDict)
     }
 }
+
+// MARK: Fetched Results Controller Delegate
 
 extension ConversationViewController: NSFetchedResultsControllerDelegate {
 

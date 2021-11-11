@@ -71,16 +71,6 @@ class CoreDataManager {
         }
     }
     
-    func getChannelsFromCoreData() {
-        let fetchRequest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
-        do {
-            let channelData = try contex.fetch(fetchRequest)
-            print(channelData)
-        } catch let error as NSError {
-            print(error.debugDescription)
-        }
-    }
-    
     // MARK: CoreData for messages
     
     func saveMessagesWithCoreData(message: Message, identifier: String) {
@@ -98,7 +88,6 @@ class CoreDataManager {
         let fetchRequest: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
         let predicate = NSPredicate(format: "identifier == %@", identifier)
         fetchRequest.predicate = predicate
-        fetchRequest.includesSubentities = true
         do {
             let channelData = try backgroundContex.fetch(fetchRequest)
             channelData.first?.addToMessage(messageData)
@@ -115,16 +104,6 @@ class CoreDataManager {
                 }
             }
             self.backgroundContex.reset()
-        }
-    }
-    
-    func getMessagesFromCoreData() {
-        let fetchRequest: NSFetchRequest<DBMessage> = DBMessage.fetchRequest()
-        do {
-            let messageData = try contex.fetch(fetchRequest)
-            print(messageData)
-        } catch let error as NSError {
-            print(error.debugDescription)
         }
     }
 }

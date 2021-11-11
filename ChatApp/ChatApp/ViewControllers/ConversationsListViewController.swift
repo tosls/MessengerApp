@@ -12,8 +12,7 @@ import CoreData
 
 class ConversationsListViewController: UIViewController {
 
-    var channels = [ChannelModel]()
-    var message = [Message]()
+    var actualChannels = [ChannelModel]()
     var userPhoto = UIImage()
     var themeName: String?
 
@@ -52,7 +51,7 @@ class ConversationsListViewController: UIViewController {
         super.viewDidLoad()
     
         setupView()
-        getChannels()
+        getChannelsFromFirebase()
    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -166,7 +165,7 @@ class ConversationsListViewController: UIViewController {
     
     // MARK: Work with Channels
 
-    private func getChannels() {
+    private func getChannelsFromFirebase() {
         
         referenceChannel.addSnapshotListener { [weak self] snapshot, error in
             if let error = error {
@@ -176,7 +175,7 @@ class ConversationsListViewController: UIViewController {
                     print("Error fetching document: \(error!)")
                     return
                 }
-                self?.channels.removeAll()
+                self?.actualChannels.removeAll()
 
                 for document in snap.documents {
                     let chanelName = document.data()["name"] as? String ?? "Channel Name"
@@ -184,20 +183,15 @@ class ConversationsListViewController: UIViewController {
                     let identifier = document.documentID
                     let lastMessageDate = document.data()["lastActivity"] as? Timestamp
                 
-                    self?.channels.append(ChannelModel(
+                    self?.actualChannels.append(ChannelModel(
                         identifier: identifier,
                         name: chanelName,
                         lastMessage: lastMessage,
                         lastActivity: lastMessageDate?.dateValue() ?? Date()
                     )
                     )
-                    CoreDataManager.shared.saveChannelsWithCoreData(channel: ChannelModel(
-                        identifier: identifier,
-                        name: chanelName,
-                        lastMessage: lastMessage,
-                        lastActivity: lastMessageDate?.dateValue() ?? Date()))
-                    
                 }
+                self?.checkingTheRelevanceOfChannels()
             }
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
@@ -205,8 +199,35 @@ class ConversationsListViewController: UIViewController {
         }
     }
     
-    func checkChannels() {
-      
+    private func checkingTheRelevanceOfChannels() {
+        guard let channelsFromCoreData = fetchedResultsController.fetchedObjects else {return}
+        if actualChannels.count < channelsFromCoreData.count {
+            var channelsIdentifier: [String] = []
+            for channel in actualChannels {
+                channelsIdentifier.append(channel.identifier)
+            }
+            let request: NSFetchRequest<DBChannel> = DBChannel.fetchRequest()
+            let predicate = NSPredicate(format: "NOT identifier IN %@", channelsIdentifier)
+            request.predicate = predicate
+            do {
+                let channelData = try CoreDataManager.shared.contex.fetch(request)
+                for channelInCoreData in channelData {
+                    CoreDataManager.shared.deleteChannel(object: channelInCoreData)
+                }
+            } catch let error as NSError {
+                print(error.debugDescription)
+            }
+        } else if actualChannels.count > channelsFromCoreData.count {
+            for channel in actualChannels {
+                CoreDataManager.shared.saveChannelsWithCoreData(channel: ChannelModel(
+                    identifier: channel.identifier,
+                    name: channel.name,
+                    lastMessage: channel.lastMessage,
+                    lastActivity: channel.lastActivity
+                )
+                )
+            }
+        }
     }
     
     private func deleteChannel(identifier: String?) {
@@ -311,7 +332,7 @@ extension ConversationsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let channelVC = ConversationViewController()
         let actualChannel = fetchedResultsController.object(at: indexPath)
-        channelVC.newChannel = actualChannel
+        channelVC.actualChannel = actualChannel
         channelVC.titleName = actualChannel.name
 
         navigationController?.pushViewController(channelVC, animated: true)
