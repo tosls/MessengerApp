@@ -32,7 +32,23 @@ class CoreDataManager {
     lazy var contex = persistentContainer.viewContext
     lazy var backgroundContex = persistentContainer.newBackgroundContext()
     
-    // MARK: CoreData for channels
+    func saveBackgroundContex() {
+        backgroundContex.perform {
+            if self.backgroundContex.hasChanges {
+                do {
+                    try self.backgroundContex.save()
+                } catch let error as NSError {
+                    self.backgroundContex.rollback()
+                    print(error.debugDescription)
+                }
+            }
+        }
+    }
+}
+
+// MARK: CoreData for channels
+
+extension CoreDataManager: ChannelCoreDataProtocol {
     
     func saveChannelsWithCoreData(channel: ChannelModel) {
         
@@ -48,17 +64,7 @@ class CoreDataManager {
         channelData.lastActivity = channel.lastActivity
         channelData.identifier = channel.identifier
         
-        backgroundContex.perform {
-            if self.backgroundContex.hasChanges {
-                do {
-                    try self.backgroundContex.save()
-                } catch let error as NSError {
-                    self.backgroundContex.rollback()
-                    print(error.debugDescription)
-                }
-            }
-            self.backgroundContex.reset()
-        }
+        saveBackgroundContex()
     }
     
     func deleteChannel(object: NSManagedObject) {
@@ -70,8 +76,11 @@ class CoreDataManager {
             print(error.debugDescription)
         }
     }
-    
-    // MARK: CoreData for messages
+}
+
+// MARK: CoreData for messages
+
+extension CoreDataManager: MessageCoreDataProtocol {
     
     func saveMessagesWithCoreData(message: Message, identifier: String) {
         backgroundContex.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
@@ -94,16 +103,6 @@ class CoreDataManager {
         } catch let error as NSError {
             print(error.debugDescription)
         }
-        backgroundContex.perform {
-            if self.backgroundContex.hasChanges {
-                do {
-                    try self.backgroundContex.save()
-                } catch let error as NSError {
-                    self.backgroundContex.rollback()
-                    print(error.debugDescription)
-                }
-            }
-            self.backgroundContex.reset()
-        }
+        saveBackgroundContex()
     }
 }

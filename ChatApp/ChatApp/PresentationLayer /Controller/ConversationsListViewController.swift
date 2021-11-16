@@ -166,7 +166,6 @@ class ConversationsListViewController: UIViewController {
     // MARK: Work with Channels
 
     private func getChannelsFromFirebase() {
-        
         referenceChannel.addSnapshotListener { [weak self] snapshot, error in
             if let error = error {
                 print(error)
@@ -182,7 +181,7 @@ class ConversationsListViewController: UIViewController {
                     let lastMessage = document.data()["lastMessage"] as? String ?? "Last Message"
                     let identifier = document.documentID
                     let lastMessageDate = document.data()["lastActivity"] as? Timestamp
-                
+
                     self?.actualChannels.append(ChannelModel(
                         identifier: identifier,
                         name: chanelName,

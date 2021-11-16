@@ -29,22 +29,19 @@ class SettingsViewController: UIViewController {
     @IBAction func lightThemeButtonTapped(_ sender: UIButton) {
         settingsClosure?(lightTheme)
         view.backgroundColor = lightTheme.backgroundColor
-        ThemeManager.userTheme = "LightTheme"
-//        SaveUserTheme.saveUserTheme(userTheme: Theme(themeName: "LightTheme")) for GCD method
+        ThemeManager.userTheme = lightTheme.themeName
     }
     
     @IBAction func darkThemeButtonTapped(_ sender: UIButton) {
         settingsClosure?(darkTheme)
         view.backgroundColor = darkTheme.backgroundColor
-        ThemeManager.userTheme = "DarkTheme"
-//        SaveUserTheme.saveUserTheme(userTheme: Theme(themeName: "DarkTheme")) for GCD method
+        ThemeManager.userTheme = darkTheme.themeName
     }
     
     @IBAction func customThemeButtonTapped(_ sender: UIButton) {
         settingsClosure?(customTheme)
         view.backgroundColor = customTheme.backgroundColor
-        ThemeManager.userTheme = "CustomTheme"
-//        SaveUserTheme.saveUserTheme(userTheme: Theme(themeName: "CustomTheme")) for GCD method
+        ThemeManager.userTheme = customTheme.themeName
     }
     
     @IBAction func closeButtonTapped(_ sender: UIButton) {

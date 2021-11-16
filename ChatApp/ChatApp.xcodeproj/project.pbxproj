@@ -15,8 +15,11 @@
 		191F772426F3BC7800A30032 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191F772226F3BC7800A30032 /* Main.storyboard */; };
 		191F772626F3BC7A00A30032 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 191F772526F3BC7A00A30032 /* Assets.xcassets */; };
 		191F772926F3BC7A00A30032 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */; };
+		1921EA782743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921EA772743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift */; };
+		1921EA7A2743B94400EA0B13 /* ChannelCoreDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921EA792743B94300EA0B13 /* ChannelCoreDataProtocol.swift */; };
+		1921EA7C2743BA8800EA0B13 /* MessageCoreDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921EA7B2743BA8800EA0B13 /* MessageCoreDataProtocol.swift */; };
+		1921EA812743C93300EA0B13 /* FirebaseChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921EA802743C93300EA0B13 /* FirebaseChannelManager.swift */; };
 		19380876271C021A001E3611 /* GCDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19380875271C021A001E3611 /* GCDManager.swift */; };
-		1938087F271EB71B001E3611 /* LoadUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1938087E271EB71B001E3611 /* LoadUserProfile.swift */; };
 		19380883271ED046001E3611 /* UserProfileImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19380882271ED046001E3611 /* UserProfileImageManager.swift */; };
 		1938088627212F42001E3611 /* UserProfileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1938088527212F42001E3611 /* UserProfileManagerProtocol.swift */; };
 		195144252714490800DDE4A1 /* ThemeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195144242714490800DDE4A1 /* ThemeSettings.swift */; };
@@ -52,8 +55,11 @@
 		191F772526F3BC7A00A30032 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		191F772826F3BC7A00A30032 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		191F772A26F3BC7A00A30032 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1921EA772743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileImageManagerProtocol.swift; sourceTree = "<group>"; };
+		1921EA792743B94300EA0B13 /* ChannelCoreDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCoreDataProtocol.swift; sourceTree = "<group>"; };
+		1921EA7B2743BA8800EA0B13 /* MessageCoreDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoreDataProtocol.swift; sourceTree = "<group>"; };
+		1921EA802743C93300EA0B13 /* FirebaseChannelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseChannelManager.swift; sourceTree = "<group>"; };
 		19380875271C021A001E3611 /* GCDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDManager.swift; sourceTree = "<group>"; };
-		1938087E271EB71B001E3611 /* LoadUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserProfile.swift; sourceTree = "<group>"; };
 		19380882271ED046001E3611 /* UserProfileImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileImageManager.swift; sourceTree = "<group>"; };
 		1938088527212F42001E3611 /* UserProfileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManagerProtocol.swift; sourceTree = "<group>"; };
 		195144242714490800DDE4A1 /* ThemeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettings.swift; sourceTree = "<group>"; };
@@ -121,15 +127,11 @@
 		191F771B26F3BC7800A30032 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
-				19DA7C93272D55E6007B8570 /* CoreData */,
-				1910AE9C27270576007F45A3 /* Accesses */,
-				1938087D271EB64A001E3611 /* Common */,
-				1994C02A2700A5A300E4F6B9 /* Data */,
-				19E978F82708D4720077D249 /* Models */,
-				1994C02B2700A63100E4F6B9 /* ViewControllers */,
-				19B334E62703160000315358 /* Storyboards */,
 				191F771C26F3BC7800A30032 /* AppDelegate.swift */,
 				191F771E26F3BC7800A30032 /* SceneDelegate.swift */,
+				1921EA722743959C00EA0B13 /* CoreLayer */,
+				1921EA712743958B00EA0B13 /* ServiceLayer */,
+				1921EA702743957200EA0B13 /* PresentationLayer  */,
 				191F772526F3BC7A00A30032 /* Assets.xcassets */,
 				191F772A26F3BC7A00A30032 /* Info.plist */,
 				199DC64B273274C9004893D0 /* GoogleService-Info.plist */,
@@ -138,48 +140,88 @@
 			path = ChatApp;
 			sourceTree = "<group>";
 		};
-		1938087D271EB64A001E3611 /* Common */ = {
+		1921EA702743957200EA0B13 /* PresentationLayer  */ = {
 			isa = PBXGroup;
 			children = (
-				1938087E271EB71B001E3611 /* LoadUserProfile.swift */,
+				1921EA75274395C000EA0B13 /* Controller */,
+				1921EA74274395BB00EA0B13 /* View */,
+				1921EA73274395B500EA0B13 /* Model */,
+			);
+			path = "PresentationLayer ";
+			sourceTree = "<group>";
+		};
+		1921EA712743958B00EA0B13 /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+				1921EA7F2743C90200EA0B13 /* Firebase */,
+				1910AE9C27270576007F45A3 /* Accesses */,
+				1921EA762743A74A00EA0B13 /* User Defaults */,
+				1994C02626FFABE800E4F6B9 /* UserProfile.swift */,
+				19380875271C021A001E3611 /* GCDManager.swift */,
 				19380882271ED046001E3611 /* UserProfileImageManager.swift */,
 				1938088527212F42001E3611 /* UserProfileManagerProtocol.swift */,
-				19514426271588FF00DDE4A1 /* ThemeManager.swift */,
+				1921EA772743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift */,
 			);
-			path = Common;
+			path = ServiceLayer;
 			sourceTree = "<group>";
 		};
-		1994C02A2700A5A300E4F6B9 /* Data */ = {
+		1921EA722743959C00EA0B13 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
-				1994C02626FFABE800E4F6B9 /* UserProfile.swift */,
+				19DA7C93272D55E6007B8570 /* CoreData */,
+			);
+			path = CoreLayer;
+			sourceTree = "<group>";
+		};
+		1921EA73274395B500EA0B13 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1951B361272592D900F01F2D /* ChannelModel.swift */,
+				19E978FB2708E81E0077D249 /* MessageModel.swift */,
+				19E978FF270B0FD80077D249 /* UserProfileModel.swift */,
+				1919D31D271407FB00C829F8 /* Theme.swift */,
 				195144242714490800DDE4A1 /* ThemeSettings.swift */,
-				19380875271C021A001E3611 /* GCDManager.swift */,
 			);
-			path = Data;
+			path = Model;
 			sourceTree = "<group>";
 		};
-		1994C02B2700A63100E4F6B9 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				19E978EE270863100077D249 /* ConversationsListViewController.swift */,
-				19E978F027086D540077D249 /* ConversationTableViewCell.swift */,
-				19E978F427088C8F0077D249 /* ConversationViewController.swift */,
-				19E97901270C35490077D249 /* MessageTableViewCell.swift */,
-				1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */,
-				1919D31F27140BA100C829F8 /* SettingsViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		19B334E62703160000315358 /* Storyboards */ = {
+		1921EA74274395BB00EA0B13 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				19E978F127086D540077D249 /* ConversationTableViewCell.xib */,
 				191F772226F3BC7800A30032 /* Main.storyboard */,
 				191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */,
 			);
-			path = Storyboards;
+			path = View;
+			sourceTree = "<group>";
+		};
+		1921EA75274395C000EA0B13 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				19E978EE270863100077D249 /* ConversationsListViewController.swift */,
+				19E978F427088C8F0077D249 /* ConversationViewController.swift */,
+				1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */,
+				19E978F027086D540077D249 /* ConversationTableViewCell.swift */,
+				19E97901270C35490077D249 /* MessageTableViewCell.swift */,
+				1919D31F27140BA100C829F8 /* SettingsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1921EA762743A74A00EA0B13 /* User Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				19514426271588FF00DDE4A1 /* ThemeManager.swift */,
+			);
+			path = "User Defaults";
+			sourceTree = "<group>";
+		};
+		1921EA7F2743C90200EA0B13 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				1921EA802743C93300EA0B13 /* FirebaseChannelManager.swift */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		19DA7C93272D55E6007B8570 /* CoreData */ = {
@@ -190,19 +232,10 @@
 				19DA7CA1272D57AA007B8570 /* DBMessage+CoreDataClass.swift */,
 				19DA7CA2272D57AA007B8570 /* DBMessage+CoreDataProperties.swift */,
 				199DC64D2732D1C2004893D0 /* CoreDataManager.swift */,
+				1921EA792743B94300EA0B13 /* ChannelCoreDataProtocol.swift */,
+				1921EA7B2743BA8800EA0B13 /* MessageCoreDataProtocol.swift */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		19E978F82708D4720077D249 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				1951B361272592D900F01F2D /* ChannelModel.swift */,
-				19E978FB2708E81E0077D249 /* MessageModel.swift */,
-				19E978FF270B0FD80077D249 /* UserProfileModel.swift */,
-				1919D31D271407FB00C829F8 /* Theme.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		2B6694A7C5709C4B644FA5AD /* Frameworks */ = {
@@ -374,11 +407,14 @@
 				1951B362272592D900F01F2D /* ChannelModel.swift in Sources */,
 				1910AE9E272705BB007F45A3 /* UserSenederID.swift in Sources */,
 				195144252714490800DDE4A1 /* ThemeSettings.swift in Sources */,
+				1921EA812743C93300EA0B13 /* FirebaseChannelManager.swift in Sources */,
 				19DA7CA6272D57AA007B8570 /* DBMessage+CoreDataProperties.swift in Sources */,
+				1921EA7A2743B94400EA0B13 /* ChannelCoreDataProtocol.swift in Sources */,
 				19380883271ED046001E3611 /* UserProfileImageManager.swift in Sources */,
-				1938087F271EB71B001E3611 /* LoadUserProfile.swift in Sources */,
 				199DC64E2732D1C2004893D0 /* CoreDataManager.swift in Sources */,
+				1921EA782743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift in Sources */,
 				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,
+				1921EA7C2743BA8800EA0B13 /* MessageCoreDataProtocol.swift in Sources */,
 				19E97900270B0FD80077D249 /* UserProfileModel.swift in Sources */,
 				19DA7CA4272D57AA007B8570 /* DBChannel+CoreDataProperties.swift in Sources */,
 				191F771F26F3BC7800A30032 /* SceneDelegate.swift in Sources */,
