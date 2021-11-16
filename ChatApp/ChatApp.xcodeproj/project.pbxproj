@@ -18,7 +18,9 @@
 		1921EA782743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921EA772743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift */; };
 		1921EA7A2743B94400EA0B13 /* ChannelCoreDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921EA792743B94300EA0B13 /* ChannelCoreDataProtocol.swift */; };
 		1921EA7C2743BA8800EA0B13 /* MessageCoreDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921EA7B2743BA8800EA0B13 /* MessageCoreDataProtocol.swift */; };
-		1921EA812743C93300EA0B13 /* FirebaseChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921EA802743C93300EA0B13 /* FirebaseChannelManager.swift */; };
+		1921EA832743EAE500EA0B13 /* ConversationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921EA822743EAE500EA0B13 /* ConversationTableView.swift */; };
+		1921EA852743ECCF00EA0B13 /* FRCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921EA842743ECCF00EA0B13 /* FRCDelegate.swift */; };
+		1921EA882744144C00EA0B13 /* ChannelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921EA872744144C00EA0B13 /* ChannelsManager.swift */; };
 		19380876271C021A001E3611 /* GCDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19380875271C021A001E3611 /* GCDManager.swift */; };
 		19380883271ED046001E3611 /* UserProfileImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19380882271ED046001E3611 /* UserProfileImageManager.swift */; };
 		1938088627212F42001E3611 /* UserProfileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1938088527212F42001E3611 /* UserProfileManagerProtocol.swift */; };
@@ -58,7 +60,9 @@
 		1921EA772743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileImageManagerProtocol.swift; sourceTree = "<group>"; };
 		1921EA792743B94300EA0B13 /* ChannelCoreDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCoreDataProtocol.swift; sourceTree = "<group>"; };
 		1921EA7B2743BA8800EA0B13 /* MessageCoreDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoreDataProtocol.swift; sourceTree = "<group>"; };
-		1921EA802743C93300EA0B13 /* FirebaseChannelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseChannelManager.swift; sourceTree = "<group>"; };
+		1921EA822743EAE500EA0B13 /* ConversationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableView.swift; sourceTree = "<group>"; };
+		1921EA842743ECCF00EA0B13 /* FRCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCDelegate.swift; sourceTree = "<group>"; };
+		1921EA872744144C00EA0B13 /* ChannelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsManager.swift; sourceTree = "<group>"; };
 		19380875271C021A001E3611 /* GCDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDManager.swift; sourceTree = "<group>"; };
 		19380882271ED046001E3611 /* UserProfileImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileImageManager.swift; sourceTree = "<group>"; };
 		1938088527212F42001E3611 /* UserProfileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManagerProtocol.swift; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 		1921EA702743957200EA0B13 /* PresentationLayer  */ = {
 			isa = PBXGroup;
 			children = (
+				1921EA862743F5AF00EA0B13 /* Channels */,
+				1921EA8F27442DBA00EA0B13 /* Messages */,
 				1921EA75274395C000EA0B13 /* Controller */,
 				1921EA74274395BB00EA0B13 /* View */,
 				1921EA73274395B500EA0B13 /* Model */,
@@ -153,7 +159,6 @@
 		1921EA712743958B00EA0B13 /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
-				1921EA7F2743C90200EA0B13 /* Firebase */,
 				1910AE9C27270576007F45A3 /* Accesses */,
 				1921EA762743A74A00EA0B13 /* User Defaults */,
 				1994C02626FFABE800E4F6B9 /* UserProfile.swift */,
@@ -176,8 +181,6 @@
 		1921EA73274395B500EA0B13 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1951B361272592D900F01F2D /* ChannelModel.swift */,
-				19E978FB2708E81E0077D249 /* MessageModel.swift */,
 				19E978FF270B0FD80077D249 /* UserProfileModel.swift */,
 				1919D31D271407FB00C829F8 /* Theme.swift */,
 				195144242714490800DDE4A1 /* ThemeSettings.swift */,
@@ -188,7 +191,6 @@
 		1921EA74274395BB00EA0B13 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				19E978F127086D540077D249 /* ConversationTableViewCell.xib */,
 				191F772226F3BC7800A30032 /* Main.storyboard */,
 				191F772726F3BC7A00A30032 /* LaunchScreen.storyboard */,
 			);
@@ -198,11 +200,7 @@
 		1921EA75274395C000EA0B13 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				19E978EE270863100077D249 /* ConversationsListViewController.swift */,
-				19E978F427088C8F0077D249 /* ConversationViewController.swift */,
 				1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */,
-				19E978F027086D540077D249 /* ConversationTableViewCell.swift */,
-				19E97901270C35490077D249 /* MessageTableViewCell.swift */,
 				1919D31F27140BA100C829F8 /* SettingsViewController.swift */,
 			);
 			path = Controller;
@@ -216,12 +214,52 @@
 			path = "User Defaults";
 			sourceTree = "<group>";
 		};
-		1921EA7F2743C90200EA0B13 /* Firebase */ = {
+		1921EA862743F5AF00EA0B13 /* Channels */ = {
 			isa = PBXGroup;
 			children = (
-				1921EA802743C93300EA0B13 /* FirebaseChannelManager.swift */,
+				1921EA8E27442CDF00EA0B13 /* Controller */,
+				1921EA8D27442CDA00EA0B13 /* View */,
+				1921EA8C27442CD500EA0B13 /* Model */,
 			);
-			path = Firebase;
+			path = Channels;
+			sourceTree = "<group>";
+		};
+		1921EA8C27442CD500EA0B13 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1921EA872744144C00EA0B13 /* ChannelsManager.swift */,
+				1921EA822743EAE500EA0B13 /* ConversationTableView.swift */,
+				1921EA842743ECCF00EA0B13 /* FRCDelegate.swift */,
+				1951B361272592D900F01F2D /* ChannelModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1921EA8D27442CDA00EA0B13 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				19E978F127086D540077D249 /* ConversationTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1921EA8E27442CDF00EA0B13 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				19E978EE270863100077D249 /* ConversationsListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1921EA8F27442DBA00EA0B13 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				19E978FB2708E81E0077D249 /* MessageModel.swift */,
+				19E978F427088C8F0077D249 /* ConversationViewController.swift */,
+				19E97901270C35490077D249 /* MessageTableViewCell.swift */,
+				19E978F027086D540077D249 /* ConversationTableViewCell.swift */,
+			);
+			path = Messages;
 			sourceTree = "<group>";
 		};
 		19DA7C93272D55E6007B8570 /* CoreData */ = {
@@ -390,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1921EA832743EAE500EA0B13 /* ConversationTableView.swift in Sources */,
 				1919D32027140BA100C829F8 /* SettingsViewController.swift in Sources */,
 				1938088627212F42001E3611 /* UserProfileManagerProtocol.swift in Sources */,
 				19E978F527088C8F0077D249 /* ConversationViewController.swift in Sources */,
@@ -403,14 +442,15 @@
 				19DA7CA3272D57AA007B8570 /* DBChannel+CoreDataClass.swift in Sources */,
 				19514427271588FF00DDE4A1 /* ThemeManager.swift in Sources */,
 				19E978FC2708E81E0077D249 /* MessageModel.swift in Sources */,
+				1921EA852743ECCF00EA0B13 /* FRCDelegate.swift in Sources */,
 				1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */,
 				1951B362272592D900F01F2D /* ChannelModel.swift in Sources */,
 				1910AE9E272705BB007F45A3 /* UserSenederID.swift in Sources */,
 				195144252714490800DDE4A1 /* ThemeSettings.swift in Sources */,
-				1921EA812743C93300EA0B13 /* FirebaseChannelManager.swift in Sources */,
 				19DA7CA6272D57AA007B8570 /* DBMessage+CoreDataProperties.swift in Sources */,
 				1921EA7A2743B94400EA0B13 /* ChannelCoreDataProtocol.swift in Sources */,
 				19380883271ED046001E3611 /* UserProfileImageManager.swift in Sources */,
+				1921EA882744144C00EA0B13 /* ChannelsManager.swift in Sources */,
 				199DC64E2732D1C2004893D0 /* CoreDataManager.swift in Sources */,
 				1921EA782743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift in Sources */,
 				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,
