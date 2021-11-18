@@ -13,15 +13,14 @@ import CoreData
 class ConversationsListViewController: UIViewController {
 
     var userPhoto = UIImage()
-    var themeName: String?
     var tableViewDataSource = ConversationTableView()
-    let firebaseManager = ChannelsManager()
+    let channelsManager = ChannelsManager()
 
-    private let identifier = String(describing: ConversationTableViewCell.self)
+    private let cellIdentifier = String(describing: ConversationTableViewCell.self)
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
-        tableView.register(UINib(nibName: String(describing: ConversationTableViewCell.self), bundle: nil), forCellReuseIdentifier: identifier)
+        tableView.register(UINib(nibName: String(describing: ConversationTableViewCell.self), bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = tableViewDataSource
         tableView.delegate = self
         
@@ -32,7 +31,7 @@ class ConversationsListViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        getChannelsFromFirebase()
+        getActualChannels()
    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -63,50 +62,16 @@ class ConversationsListViewController: UIViewController {
         newChannelAlert()
     }
     
-    private func themeChanging(selectedTheme: ThemeSettings) {
-        ThemeSettings.themeChanging(selectedTheme: selectedTheme)
-        self.navigationController?.loadView()
-    }
-    
-    private func userImageChanging() {
-        self.navigationController?.loadView()
-    }
-    
-    private func updateView() {
-        setupUserProfileButton()
-    }
-    
-    private func logThemeChanging(themeColor: UIColor) {
-        print(themeColor)
-    }
-
     private func setupView() {
         title = "Channels"
-        
         view.addSubview(tableView)
         
         setupUserProfileButton()
         setupLeftBarButtons()
         UILabel.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).adjustsFontSizeToFitWidth = true
     }
- 
-    private func setupLeftBarButtons() {
-        let newChannelBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                      target: self,
-                                                      action: #selector(addNewChannelButtonTapped(_:)
-                                                                       )
-        )
-        let settingsBarButtonItem = UIBarButtonItem(title: "Settings",
-                                                    style: .plain,
-                                                    target: self,
-                                                    action: #selector(settingsButtonTapped(_:)
-                                                                     )
-        )
-        self.navigationItem.setLeftBarButtonItems([newChannelBarButtonItem, settingsBarButtonItem], animated: false)
-    }
     
     private func setupUserProfileButton() {
-        
         let gcdManager = GCDManager()
         let button = UIButton(type: .custom)
         button.addTarget(self, action: #selector(profileButtonTapped(_:)), for: .touchUpInside)
@@ -144,11 +109,38 @@ class ConversationsListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = barButton
     }
     
+    private func setupLeftBarButtons() {
+        let newChannelBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                      target: self,
+                                                      action: #selector(addNewChannelButtonTapped(_:)
+                                                                       )
+        )
+        let settingsBarButtonItem = UIBarButtonItem(title: "Settings",
+                                                    style: .plain,
+                                                    target: self,
+                                                    action: #selector(settingsButtonTapped(_:)
+                                                                     )
+        )
+        self.navigationItem.setLeftBarButtonItems([newChannelBarButtonItem, settingsBarButtonItem], animated: false)
+    }
+    
+    private func updateView() {
+        setupUserProfileButton()
+    }
+    
+    private func themeChanging(selectedTheme: ThemeSettings) {
+        ThemeSettings.themeChanging(selectedTheme: selectedTheme)
+        self.navigationController?.loadView()
+    }
+    
+    private func userImageChanging() {
+        self.navigationController?.loadView()
+    }
+    
     // MARK: Work with Channels
 
-    private func getChannelsFromFirebase() {
-        print("Test getChannelsFromFirebase")
-        firebaseManager.getChannelsFromFirebase(tableView: tableView)
+    private func getActualChannels() {
+        channelsManager.getChannelsFromFirebase(tableView: tableView)
     }
 
     private func newChannelAlert() {
@@ -168,12 +160,9 @@ class ConversationsListViewController: UIViewController {
                 name: channelName ?? "Channel Name",
                 lastMessage: "", lastActivity: Date()
             )
-            self?.firebaseManager.addChannelToFirebase(newChannel: newChannel)
-            print("Alert added channel")
+            self?.channelsManager.addChannelToFirebase(newChannel: newChannel)
             self?.tableView.reloadData()
-            print("reload data alert")
         }
-        
         alert.addAction(cancel)
         alert.addAction(createAChannel)
         alert.addTextField(configurationHandler: { (textField) in
@@ -198,12 +187,14 @@ extension ConversationsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let channelVC = ConversationViewController()
-        let actualChannel = firebaseManager.fetchedResultsController.object(at: indexPath)
+        let actualChannel = channelsManager.fetchedResultsController.object(at: indexPath)
         channelVC.actualChannel = actualChannel
         channelVC.titleName = actualChannel.name
         
         navigationController?.pushViewController(channelVC, animated: true)
     }
+    
+    // MARK: Swipe Actions
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = self.contextualDeleteAction(forRowAtIndexPath: indexPath)
@@ -213,8 +204,8 @@ extension ConversationsListViewController: UITableViewDelegate {
 
     private func contextualDeleteAction (forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive, title: "Delete") {(_, _, _) in
-            let managedObject = self.firebaseManager.fetchedResultsController.object(at: indexPath)
-            self.firebaseManager.deleteChannel(identifier: managedObject.identifier)
+            let managedObject = self.channelsManager.fetchedResultsController.object(at: indexPath)
+            self.channelsManager.deleteChannel(identifier: managedObject.identifier)
             CoreDataManager.shared.deleteChannel(object: managedObject)
             self.tableView.reloadData()
         }
@@ -223,4 +214,3 @@ extension ConversationsListViewController: UITableViewDelegate {
         return action
     }
 }
-

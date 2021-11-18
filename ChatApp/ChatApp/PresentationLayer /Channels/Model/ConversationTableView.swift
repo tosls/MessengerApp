@@ -10,7 +10,9 @@ import CoreData
 
 class ConversationTableView: NSObject, UITableViewDataSource {
     
-    private let identifier = String(describing: ConversationTableViewCell.self)
+    let channelsManager = ChannelsManager()
+    
+    private let cellIdentifier = String(describing: ConversationTableViewCell.self)
     
     func numberOfSections(in tableView: UITableView) -> Int {
         1
@@ -19,11 +21,12 @@ class ConversationTableView: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = ChannelsManager().fetchedResultsController.sections else {return 0}
         let sectionInfo = sections[section]
+        print(sectionInfo.numberOfObjects)
         return sectionInfo.numberOfObjects
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? ConversationTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ConversationTableViewCell else {
             return UITableViewCell()
         }
         let channels = ChannelsManager().fetchedResultsController.object(at: indexPath)

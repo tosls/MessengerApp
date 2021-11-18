@@ -36,7 +36,6 @@ class ChannelsManager {
     private lazy var referenceChannel = db.collection("channels")
     
     func getChannelsFromFirebase(tableView: UITableView) {
-        
         referenceChannel.addSnapshotListener { [weak self] snapshot, error in
             if let error = error {
                 print(error)
@@ -61,18 +60,21 @@ class ChannelsManager {
                     )
                     )
                 }
-                print("Check channels")
+                self?.printTest()
                 self?.checkingTheRelevanceOfChannels()
+                self?.printTest()
             }
             DispatchQueue.main.async {
                 tableView.reloadData()
-                print("Reload data after getChannelsFromFirebase 2")
-                print("firebasechannels \(self?.actualChannels.count)")
-                guard let channelsFromCoreData = self?.fetchedResultsController.fetchedObjects else {return}
-                print(channelsFromCoreData.count)
             }
         }
     }
+    
+    func printTest() {
+        print("AAAA")
+    }
+    
+
     
    func deleteChannel(identifier: String?) {
         guard let channelIdentifier = identifier else {return}
@@ -81,16 +83,11 @@ class ChannelsManager {
     
     func addChannelToFirebase(newChannel: ChannelModel) {
         referenceChannel.addDocument(data: newChannel.toDict)
-        print("Added new channel")
     }
     
     private func checkingTheRelevanceOfChannels() {
         guard let channelsFromCoreData = fetchedResultsController.fetchedObjects else {return}
-        print("Check channels core data")
-        print(actualChannels.count)
-        print(channelsFromCoreData.count)
         if actualChannels.count < channelsFromCoreData.count {
-            print("Check channels - need delete in core data")
             var channelsIdentifier: [String] = []
             for channel in actualChannels {
                 channelsIdentifier.append(channel.identifier)
@@ -102,13 +99,11 @@ class ChannelsManager {
                 let channelData = try CoreDataManager.shared.contex.fetch(request)
                 for channelInCoreData in channelData {
                     CoreDataManager.shared.deleteChannel(object: channelInCoreData)
-                    print("Check channels - delete in core data")
                 }
             } catch let error as NSError {
                 print(error.debugDescription)
             }
         } else if actualChannels.count > channelsFromCoreData.count {
-            print("Check channels - ok")
             for channel in actualChannels {
                 CoreDataManager.shared.saveChannelsWithCoreData(channel: ChannelModel(
                     identifier: channel.identifier,

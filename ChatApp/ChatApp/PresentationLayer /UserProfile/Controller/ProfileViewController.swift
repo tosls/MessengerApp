@@ -198,7 +198,7 @@ class ProfileViewController: UIViewController {
                                       handler: { [weak self] _ in self?.cancelChanges()}
                                      )
         )
-        present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: Getting a profile picture

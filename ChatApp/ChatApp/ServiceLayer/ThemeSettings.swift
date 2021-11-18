@@ -23,21 +23,4 @@ static func themeChanging(selectedTheme: ThemeSettings) {
     UINavigationBar.appearance().tintColor = selectedTheme.fontColor
     UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: selectedTheme.fontColor]
     }
-    
 }
-
-var lightTheme: ThemeSettings = ThemeSettings(
-    themeName: "LightTheme",
-    backgroundColor: .white,
-    fontColor: .black
-)
-var darkTheme: ThemeSettings = ThemeSettings(
-    themeName: "DarkTheme",
-    backgroundColor: .black,
-    fontColor: .white
-)
-var customTheme: ThemeSettings = ThemeSettings(
-    themeName: "CustomTheme",
-    backgroundColor: .orange,
-    fontColor: .white
-)
