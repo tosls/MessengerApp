@@ -60,21 +60,13 @@ class ChannelsManager {
                     )
                     )
                 }
-                self?.printTest()
                 self?.checkingTheRelevanceOfChannels()
-                self?.printTest()
             }
             DispatchQueue.main.async {
                 tableView.reloadData()
             }
         }
     }
-    
-    func printTest() {
-        print("AAAA")
-    }
-    
-
     
    func deleteChannel(identifier: String?) {
         guard let channelIdentifier = identifier else {return}

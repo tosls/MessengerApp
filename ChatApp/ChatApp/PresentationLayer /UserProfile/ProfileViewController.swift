@@ -147,7 +147,6 @@ class ProfileViewController: UIViewController {
             gcdManager.saveUserImage(userImage: profileImageView.image!) { result in
             switch result {
             case true:
-                print("Save")
                 self.updateProfileImageClosure?(true)
             case false:
                 print("Error save")

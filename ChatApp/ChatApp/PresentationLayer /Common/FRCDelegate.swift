@@ -14,7 +14,6 @@ class FRCDelegate: NSObject, NSFetchedResultsControllerDelegate {
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
-        print("beginUpdate")
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
@@ -30,21 +29,17 @@ class FRCDelegate: NSObject, NSFetchedResultsControllerDelegate {
         case .update:
             if let indexPath = indexPath {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
-                print("update")
             }
         case .move:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .automatic)
-                print("move")
             }
             if let newIndexPath = newIndexPath {
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
-                print("insert")
             }
         case .delete:
             if let indexPath = indexPath {
                 tableView.deleteRows(at: [indexPath], with: .automatic)
-                print("delete")
             }
         @unknown default:
             print("Error fetched Results Controller Delegate")
@@ -53,6 +48,6 @@ class FRCDelegate: NSObject, NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
-        print("endUpdate")
+
     }
 }

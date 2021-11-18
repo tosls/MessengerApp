@@ -13,17 +13,15 @@ class ConversationViewController: UITableViewController {
     
     var titleName: String?
     var actualChannel: DBChannel?
-//    var channelMessages = [Message]()
     
     lazy var channelIdentifier = actualChannel?.identifier ?? ""
     
-    private let frcDelegate = FRCDelegate()
     private let cellIdentifier = "messageCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = titleName ?? "Messages"
-
+        
         tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.separatorStyle = .none
         
@@ -37,7 +35,6 @@ class ConversationViewController: UITableViewController {
         let fetchedMessages = MessagesManager().fetchedResult(channelIdentifier: channelIdentifier)
         guard let sections = fetchedMessages.sections else {return 0}
         let sectionInfo = sections[section]
-        print(sectionInfo.numberOfObjects)
         return sectionInfo.numberOfObjects
     }
     

@@ -14,6 +14,7 @@ class MessagesManager {
     
     var actualChannel: DBChannel?
     var channelMessages = [Message]()
+    
     private let frcDelegate = FRCDelegate()
     
     private lazy var db = Firestore.firestore()
@@ -46,9 +47,8 @@ class MessagesManager {
     }
     
     func getChannelMessages(channelIdentifier: String, tableView: UITableView) {
-        print("Start get messages")
         let messagesReference = getMessagesReferenceFormFirebase(channelIdentifier: channelIdentifier)
-        messagesReference.addSnapshotListener { [weak self] snapshot, error in
+        messagesReference.addSnapshotListener { snapshot, error in
             if let error = error {
                 print(error)
                 return
@@ -57,17 +57,14 @@ class MessagesManager {
                     print("Error fetching document: \(error!)")
                     return
                 }
-                self?.channelMessages.removeAll()
-                self?.printTest()
-                
+                self.channelMessages.removeAll()
                 for documnet in snap.documents {
-                    print("HEY")
                     let content = documnet.data()["content"] as? String ?? "Channel Name"
                     let senderName = documnet.data()["senderName"] as? String ?? "Sender Name"
                     let senderID = documnet.data()["senderid"] as? String ?? "senderid Name"
                     let created = documnet.data()["created"] as? Timestamp
                 
-                    self?.channelMessages.append(Message(
+                    self.channelMessages.append(Message(
                         content: content,
                         created: created?.dateValue() ?? Date(),
                         senderid: senderID,
@@ -75,10 +72,7 @@ class MessagesManager {
                     )
                     )
                 }
-                print("Finish get messages")
-                self?.printTest()
-                self?.checkingTheMessages(channelIdentifier: channelIdentifier)
-                print("Test after Finish get messages")
+                self.checkingTheMessages(channelIdentifier: channelIdentifier)
             }
             DispatchQueue.main.async {
                 tableView.reloadData()
@@ -86,24 +80,12 @@ class MessagesManager {
         }
     }
 
-    func printTest() {
-        print("DDD")
-    }
-    
-    func checkingTheMessages(channelIdentifier: String) {
+    private func checkingTheMessages(channelIdentifier: String) {
         let messages = fetchedResult(channelIdentifier: channelIdentifier)
-        print("Messages count")
-        print(messages.fetchedObjects?.count)
-        
         guard let messagesCD = messages.fetchedObjects else {
-            return}
-        print("Messages count")
-        print(messagesCD.count)
-        print(channelMessages.count)
-        print("End")
+            return
+        }
         if channelMessages.count > messagesCD.count {
-            
-            print("need append message in core data")
             for message in channelMessages {
                 CoreDataManager.shared.saveMessagesWithCoreData(message:
                                                                     Message(
@@ -112,10 +94,9 @@ class MessagesManager {
                                                                         senderid: message.senderid,
                                                                         senderName: message.senderName
                                                                     ),
-                                                                identifier: self.actualChannel?.identifier ?? ""
+                                                                identifier: channelIdentifier
                 )
             }
         }
     }
-    
 }

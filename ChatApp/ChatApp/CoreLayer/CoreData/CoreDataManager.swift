@@ -37,7 +37,6 @@ class CoreDataManager {
             if self.backgroundContex.hasChanges {
                 do {
                     try self.backgroundContex.save()
-                    print("Save Core data 5")
                 } catch let error as NSError {
                     self.backgroundContex.rollback()
                     print(error.debugDescription)
@@ -52,7 +51,6 @@ class CoreDataManager {
 extension CoreDataManager: ChannelCoreDataProtocol {
     
     func saveChannelsWithCoreData(channel: ChannelModel) {
-        print("Save Core data 1")
         backgroundContex.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         backgroundContex.shouldDeleteInaccessibleFaults = true
         backgroundContex.automaticallyMergesChangesFromParent = true
@@ -64,9 +62,7 @@ extension CoreDataManager: ChannelCoreDataProtocol {
         channelData.lastMessage = channel.lastMessage
         channelData.lastActivity = channel.lastActivity
         channelData.identifier = channel.identifier
-        print("Save Core data 2")
         saveBackgroundContex()
-        print("Save Core data 3")
     }
     
     func deleteChannel(object: NSManagedObject) {
@@ -85,11 +81,9 @@ extension CoreDataManager: ChannelCoreDataProtocol {
 extension CoreDataManager: MessageCoreDataProtocol {
     
     func saveMessagesWithCoreData(message: Message, identifier: String) {
-       
         backgroundContex.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         backgroundContex.shouldDeleteInaccessibleFaults = true
         backgroundContex.automaticallyMergesChangesFromParent = true
-        
         guard let messageObject = NSEntityDescription.entity(forEntityName: "DBMessage", in: backgroundContex) else {return}
         let messageData = DBMessage(entity: messageObject, insertInto: backgroundContex)
         messageData.senderName = message.senderName
@@ -106,8 +100,6 @@ extension CoreDataManager: MessageCoreDataProtocol {
         } catch let error as NSError {
             print(error.debugDescription)
         }
-        
         saveBackgroundContex()
-        
     }
 }

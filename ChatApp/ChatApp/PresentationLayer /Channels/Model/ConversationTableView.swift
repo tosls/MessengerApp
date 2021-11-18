@@ -21,7 +21,6 @@ class ConversationTableView: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = ChannelsManager().fetchedResultsController.sections else {return 0}
         let sectionInfo = sections[section]
-        print(sectionInfo.numberOfObjects)
         return sectionInfo.numberOfObjects
     }
     

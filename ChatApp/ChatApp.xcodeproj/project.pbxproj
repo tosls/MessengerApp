@@ -280,50 +280,18 @@
 		19E673F62744DD7300B1369A /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
-				19E673F82744DF1300B1369A /* Controller */,
-				19E673F72744DDEF00B1369A /* Model */,
-			);
-			path = UserProfile;
-			sourceTree = "<group>";
-		};
-		19E673F72744DDEF00B1369A /* Model */ = {
-			isa = PBXGroup;
-			children = (
+				1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */,
 				19E978FF270B0FD80077D249 /* UserProfileModel.swift */,
 			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		19E673F82744DF1300B1369A /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */,
-			);
-			path = Controller;
+			path = UserProfile;
 			sourceTree = "<group>";
 		};
 		19E673F92744DF2400B1369A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				19E673FB2744DF4C00B1369A /* Model */,
-				19E673FA2744DF3200B1369A /* Controller */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		19E673FA2744DF3200B1369A /* Controller */ = {
-			isa = PBXGroup;
-			children = (
 				1919D31F27140BA100C829F8 /* SettingsViewController.swift */,
 			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		19E673FB2744DF4C00B1369A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		19E673FC2744E2E200B1369A /* Common */ = {
