@@ -142,7 +142,6 @@ class ProfileViewController: UIViewController {
             self?.showFailAlert()
         }
         }
-        
         if changeUserImage {
             gcdManager.saveUserImage(userImage: profileImageView.image!) { result in
             switch result {
@@ -217,6 +216,11 @@ class ProfileViewController: UIViewController {
                                                       handler: { _ in self.fetchPhotoFromGallery()}
                                                      )
         )
+        actionSheetController.addAction(UIAlertAction(title: "Download",
+                                                      style: .default,
+                                                      handler: { _ in self.downloadPhotoFromNetwork()}
+                                                     )
+        )
         actionSheetController.addAction(UIAlertAction(title: "Cancel",
                                                       style: .cancel
                                                      )
@@ -232,23 +236,21 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true)
     }
-
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         var profileImage: UIImage?
-        
+
         if let editedImage = info[.editedImage] as? UIImage {
             profileImage = editedImage
-            enableAButtons()
-
         } else if let originalImage = info[.originalImage] as? UIImage {
             profileImage = originalImage
-            enableAButtons()
         }
+        enableAButtons()
         changeUserImage = true
         profileImageView.image = profileImage
-        
+
         dismiss(animated: true)
-        
+
         guard profileImage != nil else {
             print("Not Image")
             return
@@ -269,6 +271,11 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
         present(imagePicker, animated: true)
+    }
+    
+    private func downloadPhotoFromNetwork() {
+        let imageColletion = ImageCollectionViewController()
+        present(imageColletion, animated: true, completion: nil)
     }
 }
 
