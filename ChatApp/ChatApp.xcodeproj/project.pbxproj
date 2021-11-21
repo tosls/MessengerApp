@@ -31,6 +31,16 @@
 		198AA0972747A9C8009ABF58 /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0962747A9C8009ABF58 /* ImageCollectionViewController.swift */; };
 		198AA0992747AAF5009ABF58 /* ImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0982747AAF5009ABF58 /* ImageCollectionView.swift */; };
 		198AA09B2747B28D009ABF58 /* ProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA09A2747B28D009ABF58 /* ProfileImageCollectionViewCell.swift */; };
+		198AA0A22748C9FB009ABF58 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0A12748C9FB009ABF58 /* RequestProtocol.swift */; };
+		198AA0A42748CB23009ABF58 /* ImageNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0A32748CB23009ABF58 /* ImageNetworkManager.swift */; };
+		198AA0A8274A44C9009ABF58 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0A7274A44C9009ABF58 /* ParserProtocol.swift */; };
+		198AA0AC274A4764009ABF58 /* RequestSenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0AB274A4764009ABF58 /* RequestSenderProtocol.swift */; };
+		198AA0AE274A4847009ABF58 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0AD274A4847009ABF58 /* RequestConfig.swift */; };
+		198AA0B0274A5657009ABF58 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0AF274A5657009ABF58 /* RequestFactory.swift */; };
+		198AA0B2274A56C4009ABF58 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0B1274A56C4009ABF58 /* Parser.swift */; };
+		198AA0B4274A5B4E009ABF58 /* FetchImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0B3274A5B4E009ABF58 /* FetchImages.swift */; };
+		198AA0BA274A94A2009ABF58 /* NetworkImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0B9274A94A2009ABF58 /* NetworkImageService.swift */; };
+		198AA0BC274A9AE6009ABF58 /* ImageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0BB274A9AE6009ABF58 /* ImageResponseModel.swift */; };
 		1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */; };
 		1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02626FFABE800E4F6B9 /* UserProfile.swift */; };
 		199DC64C273274C9004893D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 199DC64B273274C9004893D0 /* GoogleService-Info.plist */; };
@@ -78,6 +88,16 @@
 		198AA0962747A9C8009ABF58 /* ImageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewController.swift; sourceTree = "<group>"; };
 		198AA0982747AAF5009ABF58 /* ImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionView.swift; sourceTree = "<group>"; };
 		198AA09A2747B28D009ABF58 /* ProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		198AA0A12748C9FB009ABF58 /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
+		198AA0A32748CB23009ABF58 /* ImageNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkManager.swift; sourceTree = "<group>"; };
+		198AA0A7274A44C9009ABF58 /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
+		198AA0AB274A4764009ABF58 /* RequestSenderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSenderProtocol.swift; sourceTree = "<group>"; };
+		198AA0AD274A4847009ABF58 /* RequestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConfig.swift; sourceTree = "<group>"; };
+		198AA0AF274A5657009ABF58 /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
+		198AA0B1274A56C4009ABF58 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		198AA0B3274A5B4E009ABF58 /* FetchImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImages.swift; sourceTree = "<group>"; };
+		198AA0B9274A94A2009ABF58 /* NetworkImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkImageService.swift; sourceTree = "<group>"; };
+		198AA0BB274A9AE6009ABF58 /* ImageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResponseModel.swift; sourceTree = "<group>"; };
 		1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1994C02626FFABE800E4F6B9 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		199DC64B273274C9004893D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -180,6 +200,8 @@
 				1921EA772743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift */,
 				195144242714490800DDE4A1 /* ThemeSettings.swift */,
 				1919D31D271407FB00C829F8 /* Theme.swift */,
+				198AA0B3274A5B4E009ABF58 /* FetchImages.swift */,
+				198AA0B9274A94A2009ABF58 /* NetworkImageService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -259,6 +281,12 @@
 		198AA0952747A784009ABF58 /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
+				198AA0AF274A5657009ABF58 /* RequestFactory.swift */,
+				198AA0A32748CB23009ABF58 /* ImageNetworkManager.swift */,
+				198AA0B1274A56C4009ABF58 /* Parser.swift */,
+				198AA0AD274A4847009ABF58 /* RequestConfig.swift */,
+				198AA0B8274A9240009ABF58 /* ParseModel */,
+				198AA0B7274A921F009ABF58 /* Protocols */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -278,6 +306,24 @@
 				198AA0982747AAF5009ABF58 /* ImageCollectionView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		198AA0B7274A921F009ABF58 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				198AA0A12748C9FB009ABF58 /* RequestProtocol.swift */,
+				198AA0AB274A4764009ABF58 /* RequestSenderProtocol.swift */,
+				198AA0A7274A44C9009ABF58 /* ParserProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		198AA0B8274A9240009ABF58 /* ParseModel */ = {
+			isa = PBXGroup;
+			children = (
+				198AA0BB274A9AE6009ABF58 /* ImageResponseModel.swift */,
+			);
+			path = ParseModel;
 			sourceTree = "<group>";
 		};
 		19DA7C93272D55E6007B8570 /* CoreData */ = {
@@ -515,8 +561,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				198AA0B0274A5657009ABF58 /* RequestFactory.swift in Sources */,
 				1921EA832743EAE500EA0B13 /* ConversationTableView.swift in Sources */,
 				1919D32027140BA100C829F8 /* SettingsViewController.swift in Sources */,
+				198AA0AC274A4764009ABF58 /* RequestSenderProtocol.swift in Sources */,
 				1938088627212F42001E3611 /* UserProfileManagerProtocol.swift in Sources */,
 				19E673F52744DC4900B1369A /* MessagesManager.swift in Sources */,
 				19E978F527088C8F0077D249 /* ConversationViewController.swift in Sources */,
@@ -533,23 +581,31 @@
 				198AA0972747A9C8009ABF58 /* ImageCollectionViewController.swift in Sources */,
 				19E978FC2708E81E0077D249 /* MessageModel.swift in Sources */,
 				1921EA852743ECCF00EA0B13 /* FRCDelegate.swift in Sources */,
+				198AA0B4274A5B4E009ABF58 /* FetchImages.swift in Sources */,
 				198AA09B2747B28D009ABF58 /* ProfileImageCollectionViewCell.swift in Sources */,
 				1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */,
 				1951B362272592D900F01F2D /* ChannelModel.swift in Sources */,
 				1910AE9E272705BB007F45A3 /* UserSenederID.swift in Sources */,
+				198AA0BA274A94A2009ABF58 /* NetworkImageService.swift in Sources */,
 				195144252714490800DDE4A1 /* ThemeSettings.swift in Sources */,
 				19DA7CA6272D57AA007B8570 /* DBMessage+CoreDataProperties.swift in Sources */,
 				1921EA7A2743B94400EA0B13 /* ChannelCoreDataProtocol.swift in Sources */,
 				19380883271ED046001E3611 /* UserProfileImageManager.swift in Sources */,
 				198AA0942747A752009ABF58 /* PixabayApiAccesses.swift in Sources */,
+				198AA0A22748C9FB009ABF58 /* RequestProtocol.swift in Sources */,
+				198AA0B2274A56C4009ABF58 /* Parser.swift in Sources */,
 				1921EA882744144C00EA0B13 /* ChannelsManager.swift in Sources */,
 				199DC64E2732D1C2004893D0 /* CoreDataManager.swift in Sources */,
+				198AA0A42748CB23009ABF58 /* ImageNetworkManager.swift in Sources */,
+				198AA0BC274A9AE6009ABF58 /* ImageResponseModel.swift in Sources */,
 				1921EA782743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift in Sources */,
 				1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */,
 				1921EA7C2743BA8800EA0B13 /* MessageCoreDataProtocol.swift in Sources */,
 				19E97900270B0FD80077D249 /* UserProfileModel.swift in Sources */,
 				19DA7CA4272D57AA007B8570 /* DBChannel+CoreDataProperties.swift in Sources */,
 				191F771F26F3BC7800A30032 /* SceneDelegate.swift in Sources */,
+				198AA0A8274A44C9009ABF58 /* ParserProtocol.swift in Sources */,
+				198AA0AE274A4847009ABF58 /* RequestConfig.swift in Sources */,
 				19380876271C021A001E3611 /* GCDManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
