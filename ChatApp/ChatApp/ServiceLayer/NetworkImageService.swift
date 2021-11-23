@@ -7,34 +7,36 @@
 
 import UIKit
 
-struct NetworkImageService {
+class NetworkImageService {
     
-    private func getImageData(completionHandler: @escaping (ImageResponseModel) -> Void) {
+    static let shared = NetworkImageService()
+    
+    private init() {}
+    var imageURLs = [String]()
+    
+    func getImageData(completionHandler: @escaping (ImageResponseModel) -> Void) {
         let imageConfig = RequsetFactory.ImageRequest.randomImages()
         let sender = RequestSender()
         sender.send(config: imageConfig) { (result: Result<ImageResponseModel, Error>) in
             switch result {
             case .success(let imagesData):
-                completionHandler(imagesData)
+                    print("get image data \(Thread.current)")
+                    completionHandler(imagesData)
             case .failure(let error):
                 print(error)
             }
         }
     }
-//    
-//    func fetchImages() -> [UIImage] {
-//        let profileImages: [UIImage] = []
-//        getImageData { imagesData in
-//            for image in imagesData.hits {
-//                guard let imageURL = URL(string: image.webformatURL) else {return}
-//                if let data = try? Data(contentsOf: imageURL) {
-//                    let newImage = UIImage(data: data)
-//                    profileImages.app
-//                } else {
-//                    print("Not image url")
-//                }
-//            }
-//        }
-//        return profileImages
-//    }
+    
+    func getURL() {
+        var url: [String] = []
+        getImageData { model in
+            for urls in model.hits {
+                url.append(urls.webformatURL)
+            }
+        }
+        DispatchQueue.main.async {
+            self.imageURLs = url
+        }
+    }
 }

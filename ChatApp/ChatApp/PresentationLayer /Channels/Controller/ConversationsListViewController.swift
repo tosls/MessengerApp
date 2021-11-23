@@ -15,7 +15,7 @@ class ConversationsListViewController: UIViewController {
     var userPhoto = UIImage()
     var tableViewDataSource = ConversationTableView()
     let channelsManager = ChannelsManager()
-
+    
     private let cellIdentifier = String(describing: ConversationTableViewCell.self)
     
     private lazy var tableView: UITableView = {
@@ -31,9 +31,9 @@ class ConversationsListViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        getActualChannels()
+        NetworkImageService.shared.getURL()
    }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? SettingsViewController {
             destination.settingsClosure = { [weak self] theme in self?.themeChanging(selectedTheme: theme) }
@@ -51,7 +51,7 @@ class ConversationsListViewController: UIViewController {
     }
 
     @objc func profileButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "profileVC", sender: nil)
+        performSegue(withIdentifier: "profileVC", sender: nil)        
     }
     
     @objc func settingsButtonTapped(_ sender: Any) {

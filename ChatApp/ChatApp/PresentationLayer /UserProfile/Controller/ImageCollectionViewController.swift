@@ -13,21 +13,21 @@ class ImageCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupCollectionView()
+        view.backgroundColor = .white
     }
     
     private func setupCollectionView() {
         let collectionSubview = imageCollectionView.setupCollectionView(view: view)
         
         view.addSubview(collectionSubview)
-        
         collectionSubview.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            collectionSubview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionSubview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             collectionSubview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            collectionSubview.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            collectionSubview.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 30)
+            collectionSubview.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            collectionSubview.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
             ])
     }
 }

@@ -39,7 +39,7 @@ class ProfileViewController: UIViewController {
         
         checkATextFieldChange()
     }
-    
+
     @IBAction func editProfileButtonTapped(_ sender: UIButton) {
         userNameTF.isUserInteractionEnabled = true
         userNameTF.returnKeyType = UIReturnKeyType.done
@@ -66,7 +66,7 @@ class ProfileViewController: UIViewController {
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         cancelChanges()
     }
-    
+
     // MARK: Setuping a view
      
     private func setupView() {
@@ -274,9 +274,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
     
     private func downloadPhotoFromNetwork() {
-        let imageColletion = ImageCollectionViewController()
-        present(imageColletion, animated: true, completion: nil)
+        let imageVC = ImageCollectionViewController()
+        present(imageVC, animated: true, completion: nil)
     }
+ 
 }
 
 // MARK: Extension UITextFieldDelegate

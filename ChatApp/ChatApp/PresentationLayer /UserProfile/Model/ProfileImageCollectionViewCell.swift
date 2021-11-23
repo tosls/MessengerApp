@@ -11,17 +11,17 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
     
     static let CollectionViewCellIdentifier = "ProfileImageCollectionViewCell"
     
-    private var imageView: UIImageView = {
+    var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "cloud")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .blue
+        contentView.backgroundColor = .gray
         contentView.layer.cornerRadius = 10
         contentView.addSubview(imageView)
         contentView.clipsToBounds = true
@@ -34,7 +34,7 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.frame = CGRect(x: 5, y: 0, width: contentView.frame.size.width - 10, height: contentView.frame.size.height - 50)
+        imageView.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
     }
     
     override func prepareForReuse() {
@@ -42,12 +42,21 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage()
     }
     
-    func configureCell(image: UIImage?) {
-        guard image != nil else {
-            print("not image")
-            imageView.image = UIImage(named: "cloud")
-            return
+    private func loadImage(imageNumber: Int, competion: @escaping (UIImage) -> Void) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            let urls = NetworkImageService.shared.imageURLs
+            guard let url = URL(string: urls[imageNumber]) else {return}
+            guard let data = try? Data(contentsOf: url) else {return}
+            guard let image = UIImage(data: data) else {return}
+            DispatchQueue.main.async {
+                competion(image)
+            }
         }
-        imageView.image = image
+    }
+    
+    func configureCell(image: Int) {
+        loadImage(imageNumber: image) { image in
+            self.imageView.image = image
+        }
     }
 }

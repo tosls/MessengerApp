@@ -28,6 +28,7 @@ class RequestSender: RequestSenderProtocol {
                     return
                 }
             completionHandler(.success(parsedModel))
+
         }
         task.resume()
     }

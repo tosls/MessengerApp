@@ -15,26 +15,35 @@ class ImageCollectionView: NSObject, UICollectionViewDelegate, UICollectionViewD
     func setupCollectionView(view: UIView) -> UICollectionView {
         
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 100,
-                                 height: 100)
-        
-        collectionView = UICollectionView(frame: .zero,
+        let margin: CGFloat = 20
+        let cellsInRow: Int = 3
+        collectionView = UICollectionView(frame: view.frame,
                                           collectionViewLayout: layout)
-        guard let collectionView = collectionView else {fatalError()}
+        collectionView?.backgroundColor = .white
+        layout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
+        layout.minimumLineSpacing = margin
+        layout.minimumInteritemSpacing = margin
+        collectionView?.contentInsetAdjustmentBehavior = .always
+
+        guard let collectionView = collectionView else {return UICollectionView()}
+        let marginsAndInsets = layout.sectionInset.left + layout.sectionInset.right +
+        collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right +
+        layout.minimumInteritemSpacing * CGFloat(cellsInRow - 1)
+        let itemSize = ((collectionView.bounds.size.width - marginsAndInsets) /
+                        CGFloat(cellsInRow)).rounded(.down)
+        layout.itemSize = CGSize(width: itemSize, height: itemSize)
+        
         collectionView.register(ProfileImageCollectionViewCell.self,
                                 forCellWithReuseIdentifier: cellIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.frame = view.bounds
         
         return collectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        let imageCount = NetworkImageService.shared.imageURLs.count
+        return imageCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -43,7 +52,10 @@ class ImageCollectionView: NSObject, UICollectionViewDelegate, UICollectionViewD
                 ProfileImageCollectionViewCell else {
                     return UICollectionViewCell()
                 }
-        cell.configureCell(image: nil)
+        cell.configureCell(image: indexPath.row)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
 }

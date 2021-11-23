@@ -54,7 +54,7 @@ class ConversationViewController: UITableViewController {
     @objc func addNewChannelButtonTapped(_ sender: Any) {
         newMessageAlert()
     }
-
+    
     // MARK: Sending Message
 
     private func setupNewMessageButton() {
@@ -72,7 +72,7 @@ class ConversationViewController: UITableViewController {
         let alert = UIAlertController(title: "Отправить новое сообщение",
                                       message: nil,
                                       preferredStyle: .alert)
-
+        
         let cancel = UIAlertAction(title: "Cancel",
                                    style: .cancel,
                                    handler: nil)
@@ -81,8 +81,14 @@ class ConversationViewController: UITableViewController {
                                         style: .default) { [weak self] _ in
             self?.sendMessage(message: newMessage ?? "")
         }
-
+        
+        let sendImage = UIAlertAction(title: "Image",
+                                        style: .default) { [weak self] _ in
+            self?.sendImage()
+        }
+        
         alert.addAction(cancel)
+        alert.addAction(sendImage)
         alert.addAction(sendMessage)
         alert.addTextField(configurationHandler: { (textField) in
             textField.placeholder = "Сообщение"
@@ -97,6 +103,11 @@ class ConversationViewController: UITableViewController {
             }
         })
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func sendImage() {
+        let imageVC = ImageCollectionViewController()
+        present(imageVC, animated: true, completion: nil)
     }
 
     private func sendMessage(message: String) {

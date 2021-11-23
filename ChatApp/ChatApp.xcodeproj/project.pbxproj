@@ -38,7 +38,6 @@
 		198AA0AE274A4847009ABF58 /* RequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0AD274A4847009ABF58 /* RequestConfig.swift */; };
 		198AA0B0274A5657009ABF58 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0AF274A5657009ABF58 /* RequestFactory.swift */; };
 		198AA0B2274A56C4009ABF58 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0B1274A56C4009ABF58 /* Parser.swift */; };
-		198AA0B4274A5B4E009ABF58 /* FetchImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0B3274A5B4E009ABF58 /* FetchImages.swift */; };
 		198AA0BA274A94A2009ABF58 /* NetworkImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0B9274A94A2009ABF58 /* NetworkImageService.swift */; };
 		198AA0BC274A9AE6009ABF58 /* ImageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0BB274A9AE6009ABF58 /* ImageResponseModel.swift */; };
 		1994C02426FF4B7C00E4F6B9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */; };
@@ -95,7 +94,6 @@
 		198AA0AD274A4847009ABF58 /* RequestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConfig.swift; sourceTree = "<group>"; };
 		198AA0AF274A5657009ABF58 /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		198AA0B1274A56C4009ABF58 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		198AA0B3274A5B4E009ABF58 /* FetchImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImages.swift; sourceTree = "<group>"; };
 		198AA0B9274A94A2009ABF58 /* NetworkImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkImageService.swift; sourceTree = "<group>"; };
 		198AA0BB274A9AE6009ABF58 /* ImageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResponseModel.swift; sourceTree = "<group>"; };
 		1994C02326FF4B7C00E4F6B9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 				1921EA772743AF7400EA0B13 /* UserProfileImageManagerProtocol.swift */,
 				195144242714490800DDE4A1 /* ThemeSettings.swift */,
 				1919D31D271407FB00C829F8 /* Theme.swift */,
-				198AA0B3274A5B4E009ABF58 /* FetchImages.swift */,
 				198AA0B9274A94A2009ABF58 /* NetworkImageService.swift */,
 			);
 			path = ServiceLayer;
@@ -581,7 +578,6 @@
 				198AA0972747A9C8009ABF58 /* ImageCollectionViewController.swift in Sources */,
 				19E978FC2708E81E0077D249 /* MessageModel.swift in Sources */,
 				1921EA852743ECCF00EA0B13 /* FRCDelegate.swift in Sources */,
-				198AA0B4274A5B4E009ABF58 /* FetchImages.swift in Sources */,
 				198AA09B2747B28D009ABF58 /* ProfileImageCollectionViewCell.swift in Sources */,
 				1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */,
 				1951B362272592D900F01F2D /* ChannelModel.swift in Sources */,
