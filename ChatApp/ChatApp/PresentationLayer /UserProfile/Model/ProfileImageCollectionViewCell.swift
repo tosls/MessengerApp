@@ -13,7 +13,7 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
     
     var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "cloud")
+        imageView.image = UIImage(named: "notImageAvailable.jpeg")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView

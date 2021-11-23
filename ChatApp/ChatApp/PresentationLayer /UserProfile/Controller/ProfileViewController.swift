@@ -23,13 +23,13 @@ class ProfileViewController: UIViewController {
     
     let userProfile = UserProfile.shared.getUserProfile()
     var updateProfileImageClosure: ((Bool) -> Void)?
-    
+        
     private var changeUserInfo: Bool = false
-    private var changeUserImage: Bool = false
+    var changeUserImage: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupView()
         userNameTF.delegate = self
         infoAboutUserTF.delegate = self
@@ -38,6 +38,10 @@ class ProfileViewController: UIViewController {
         infoAboutUserTF.isUserInteractionEnabled = false
         
         checkATextFieldChange()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("Test App")
     }
 
     @IBAction func editProfileButtonTapped(_ sender: UIButton) {
@@ -69,7 +73,7 @@ class ProfileViewController: UIViewController {
 
     // MARK: Setuping a view
      
-    private func setupView() {
+    func setupView() {
         view.backgroundColor = .white
         
         userNameTF.text = userProfile.userName
@@ -80,7 +84,7 @@ class ProfileViewController: UIViewController {
         
         saveGCDButton.layer.cornerRadius = 10
         cancelButton.layer.cornerRadius = 10
-        
+
         saveProcessIndicator.isHidden = true
         
         editProfileButton.isHidden = false
@@ -89,7 +93,7 @@ class ProfileViewController: UIViewController {
         editProfileImageButton.isHidden = true
     }
     
-    private func hideAButtons() {
+    func hideAButtons() {
         editProfileButton.isHidden.toggle()
         cancelButton.isHidden.toggle()
         saveGCDButton.isHidden.toggle()
@@ -274,10 +278,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
     
     private func downloadPhotoFromNetwork() {
+        
         let imageVC = ImageCollectionViewController()
         present(imageVC, animated: true, completion: nil)
     }
- 
 }
 
 // MARK: Extension UITextFieldDelegate

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImageCollectionView: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
+class ImageCollectionView: NSObject, UICollectionViewDataSource {
 
     private var collectionView: UICollectionView?
     private var cellIdentifier = ProfileImageCollectionViewCell.CollectionViewCellIdentifier
@@ -36,7 +36,6 @@ class ImageCollectionView: NSObject, UICollectionViewDelegate, UICollectionViewD
         collectionView.register(ProfileImageCollectionViewCell.self,
                                 forCellWithReuseIdentifier: cellIdentifier)
         collectionView.dataSource = self
-        collectionView.delegate = self
         
         return collectionView
     }
@@ -54,8 +53,5 @@ class ImageCollectionView: NSObject, UICollectionViewDelegate, UICollectionViewD
                 }
         cell.configureCell(image: indexPath.row)
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
 }
