@@ -23,13 +23,13 @@ class ProfileViewController: UIViewController {
     
     let userProfile = UserProfile.shared.getUserProfile()
     var updateProfileImageClosure: ((Bool) -> Void)?
-        
+    
     private var changeUserInfo: Bool = false
-    var changeUserImage: Bool = false
+    private var changeUserImage: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupView()
         userNameTF.delegate = self
         infoAboutUserTF.delegate = self
@@ -38,10 +38,6 @@ class ProfileViewController: UIViewController {
         infoAboutUserTF.isUserInteractionEnabled = false
         
         checkATextFieldChange()
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("Test App")
     }
 
     @IBAction func editProfileButtonTapped(_ sender: UIButton) {
@@ -70,10 +66,10 @@ class ProfileViewController: UIViewController {
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         cancelChanges()
     }
-
+    
     // MARK: Setuping a view
      
-    func setupView() {
+    private func setupView() {
         view.backgroundColor = .white
         
         userNameTF.text = userProfile.userName
@@ -93,7 +89,7 @@ class ProfileViewController: UIViewController {
         editProfileImageButton.isHidden = true
     }
     
-    func hideAButtons() {
+    private func hideAButtons() {
         editProfileButton.isHidden.toggle()
         cancelButton.isHidden.toggle()
         saveGCDButton.isHidden.toggle()
@@ -126,7 +122,7 @@ class ProfileViewController: UIViewController {
             self?.profileImageView.image = image
         }
     }
-
+    
     // MARK: Work with User Profile
     
     private func saveWithGCD() {
@@ -278,8 +274,14 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
     
     private func downloadPhotoFromNetwork() {
-        
         let imageVC = ImageCollectionViewController()
+        imageVC.newProfileImageClosure = { [weak self] (image) in
+            if let vc = self {
+                vc.profileImageView.image = image
+                vc.changeUserImage = true
+                vc.enableAButtons()
+            }
+        }
         present(imageVC, animated: true, completion: nil)
     }
 }

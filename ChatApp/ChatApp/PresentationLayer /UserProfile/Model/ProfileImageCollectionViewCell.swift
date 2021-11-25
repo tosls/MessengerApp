@@ -42,20 +42,8 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage()
     }
     
-    private func loadImage(imageNumber: Int, competion: @escaping (UIImage) -> Void) {
-        DispatchQueue.global(qos: .userInteractive).async {
-            let urls = NetworkImageService.shared.imageURLs
-            guard let url = URL(string: urls[imageNumber]) else {return}
-            guard let data = try? Data(contentsOf: url) else {return}
-            guard let image = UIImage(data: data) else {return}
-            DispatchQueue.main.async {
-                competion(image)
-            }
-        }
-    }
-    
-    func configureCell(image: Int) {
-        loadImage(imageNumber: image) { image in
+    func configureCell(imageID: Int) {
+        NetworkImageService.shared.loadImage(imageID: imageID) { image in
             self.imageView.image = image
         }
     }

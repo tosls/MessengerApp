@@ -79,6 +79,33 @@ class MessagesManager {
             }
         }
     }
+    
+    func checingImageInMessage(messageText: String, messageCell: MessageTableViewCell) {
+        if validateURL(url: messageText) {
+            guard let imageURL = URL(string: messageText) else {return}
+            let queue = DispatchQueue.global(qos: .userInteractive)
+            queue.async {
+                if let data = try? Data(contentsOf: imageURL) {
+                    DispatchQueue.main.async {
+                        messageCell.sendedImage.image = UIImage(data: data)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        messageCell.messageLabel.text = "The API is not supported, imageURL: \(imageURL)"
+                    }
+                }
+            }
+        } else {
+            messageCell.messageLabel.text = messageText
+        }
+    }
+    
+    private func validateURL(url: String) -> Bool {
+            let regex = "http[s]?://(([^/:.[:space:]]+(.[^/:.[:space:]]+)*)|([0-9](.[0-9]{3})))(:[0-9]+)?((/[^?#[:space:]]+)([^#[:space:]]+)?(#.+)?)?"
+            let test = NSPredicate(format: "SELF MATCHES %@", regex)
+            let result = test.evaluate(with: url)
+            return result
+     }
 
     private func checkingTheMessages(channelIdentifier: String) {
         let messages = fetchedResult(channelIdentifier: channelIdentifier)

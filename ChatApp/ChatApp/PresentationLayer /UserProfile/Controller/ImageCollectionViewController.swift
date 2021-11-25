@@ -10,7 +10,8 @@ import UIKit
 class ImageCollectionViewController: UIViewController {
     
     var imageCollectionView = ImageCollectionView()
-    var updateProfileImage: ((Bool) -> Void)?
+    var newProfileImageURLClosure: ((String) -> Void)?
+    var newProfileImageClosure: ((UIImage) -> Void)?
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
@@ -51,14 +52,19 @@ class ImageCollectionViewController: UIViewController {
         collectionSubview.delegate = self
     }
     
-    func close() {
+    private func close() {
         dismiss(animated: true, completion: nil)
     }
 }
 
 extension ImageCollectionViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let profileVC = ProfileViewController()
+        
+        newProfileImageURLClosure?(NetworkImageService.shared.imageURLs[indexPath.row])
+        NetworkImageService.shared.loadImage(imageID: indexPath.row) { newImage in
+            self.newProfileImageClosure?(newImage)
+        }
         close()
     }
 }

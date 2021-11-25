@@ -20,7 +20,6 @@ class NetworkImageService {
         sender.send(config: imageConfig) { (result: Result<ImageResponseModel, Error>) in
             switch result {
             case .success(let imagesData):
-                    print("get image data \(Thread.current)")
                     completionHandler(imagesData)
             case .failure(let error):
                 print(error)
@@ -37,6 +36,18 @@ class NetworkImageService {
         }
         DispatchQueue.main.async {
             self.imageURLs = url
+        }
+    }
+    
+    func loadImage(imageID: Int, completion: @escaping (UIImage) -> Void) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            let urls = self.imageURLs
+            guard let url = URL(string: urls[imageID]) else {return}
+            guard let data = try? Data(contentsOf: url) else {return}
+            guard let image = UIImage(data: data) else {return}
+            DispatchQueue.main.async {
+                completion(image)
+            }
         }
     }
 }

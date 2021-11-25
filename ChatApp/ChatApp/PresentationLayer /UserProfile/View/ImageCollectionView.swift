@@ -51,7 +51,7 @@ class ImageCollectionView: NSObject, UICollectionViewDataSource {
                 ProfileImageCollectionViewCell else {
                     return UICollectionViewCell()
                 }
-        cell.configureCell(image: indexPath.row)
+        cell.configureCell(imageID: indexPath.row)
         return cell
     }
 }

@@ -12,6 +12,7 @@ class MessageTableViewCell: UITableViewCell {
     let messageLabel = UILabel()
     let userNameLabel = UILabel()
     let messageBackgroundView = UIView()
+    var sendedImage = UIImageView()
     var leadingConstraint: NSLayoutConstraint?
     var trailingConstraint: NSLayoutConstraint?
     
@@ -29,12 +30,14 @@ class MessageTableViewCell: UITableViewCell {
         didSet {
             guard let messageID = channelMessageID  else {return}
             messageBackgroundView.backgroundColor = messageColor
-            
+ 
             if messageID == UserSenderID.shared.getUserSenderId() {
                 leadingConstraint?.isActive = false
                 trailingConstraint?.isActive = true
                 userNameLabel.isHidden = true
+
                 messageBackgroundView.backgroundColor = SendingMessageColor
+                
             } else {
                 leadingConstraint?.isActive = true
                 trailingConstraint?.isActive = false
@@ -48,14 +51,21 @@ class MessageTableViewCell: UITableViewCell {
         messageBackgroundView.layer.cornerRadius = 10
         messageBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         userNameLabel.font = userNameLabel.font.withSize(14)
+        sendedImage.clipsToBounds = true
         
         addSubview(messageBackgroundView)
         addSubview(userNameLabel)
+        
+        messageLabel.addSubview(sendedImage)
         addSubview(messageLabel)
         
+        sendedImage.layer.cornerRadius = messageBackgroundView.layer.cornerRadius
+    
+        sendedImage.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        messageLabel.numberOfLines = 0
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        messageLabel.numberOfLines = 0
         userNameLabel.numberOfLines = 0
         
         let constraints = [messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 32),
@@ -66,7 +76,12 @@ class MessageTableViewCell: UITableViewCell {
                            messageBackgroundView.topAnchor.constraint(equalTo: messageLabel.topAnchor, constant: -16),
                            messageBackgroundView.leadingAnchor.constraint(equalTo: messageLabel.leadingAnchor, constant: -16),
                            messageBackgroundView.bottomAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 16),
-                           messageBackgroundView.trailingAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 16)
+                           messageBackgroundView.trailingAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 16),
+                           sendedImage.leadingAnchor.constraint(equalTo: messageBackgroundView.leadingAnchor, constant: 0),
+                           sendedImage.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: 0),
+                           sendedImage.topAnchor.constraint(equalTo: messageBackgroundView.topAnchor, constant: 0),
+                           sendedImage.bottomAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: 0),
+                           sendedImage.widthAnchor.constraint(equalToConstant: messageLabel.bounds.width)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -75,6 +90,7 @@ class MessageTableViewCell: UITableViewCell {
         leadingConstraint?.isActive = false
         trailingConstraint = messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32)
         trailingConstraint?.isActive = true
+        
     }
 
     required init?(coder: NSCoder) {
