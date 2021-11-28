@@ -29,7 +29,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(saveGCDButton.layer.position.x)
         setupView()
         userNameTF.delegate = self
         infoAboutUserTF.delegate = self
@@ -37,9 +37,13 @@ class ProfileViewController: UIViewController {
         userNameTF.isUserInteractionEnabled = false
         infoAboutUserTF.isUserInteractionEnabled = false
         
+        print(saveGCDButton.frame.origin.x)
+        
         checkATextFieldChange()
     }
-
+    
+    // MARK: Animations
+    
     @IBAction func editProfileButtonTapped(_ sender: UIButton) {
         userNameTF.isUserInteractionEnabled = true
         userNameTF.returnKeyType = UIReturnKeyType.done
@@ -48,7 +52,9 @@ class ProfileViewController: UIViewController {
         userNameTF.becomeFirstResponder()
         
         saveGCDButton.isEnabled = false
+        
         hideAButtons()
+        Animations.buttonShakeAnimation(button: saveGCDButton)
     }
     
     @IBAction func editProfileImageButtonTapped(_ sender: UIButton) {

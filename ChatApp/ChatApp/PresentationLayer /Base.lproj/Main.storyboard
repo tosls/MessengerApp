@@ -179,7 +179,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5C-3H-cnf">
-                                <rect key="frame" x="50" y="703" width="314" height="30"/>
+                                <rect key="frame" x="50" y="698" width="314" height="30"/>
                                 <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -188,21 +188,6 @@
                                     <action selector="cancelButtonTapped:" destination="vtQ-IR-tYA" eventType="touchUpInside" id="Kkd-i6-Lcg"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kNu-wC-BBU">
-                                <rect key="frame" x="50" y="748" width="314" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cv8-Ss-afN">
-                                        <rect key="frame" x="0.0" y="0.0" width="314" height="30"/>
-                                        <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Save"/>
-                                        <connections>
-                                            <action selector="saveGCDButtonTapped:" destination="vtQ-IR-tYA" eventType="touchUpInside" id="aNU-FV-cuB"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pQj-ic-UFl">
                                 <rect key="frame" x="197" y="583" width="20" height="20"/>
                             </activityIndicatorView>
@@ -214,6 +199,16 @@
                                     <action selector="editProfileButtonTapped:" destination="vtQ-IR-tYA" eventType="touchUpInside" id="GaH-9Z-BjW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cv8-Ss-afN">
+                                <rect key="frame" x="50" y="748" width="314" height="30"/>
+                                <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveGCDButtonTapped:" destination="vtQ-IR-tYA" eventType="touchUpInside" id="aNU-FV-cuB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SQ5-EG-bHD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -221,25 +216,25 @@
                             <constraint firstItem="d0F-fy-I3O" firstAttribute="top" secondItem="gFR-id-JVj" secondAttribute="bottom" constant="-34" id="2ic-WI-OUf"/>
                             <constraint firstItem="gFR-id-JVj" firstAttribute="centerX" secondItem="SQ5-EG-bHD" secondAttribute="centerX" id="7d1-wf-Caq"/>
                             <constraint firstItem="g5C-3H-cnf" firstAttribute="centerX" secondItem="64L-Zy-p2m" secondAttribute="centerX" id="8pr-TE-XEF"/>
-                            <constraint firstItem="g5C-3H-cnf" firstAttribute="top" secondItem="pQj-ic-UFl" secondAttribute="bottom" constant="100" id="ARD-mq-tNE"/>
-                            <constraint firstItem="kNu-wC-BBU" firstAttribute="leading" secondItem="SQ5-EG-bHD" secondAttribute="leading" constant="50" id="AsP-HS-aY4"/>
-                            <constraint firstItem="kNu-wC-BBU" firstAttribute="top" secondItem="g5C-3H-cnf" secondAttribute="bottom" constant="15" id="KoO-Sx-xVE"/>
-                            <constraint firstItem="SQ5-EG-bHD" firstAttribute="trailing" secondItem="kNu-wC-BBU" secondAttribute="trailing" constant="50" id="NUV-x2-A6c"/>
                             <constraint firstItem="SoJ-Ez-OLm" firstAttribute="centerX" secondItem="64L-Zy-p2m" secondAttribute="centerX" id="PTb-hP-Ej9"/>
+                            <constraint firstItem="SQ5-EG-bHD" firstAttribute="trailing" secondItem="Cv8-Ss-afN" secondAttribute="trailing" constant="50" id="Pim-dR-0uY"/>
                             <constraint firstItem="FVV-Ei-xkH" firstAttribute="top" secondItem="Dzt-Tk-R56" secondAttribute="bottom" constant="15" id="Rb9-U1-1Qx"/>
                             <constraint firstItem="FVV-Ei-xkH" firstAttribute="width" secondItem="Dzt-Tk-R56" secondAttribute="width" id="TC6-5A-fY8"/>
+                            <constraint firstItem="SQ5-EG-bHD" firstAttribute="bottom" secondItem="Cv8-Ss-afN" secondAttribute="bottom" constant="30" id="TdF-E5-e7D"/>
+                            <constraint firstItem="g5C-3H-cnf" firstAttribute="top" secondItem="pQj-ic-UFl" secondAttribute="bottom" constant="95" id="Y3S-za-Kjv"/>
                             <constraint firstItem="Dzt-Tk-R56" firstAttribute="width" secondItem="gFR-id-JVj" secondAttribute="width" id="YZX-ne-VKP"/>
                             <constraint firstItem="pQj-ic-UFl" firstAttribute="centerX" secondItem="64L-Zy-p2m" secondAttribute="centerX" id="bj0-lX-HkG"/>
                             <constraint firstItem="SQ5-EG-bHD" firstAttribute="trailing" secondItem="d0F-fy-I3O" secondAttribute="trailing" constant="40" id="cUM-fH-Ah2"/>
+                            <constraint firstItem="g5C-3H-cnf" firstAttribute="width" secondItem="Cv8-Ss-afN" secondAttribute="width" id="cYi-fY-ep3"/>
                             <constraint firstItem="FVV-Ei-xkH" firstAttribute="centerX" secondItem="64L-Zy-p2m" secondAttribute="centerX" id="dbb-5I-kdM"/>
                             <constraint firstItem="SQ5-EG-bHD" firstAttribute="trailing" secondItem="f8r-Fe-uzi" secondAttribute="trailing" id="f1t-PJ-jzm"/>
                             <constraint firstItem="d0F-fy-I3O" firstAttribute="leading" secondItem="gFR-id-JVj" secondAttribute="trailing" constant="-54" id="gya-cW-6kg"/>
-                            <constraint firstItem="SQ5-EG-bHD" firstAttribute="bottom" secondItem="kNu-wC-BBU" secondAttribute="bottom" constant="30" id="ij8-nF-VPv"/>
                             <constraint firstItem="Dzt-Tk-R56" firstAttribute="centerX" secondItem="SQ5-EG-bHD" secondAttribute="centerX" id="jqX-3m-VNK"/>
                             <constraint firstItem="Dzt-Tk-R56" firstAttribute="top" secondItem="gFR-id-JVj" secondAttribute="bottom" constant="32" id="kWr-zZ-6mF"/>
                             <constraint firstItem="f8r-Fe-uzi" firstAttribute="top" secondItem="SQ5-EG-bHD" secondAttribute="top" id="nmN-Aa-heT"/>
                             <constraint firstItem="f8r-Fe-uzi" firstAttribute="leading" secondItem="SQ5-EG-bHD" secondAttribute="leading" id="obW-bY-p2w"/>
-                            <constraint firstItem="g5C-3H-cnf" firstAttribute="width" secondItem="kNu-wC-BBU" secondAttribute="width" id="ta4-Zc-nod"/>
+                            <constraint firstItem="Cv8-Ss-afN" firstAttribute="top" secondItem="g5C-3H-cnf" secondAttribute="bottom" constant="20" id="qH1-eB-7kj"/>
+                            <constraint firstItem="Cv8-Ss-afN" firstAttribute="leading" secondItem="SQ5-EG-bHD" secondAttribute="leading" constant="50" id="rPz-wT-3jY"/>
                             <constraint firstItem="gFR-id-JVj" firstAttribute="top" secondItem="f8r-Fe-uzi" secondAttribute="bottom" constant="7" id="yax-6m-R28"/>
                             <constraint firstItem="SoJ-Ez-OLm" firstAttribute="top" secondItem="FVV-Ei-xkH" secondAttribute="bottom" constant="15" id="zax-uT-ZVb"/>
                         </constraints>

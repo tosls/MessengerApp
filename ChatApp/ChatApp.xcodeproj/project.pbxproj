@@ -27,6 +27,7 @@
 		195144252714490800DDE4A1 /* ThemeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195144242714490800DDE4A1 /* ThemeSettings.swift */; };
 		19514427271588FF00DDE4A1 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19514426271588FF00DDE4A1 /* ThemeManager.swift */; };
 		1951B362272592D900F01F2D /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1951B361272592D900F01F2D /* ChannelModel.swift */; };
+		1989E70E2753A9530028A7A5 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1989E70D2753A9530028A7A5 /* Animations.swift */; };
 		198AA0942747A752009ABF58 /* PixabayApiAccesses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0932747A752009ABF58 /* PixabayApiAccesses.swift */; };
 		198AA0972747A9C8009ABF58 /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0962747A9C8009ABF58 /* ImageCollectionViewController.swift */; };
 		198AA0992747AAF5009ABF58 /* ImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0982747AAF5009ABF58 /* ImageCollectionView.swift */; };
@@ -83,6 +84,7 @@
 		195144242714490800DDE4A1 /* ThemeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettings.swift; sourceTree = "<group>"; };
 		19514426271588FF00DDE4A1 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		1951B361272592D900F01F2D /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
+		1989E70D2753A9530028A7A5 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		198AA0932747A752009ABF58 /* PixabayApiAccesses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayApiAccesses.swift; sourceTree = "<group>"; };
 		198AA0962747A9C8009ABF58 /* ImageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewController.swift; sourceTree = "<group>"; };
 		198AA0982747AAF5009ABF58 /* ImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionView.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				1921EA842743ECCF00EA0B13 /* FRCDelegate.swift */,
+				1989E70D2753A9530028A7A5 /* Animations.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				1921EA852743ECCF00EA0B13 /* FRCDelegate.swift in Sources */,
 				198AA09B2747B28D009ABF58 /* ProfileImageCollectionViewCell.swift in Sources */,
 				1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */,
+				1989E70E2753A9530028A7A5 /* Animations.swift in Sources */,
 				1951B362272592D900F01F2D /* ChannelModel.swift in Sources */,
 				1910AE9E272705BB007F45A3 /* UserSenederID.swift in Sources */,
 				198AA0BA274A94A2009ABF58 /* NetworkImageService.swift in Sources */,
