@@ -39,7 +39,6 @@ class ConversationsListViewController: UIViewController {
             destination.settingsClosure = { [weak self] theme in self?.themeChanging(selectedTheme: theme) }
         }
         if let destination = segue.destination as? ProfileViewController {
-            print("Test13")
             destination.updateProfileImageClosure = {
             switch $0 {
             case true:
@@ -52,7 +51,7 @@ class ConversationsListViewController: UIViewController {
     }
 
     @objc func profileButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "profileVC", sender: nil)        
+        performSegue(withIdentifier: "profileVC", sender: nil)
     }
     
     @objc func settingsButtonTapped(_ sender: Any) {

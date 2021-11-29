@@ -29,16 +29,13 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(saveGCDButton.layer.position.x)
         setupView()
         userNameTF.delegate = self
         infoAboutUserTF.delegate = self
         
         userNameTF.isUserInteractionEnabled = false
         infoAboutUserTF.isUserInteractionEnabled = false
-        
-        print(saveGCDButton.frame.origin.x)
-        
+
         checkATextFieldChange()
     }
     
