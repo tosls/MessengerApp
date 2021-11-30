@@ -7,8 +7,8 @@
 
 import UIKit
 
-class Animations {
-    
+class ShakeAnimation {
+
     static func buttonShakeAnimation(button: UIButton) {
         
         var buttonAnimations = [CABasicAnimation]()

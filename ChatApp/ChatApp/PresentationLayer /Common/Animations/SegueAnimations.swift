@@ -16,6 +16,7 @@ class ScrollSegue: UIStoryboardSegue {
 }
 
 extension ScrollSegue: UIViewControllerTransitioningDelegate {
+    
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return ScrollSegueAnimation()
     }

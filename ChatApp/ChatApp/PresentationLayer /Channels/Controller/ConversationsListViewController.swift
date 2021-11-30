@@ -17,6 +17,13 @@ class ConversationsListViewController: UIViewController {
     let channelsManager = ChannelsManager()
     
     private let cellIdentifier = String(describing: ConversationTableViewCell.self)
+    private let particleAnimation = ParticleAnimation()
+    
+    private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
+        let gestureRecognizer = UIPanGestureRecognizer()
+        gestureRecognizer.addTarget(self, action: #selector(touchTracking(sender:)))
+        return gestureRecognizer
+    }()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
@@ -49,6 +56,10 @@ class ConversationsListViewController: UIViewController {
             }
         }
     }
+    
+    @objc func touchTracking(sender: UIPanGestureRecognizer) {
+        particleAnimation.touchTracking(sender: sender, view: view)
+    }
 
     @objc func profileButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "profileVC", sender: nil)
@@ -65,6 +76,7 @@ class ConversationsListViewController: UIViewController {
     private func setupView() {
         title = "Channels"
         view.addSubview(tableView)
+        view.addGestureRecognizer(panGestureRecognizer)
         
         setupUserProfileButton()
         setupLeftBarButtons()

@@ -26,6 +26,13 @@ class ProfileViewController: UIViewController {
     
     private var changeUserInfo: Bool = false
     private var changeUserImage: Bool = false
+    private let particleAnimation = ParticleAnimation()
+    
+    private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
+        let gestureRecognizer = UIPanGestureRecognizer()
+        gestureRecognizer.addTarget(self, action: #selector(touchTracking(sender:)))
+        return gestureRecognizer
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +58,7 @@ class ProfileViewController: UIViewController {
         saveGCDButton.isEnabled = false
         
         hideAButtons()
-        Animations.buttonShakeAnimation(button: saveGCDButton)
+        ShakeAnimation.buttonShakeAnimation(button: saveGCDButton)
     }
     
     @IBAction func editProfileImageButtonTapped(_ sender: UIButton) {
@@ -70,10 +77,15 @@ class ProfileViewController: UIViewController {
         cancelChanges()
     }
     
+    @objc func touchTracking(sender: UIPanGestureRecognizer) {
+        particleAnimation.touchTracking(sender: sender, view: view)
+    }
+    
     // MARK: Setuping a view
      
     private func setupView() {
         view.backgroundColor = .white
+        view.addGestureRecognizer(panGestureRecognizer)
         
         userNameTF.text = userProfile.userName
         infoAboutUserTF.text = userProfile.userInfo
@@ -296,8 +308,8 @@ extension ProfileViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
-        }
-    
+    }
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return true
     }

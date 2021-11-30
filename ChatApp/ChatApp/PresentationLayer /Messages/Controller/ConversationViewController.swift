@@ -17,6 +17,13 @@ class ConversationViewController: UITableViewController {
     lazy var channelIdentifier = actualChannel?.identifier ?? ""
     
     private let cellIdentifier = "messageCell"
+    private let particleAnimation = ParticleAnimation()
+    
+    private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
+        let gestureRecognizer = UIPanGestureRecognizer()
+        gestureRecognizer.addTarget(self, action: #selector(touchTracking(sender:)))
+        return gestureRecognizer
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +34,7 @@ class ConversationViewController: UITableViewController {
         
         MessagesManager().getChannelMessages(channelIdentifier: channelIdentifier, tableView: tableView)
         setupNewMessageButton()
+        view.addGestureRecognizer(panGestureRecognizer)
     }
     
     // MARK: Work with TableView
@@ -51,6 +59,10 @@ class ConversationViewController: UITableViewController {
         cell.backgroundColor = .white
         
         return cell
+    }
+    
+    @objc func touchTracking(sender: UIPanGestureRecognizer) {
+        particleAnimation.touchTracking(sender: sender, view: view)
     }
     
     @objc func addNewChannelButtonTapped(_ sender: Any) {

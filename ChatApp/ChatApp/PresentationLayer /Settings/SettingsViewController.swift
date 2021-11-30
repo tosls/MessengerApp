@@ -13,12 +13,19 @@ class SettingsViewController: UIViewController {
     @IBOutlet var darkThemeButton: UIButton!
     @IBOutlet var customThemeButton: UIButton!
     @IBOutlet var settingsLabel: UILabel!
+    
+    var settingsClosure: ((ThemeSettings) -> Void)?
 
     private var themeOne: UIColor = .white
     private var themeTwo: UIColor = .black
     private var themeThree: UIColor = .orange
+    private let particleAnimation = ParticleAnimation()
     
-    var settingsClosure: ((ThemeSettings) -> Void)?
+    private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
+        let gestureRecognizer = UIPanGestureRecognizer()
+        gestureRecognizer.addTarget(self, action: #selector(touchTracking(sender:)))
+        return gestureRecognizer
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +55,14 @@ class SettingsViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    @objc func touchTracking(sender: UIPanGestureRecognizer) {
+        particleAnimation.touchTracking(sender: sender, view: view)
+    }
+    
     private func setupView() {
         lightThemeButton.layer.cornerRadius = 10
         darkThemeButton.layer.cornerRadius = 10
         customThemeButton.layer.cornerRadius = 10
+        view.addGestureRecognizer(panGestureRecognizer)
     }
 }

@@ -27,7 +27,7 @@
 		195144252714490800DDE4A1 /* ThemeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195144242714490800DDE4A1 /* ThemeSettings.swift */; };
 		19514427271588FF00DDE4A1 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19514426271588FF00DDE4A1 /* ThemeManager.swift */; };
 		1951B362272592D900F01F2D /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1951B361272592D900F01F2D /* ChannelModel.swift */; };
-		1989E70E2753A9530028A7A5 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1989E70D2753A9530028A7A5 /* Animations.swift */; };
+		1989E70E2753A9530028A7A5 /* ShakeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1989E70D2753A9530028A7A5 /* ShakeAnimation.swift */; };
 		198AA0942747A752009ABF58 /* PixabayApiAccesses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0932747A752009ABF58 /* PixabayApiAccesses.swift */; };
 		198AA0972747A9C8009ABF58 /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0962747A9C8009ABF58 /* ImageCollectionViewController.swift */; };
 		198AA0992747AAF5009ABF58 /* ImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0982747AAF5009ABF58 /* ImageCollectionView.swift */; };
@@ -59,6 +59,7 @@
 		19E97900270B0FD80077D249 /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E978FF270B0FD80077D249 /* UserProfileModel.swift */; };
 		19E97903270C35490077D249 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E97901270C35490077D249 /* MessageTableViewCell.swift */; };
 		19FE2D37275501F9003E04F6 /* SegueAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FE2D36275501F9003E04F6 /* SegueAnimations.swift */; };
+		19FE2D39275655CD003E04F6 /* ParticleAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FE2D38275655CD003E04F6 /* ParticleAnimation.swift */; };
 		D258726B2A4E515C076B6BB2 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A603D37C8D148624E07FA1D /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,7 +86,7 @@
 		195144242714490800DDE4A1 /* ThemeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettings.swift; sourceTree = "<group>"; };
 		19514426271588FF00DDE4A1 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		1951B361272592D900F01F2D /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
-		1989E70D2753A9530028A7A5 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		1989E70D2753A9530028A7A5 /* ShakeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeAnimation.swift; sourceTree = "<group>"; };
 		198AA0932747A752009ABF58 /* PixabayApiAccesses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayApiAccesses.swift; sourceTree = "<group>"; };
 		198AA0962747A9C8009ABF58 /* ImageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewController.swift; sourceTree = "<group>"; };
 		198AA0982747AAF5009ABF58 /* ImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionView.swift; sourceTree = "<group>"; };
@@ -117,6 +118,7 @@
 		19E978FF270B0FD80077D249 /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
 		19E97901270C35490077D249 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		19FE2D36275501F9003E04F6 /* SegueAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueAnimations.swift; sourceTree = "<group>"; };
+		19FE2D38275655CD003E04F6 /* ParticleAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAnimation.swift; sourceTree = "<group>"; };
 		2A603D37C8D148624E07FA1D /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BAD0F33A7F8D0CF2F24DF4E /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		BA5AC61ED8459E8DF6C568F3 /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -414,8 +416,9 @@
 		19FE2D35275501DF003E04F6 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				1989E70D2753A9530028A7A5 /* Animations.swift */,
+				1989E70D2753A9530028A7A5 /* ShakeAnimation.swift */,
 				19FE2D36275501F9003E04F6 /* SegueAnimations.swift */,
+				19FE2D38275655CD003E04F6 /* ParticleAnimation.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -594,7 +597,8 @@
 				1921EA852743ECCF00EA0B13 /* FRCDelegate.swift in Sources */,
 				198AA09B2747B28D009ABF58 /* ProfileImageCollectionViewCell.swift in Sources */,
 				1994C02726FFABE800E4F6B9 /* UserProfile.swift in Sources */,
-				1989E70E2753A9530028A7A5 /* Animations.swift in Sources */,
+				1989E70E2753A9530028A7A5 /* ShakeAnimation.swift in Sources */,
+				19FE2D39275655CD003E04F6 /* ParticleAnimation.swift in Sources */,
 				1951B362272592D900F01F2D /* ChannelModel.swift in Sources */,
 				1910AE9E272705BB007F45A3 /* UserSenederID.swift in Sources */,
 				198AA0BA274A94A2009ABF58 /* NetworkImageService.swift in Sources */,
