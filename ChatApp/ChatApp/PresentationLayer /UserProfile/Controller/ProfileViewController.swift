@@ -42,6 +42,9 @@ class ProfileViewController: UIViewController {
         
         userNameTF.isUserInteractionEnabled = false
         infoAboutUserTF.isUserInteractionEnabled = false
+        
+        userNameTF.accessibilityIdentifier = "userNameTF"
+        infoAboutUserTF.accessibilityIdentifier = "infoAboutUserTF"
 
         checkATextFieldChange()
     }
