@@ -38,7 +38,7 @@ class ConversationsListViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        NetworkImageService.shared.getURL()
+        NetworkImageService.shared.getImageURL()
    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

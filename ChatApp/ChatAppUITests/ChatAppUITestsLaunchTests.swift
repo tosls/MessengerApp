@@ -14,6 +14,7 @@ class ChatAppUITestsLaunchTests: XCTestCase {
     }
 
     override func setUpWithError() throws {
+        try super.setUpWithError()
         continueAfterFailure = false
     }
 

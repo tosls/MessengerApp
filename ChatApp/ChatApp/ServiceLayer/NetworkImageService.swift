@@ -27,7 +27,7 @@ class NetworkImageService {
         }
     }
     
-    func getURL() {
+    func getImageURL() {
         var url: [String] = []
         getImageData { model in
             for urls in model.hits {
