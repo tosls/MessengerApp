@@ -28,7 +28,6 @@
 		19514427271588FF00DDE4A1 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19514426271588FF00DDE4A1 /* ThemeManager.swift */; };
 		1951B362272592D900F01F2D /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1951B361272592D900F01F2D /* ChannelModel.swift */; };
 		1989E70E2753A9530028A7A5 /* ShakeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1989E70D2753A9530028A7A5 /* ShakeAnimation.swift */; };
-		198AA0942747A752009ABF58 /* PixabayApiAccesses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0932747A752009ABF58 /* PixabayApiAccesses.swift */; };
 		198AA0972747A9C8009ABF58 /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0962747A9C8009ABF58 /* ImageCollectionViewController.swift */; };
 		198AA0992747AAF5009ABF58 /* ImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA0982747AAF5009ABF58 /* ImageCollectionView.swift */; };
 		198AA09B2747B28D009ABF58 /* ProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198AA09A2747B28D009ABF58 /* ProfileImageCollectionViewCell.swift */; };
@@ -100,6 +99,7 @@
 		1921EA822743EAE500EA0B13 /* ConversationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableView.swift; sourceTree = "<group>"; };
 		1921EA842743ECCF00EA0B13 /* FRCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCDelegate.swift; sourceTree = "<group>"; };
 		1921EA872744144C00EA0B13 /* ChannelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsManager.swift; sourceTree = "<group>"; };
+		192FEB402765E3EE00F37014 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		19380875271C021A001E3611 /* GCDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDManager.swift; sourceTree = "<group>"; };
 		19380882271ED046001E3611 /* UserProfileImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileImageManager.swift; sourceTree = "<group>"; };
 		1938088527212F42001E3611 /* UserProfileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManagerProtocol.swift; sourceTree = "<group>"; };
@@ -107,7 +107,6 @@
 		19514426271588FF00DDE4A1 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		1951B361272592D900F01F2D /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		1989E70D2753A9530028A7A5 /* ShakeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeAnimation.swift; sourceTree = "<group>"; };
-		198AA0932747A752009ABF58 /* PixabayApiAccesses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayApiAccesses.swift; sourceTree = "<group>"; };
 		198AA0962747A9C8009ABF58 /* ImageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewController.swift; sourceTree = "<group>"; };
 		198AA0982747AAF5009ABF58 /* ImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionView.swift; sourceTree = "<group>"; };
 		198AA09A2747B28D009ABF58 /* ProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -179,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				1910AE9D272705BB007F45A3 /* UserSenederID.swift */,
-				198AA0932747A752009ABF58 /* PixabayApiAccesses.swift */,
 			);
 			path = Accesses;
 			sourceTree = "<group>";
@@ -187,6 +185,7 @@
 		191F771026F3BC7800A30032 = {
 			isa = PBXGroup;
 			children = (
+				192FEB402765E3EE00F37014 /* Config.xcconfig */,
 				191F771B26F3BC7800A30032 /* ChatApp */,
 				19B5A1F52760DFDB00459975 /* ChatAppUITests */,
 				19B5A2042761E70900459975 /* ChatAppTests */,
@@ -727,7 +726,6 @@
 				19DA7CA6272D57AA007B8570 /* DBMessage+CoreDataProperties.swift in Sources */,
 				1921EA7A2743B94400EA0B13 /* ChannelCoreDataProtocol.swift in Sources */,
 				19380883271ED046001E3611 /* UserProfileImageManager.swift in Sources */,
-				198AA0942747A752009ABF58 /* PixabayApiAccesses.swift in Sources */,
 				198AA0A22748C9FB009ABF58 /* RequestProtocol.swift in Sources */,
 				198AA0B2274A56C4009ABF58 /* Parser.swift in Sources */,
 				1921EA882744144C00EA0B13 /* ChannelsManager.swift in Sources */,
@@ -800,6 +798,7 @@
 /* Begin XCBuildConfiguration section */
 		191F772B26F3BC7A00A30032 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 192FEB402765E3EE00F37014 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1075,7 +1074,7 @@
 				191F772C26F3BC7A00A30032 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		191F772D26F3BC7A00A30032 /* Build configuration list for PBXNativeTarget "ChatApp" */ = {
 			isa = XCConfigurationList;
@@ -1084,7 +1083,7 @@
 				191F772F26F3BC7A00A30032 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		19B5A1FE2760DFDB00459975 /* Build configuration list for PBXNativeTarget "ChatAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -1093,7 +1092,7 @@
 				19B5A1FD2760DFDB00459975 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		19B5A2092761E70900459975 /* Build configuration list for PBXNativeTarget "ChatAppTests" */ = {
 			isa = XCConfigurationList;
@@ -1102,7 +1101,7 @@
 				19B5A20B2761E70900459975 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

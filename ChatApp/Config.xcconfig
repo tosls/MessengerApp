@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  ChatApp
+//
+//  Created by Антон Бобрышев on 12.12.2021.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+PIXABAY_API_URL = https://pixabay.com/api/?key=\24416770-4c41316bbfe16add5bbb5fc2c&q=yellow+flowers&image_type=photo
+

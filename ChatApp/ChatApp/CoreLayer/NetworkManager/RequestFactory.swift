@@ -12,8 +12,12 @@ struct RequsetFactory {
     struct ImageRequest {
         
         static func getRequest() -> RequestProtocol {
-            let imagesURL = "https://pixabay.com/api/?key=\(pixabayAPI)&q=yellow+flowers&image_type=photo"
-            guard let url = URL(string: imagesURL)  else {fatalError()}
+            guard let imagesURL = Bundle.main.object(forInfoDictionaryKey: "PIXABAY_API_URL") as? String else {
+                print(NetworkManagerError.invalidURL)
+                fatalError()}
+            guard let url = URL(string: imagesURL)  else {
+                print(NetworkManagerError.invalidURL)
+                fatalError()}
             let imageUrlRequest = URLRequest(url: url)
             return ImageRequestClass(urlRequest: imageUrlRequest)
         }

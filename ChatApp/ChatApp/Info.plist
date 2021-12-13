@@ -43,6 +43,8 @@
 			</array>
 		</dict>
 	</dict>
+	<key>PIXABAY_API_URL</key>
+	<string>$(PIXABAY_API_URL)</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
