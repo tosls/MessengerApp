@@ -5,7 +5,7 @@ discord_url = ENV['DISCORD_URL']
 
 platform :ios do
   desc "Build for testing"
-  lane :build_for_testing do |options|
+  lane :build_for_testing do
     scan(build_for_testing: true)
   end
 
