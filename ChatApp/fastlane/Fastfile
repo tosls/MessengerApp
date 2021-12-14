@@ -2,12 +2,6 @@
 default_platform(:ios)
 
 platform :ios do
-
-  desc "Send discord notification"
-  lane :send_discord_notification do |options|
-  
-  end
-
   desc "Build for testing"
   lane :build_for_testing do |options|
     scan(build_for_testing: true)
