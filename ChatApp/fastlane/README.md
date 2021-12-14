@@ -15,6 +15,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
+### ios send_discord_notification
+
+```sh
+[bundle exec] fastlane ios send_discord_notification
+```
+
+Send discord notification
+
 ### ios build_for_testing
 
 ```sh

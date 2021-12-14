@@ -2,6 +2,13 @@
 default_platform(:ios)
 
 platform :ios do
+
+  desc "Send discord notification"
+  lane :send_discord_notification do |options|
+    puts("Test")
+    puts(ENV["DISCORD_URL"])
+  end
+
   desc "Build for testing"
   lane :build_for_testing do |options|
     scan(build_for_testing: true)
@@ -16,6 +23,9 @@ platform :ios do
   lane :build_and_tests do |options|
     build_for_testing
     run_test
+    send_discord_notification
   end
+
+  
 end
 
