@@ -5,8 +5,7 @@ platform :ios do
 
   desc "Send discord notification"
   lane :send_discord_notification do |options|
-    puts("Test")
-    puts(ENV["DISCORD_URL"])
+  
   end
 
   desc "Build for testing"
