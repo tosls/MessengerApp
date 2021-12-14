@@ -1,6 +1,8 @@
 
 default_platform(:ios)
 
+discord_url = ENV['DISCORD_URL']
+
 platform :ios do
   desc "Build for testing"
   lane :build_for_testing do |options|
@@ -13,12 +15,14 @@ platform :ios do
   end
 
   desc "Build and tests"
-  lane :build_and_tests do |options|
+  lane :build_and_run_test do |options|
     build_for_testing
     run_test
-    send_discord_notification
+    discord_notifier(
+    webhook_url: discord_url,
+    title: "Tinkoff Chat CI",
+    description: "Build and Tests Success"
+  )
   end
-
-  
 end
 
