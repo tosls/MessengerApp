@@ -14,7 +14,7 @@ platform :ios do
     scan(test_without_building: true)
   end
 
-  desc "Build and tests"
+  desc "Build and run tests"
   lane :build_and_run_test do |options|
     build_for_testing
     run_test
