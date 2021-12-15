@@ -12,6 +12,7 @@ jobs:
         ruby-version: 2.6
         bundler-cache: true
     - name: Build and run tests
+      working-directory: chat-app-tosls/ChatApp
       env:
         SECRETS_URL: ${{ secrets.SECRETS_URL }}
       run: |
