@@ -6,12 +6,14 @@ discord_url = ENV['DISCORD_URL']
 platform :ios do
   desc "Build for testing"
   lane :build_for_testing do
-    scan(build_for_testing: true)
+    scan(workspace: './ChatApp/ChatApp.xcworkspace',
+    build_for_testing: true)
   end
 
   desc "Run test"
   lane :run_test do |options|
-    scan(test_without_building: true)
+    scan(workspace: './ChatApp/ChatApp.xcworkspace',
+    test_without_building: true)
   end
 
   desc "Build and run tests"

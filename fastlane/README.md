@@ -37,7 +37,7 @@ Run test
 [bundle exec] fastlane ios build_and_run_test
 ```
 
-Build and tests
+Build and run tests
 
 ----
 
