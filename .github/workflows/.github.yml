@@ -12,8 +12,9 @@ jobs:
         ruby-version: 2.6
         bundler-cache: true
     - name: Build and run tests
+      working-directory: ./ChatApp
       env:
         SECRETS_URL: ${{ secrets.SECRETS_URL }}
       run: |
-        working-directory: ChatApp
-          bundle exec fastlane build_and_run_test
+        bundle exec fastlane build_and_run_test
+      
