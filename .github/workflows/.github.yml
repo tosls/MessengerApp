@@ -14,8 +14,8 @@ jobs:
     - name: Build and run tests
       env:
         SECRETS_URL: ${{ secrets.SECRETS_URL }}
+      working-directory: chat-app-tosls/ChatApp/
       run: |
-        working-directory: chat-app-tosls/ChatApp
-          bundle exec fastlane build_and_run_test
+        bundle exec fastlane build_and_run_test
       
       
