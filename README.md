@@ -1,5 +1,5 @@
 # MessengerApp
-Study Project(in progress)
+
 
 SOA, MVP
 CoreData, FireBase, GCD, Fastlane, GitHub Actions
